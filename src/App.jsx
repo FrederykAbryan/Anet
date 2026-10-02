@@ -276,9 +276,6 @@ function InvitationPage({ invite, onBack }) {
   return <main className="page-shell invitation-page">
     <button className="back-button sheet-back" onClick={onBack}>← Back to hello</button>
     <div className="invitation-sheet">
-      <ButterflySticker src={yellowButterfly} className="frame-butterfly frame-butterfly-top" />
-      <ButterflySticker src={pinkButterfly} className="frame-butterfly frame-butterfly-left" />
-      <ButterflySticker src={pinkButterfly} className="frame-butterfly frame-butterfly-right" />
       <InvitationCover invite={invite} />
       <ButterflyFlight src={yellowButterfly} variant={0} />
       <EventDetails invite={invite} />
@@ -288,7 +285,6 @@ function InvitationPage({ invite, onBack }) {
       <DressCode invite={invite} />
       <ButterflyFlight src={yellowButterfly} variant={3} />
       <Wishes invite={invite} />
-      <div className="candle-flames" aria-hidden="true"><span /><span /><span /></div>
     </div>
   </main>;
 }

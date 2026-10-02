@@ -1,6 +1,6 @@
 /* Hallmark · macrostructure: Long Document · tone: playful scrapbook · anchor hue: bubblegum pink
- * references: Tweety stationery (opening letter), Brielle collage poster (cover), Olivia watercolor invite (details sheet)
- * art: hand-drawn SVG stickers in assets/art
+ * references: Tweety stationery (opening letter), Brielle collage poster (cover), mature watercolor collage (invitation frame)
+ * art: hand-drawn SVG stickers in assets/art; generated frame in assets/birthday-frame-mature.webp
  */
 /* Hallmark · pre-emit critique: P4 H4 E4 S5 R4 V4 */
 @import url('tokens.css');
@@ -187,8 +187,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .butterfly-wing-left { clip-path: inset(0 50% 0 0); }
 .butterfly-wing-right { clip-path: inset(0 0 0 50%); }
 .butterfly-body { clip-path: inset(0 47% 0 47%); }
-.poster-butterfly-two .butterfly-wing, .frame-butterfly-left .butterfly-wing { animation-delay: -.14s; }
-.frame-butterfly-right .butterfly-wing { animation-delay: -.28s; }
+.poster-butterfly-two .butterfly-wing { animation-delay: -.14s; }
 @keyframes butterfly-wingbeat { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(.45); } }
 .poster-butterfly { z-index: 6; filter: drop-shadow(.4cqi .8cqi .4cqi #8a416742); }
 .poster-butterfly-two { top: 39%; right: 4%; width: 17cqi; rotate: 18deg; }
@@ -199,18 +198,18 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .poster-photo img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: bottom right; filter: grayscale(1); }
 .poster-hat { z-index: 7; right: 14%; bottom: 34.5%; width: 20cqi; rotate: 12deg; }
 
-/* ---------- Invitation sheet (Olivia watercolor) ---------- */
+/* ---------- Invitation sheet (vintage scrapbook collage) ---------- */
 .invitation-sheet {
   position: relative;
   width: min(100%, 900px);
   margin: 0 auto;
-  /* --u is one source pixel of the 1086×1448 frame artwork at the sheet's rendered width */
+  /* --u is one source pixel of the 1086×1906 frame artwork at the sheet's rendered width */
   --u: calc(min(100cqi, 900px) / 1086);
   /* Top padding clears only the bunting; the cover poster sits in the rest of the frame's open top band. */
   padding: calc(var(--u) * 250) calc(var(--u) * 115) calc(var(--u) * 470);
   border: 1px solid transparent;
-  /* Seamless build of the frame: its side band (rows 470–1386) loops cleanly, so repeats down a long sheet read as one border. */
-  border-image-source: url('assets/birthday-frame-seamless.webp');
+  /* The narrow middle side band repeats down the long invitation. */
+  border-image-source: url('assets/birthday-frame-mature.webp');
   border-image-slice: 470 215 520 215 fill;
   border-image-width: calc(var(--u) * 470) calc(var(--u) * 215) calc(var(--u) * 520);
   border-image-repeat: stretch round;
@@ -218,31 +217,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 }
 .invitation-page { container-type: inline-size; }
 .invitation-sheet > * { position: relative; z-index: 2; }
-.invitation-sheet > .frame-butterfly { position: absolute; z-index: 1; pointer-events: none; filter: drop-shadow(0 3px 2px #8a41672e); }
-.frame-butterfly-top { top: calc(var(--u) * 30); right: calc(var(--u) * 140); width: calc(var(--u) * 130); rotate: 14deg; }
-.frame-butterfly-left { top: calc(var(--u) * 540); left: calc(var(--u) * -6); width: calc(var(--u) * 160); rotate: -10deg; }
-.frame-butterfly-right { bottom: calc(var(--u) * 520); right: calc(var(--u) * -4); width: calc(var(--u) * 120); rotate: 16deg; opacity: .9; filter: saturate(.6) brightness(1.08) drop-shadow(0 3px 2px #8a41672e); }
-.invitation-sheet > .candle-flames { position: absolute; z-index: 3; left: 0; bottom: 0; width: calc(var(--u) * 230); height: calc(var(--u) * 520); pointer-events: none; }
-.candle-flames span {
-  position: absolute;
-  bottom: calc(var(--u) * 323);
-  width: calc(var(--u) * 20);
-  height: calc(var(--u) * 42);
-  background: radial-gradient(ellipse at 50% 78%, #fffbea 0 17%, #ffda73 38%, #f5a848 75%, #f5a84800 100%);
-  clip-path: polygon(50% 0, 68% 29%, 89% 60%, 81% 84%, 62% 100%, 35% 98%, 10% 72%, 30% 36%);
-  filter: drop-shadow(0 0 calc(var(--u) * 9) #ffba55);
-  transform-origin: 50% 100%;
-  animation: candle-flicker 1.15s ease-in-out infinite;
-}
-.candle-flames span:nth-child(1) { left: calc(var(--u) * 129); animation-delay: -.2s; }
-.candle-flames span:nth-child(2) { left: calc(var(--u) * 166); height: calc(var(--u) * 46); animation-delay: -.75s; }
-.candle-flames span:nth-child(3) { left: calc(var(--u) * 200); animation-delay: -.4s; }
-@keyframes candle-flicker {
-  0%, 100% { transform: rotate(-3deg) scale(.86, 1); opacity: .65; }
-  27% { transform: rotate(4deg) scale(1.08, .88); opacity: .95; }
-  55% { transform: rotate(-5deg) scale(.8, 1.12); opacity: .8; }
-  78% { transform: rotate(3deg) scale(1.02, .94); opacity: 1; }
-}
 
 /* Cutout paper pieces: the paper lives on a masked pseudo-element so the parent can wear a white sticker edge and a soft shadow. */
 .cutout { position: relative; isolation: isolate; filter: drop-shadow(2.5px 0 0 #fff) drop-shadow(-2.5px 0 0 #fff) drop-shadow(0 2.5px 0 #fff) drop-shadow(0 -2.5px 0 #fff) drop-shadow(0 8px 10px #a4446c2e); }
