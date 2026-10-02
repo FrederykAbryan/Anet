@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 96">
+  <defs>
+    <pattern id="dots" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.6" fill="#fff" opacity=".55"/></pattern>
+  </defs>
+  <g stroke-linejoin="round">
+    <polygon points="4,10.7 56,18.5 30,70.8" fill="#f48fb8"/>
+    <polygon points="64,19.5 116,25.6 90,78.8" fill="#f9d56e"/>
+    <polygon points="124,26.4 176,30.7 150,84.8" fill="#8fd0e8"/>
+    <polygon points="184,31.3 236,33.9 210,88.8" fill="#b7dc8f"/>
+    <polygon points="244,34.1 296,35 270,90.8" fill="#c9a8ef"/>
+    <polygon points="304,35 356,34.1 330,90.8" fill="#f48fb8"/>
+    <polygon points="364,33.9 416,31.3 390,88.8" fill="#f9d56e"/>
+    <polygon points="424,30.7 476,26.4 450,84.8" fill="#8fd0e8"/>
+    <polygon points="484,25.6 536,19.5 510,78.8" fill="#b7dc8f"/>
+    <polygon points="544,18.5 596,10.7 570,70.8" fill="#c9a8ef"/>
+  </g>
+  <g fill="url(#dots)">
+    <polygon points="4,10.7 56,18.5 30,70.8"/><polygon points="124,26.4 176,30.7 150,84.8"/><polygon points="244,34.1 296,35 270,90.8"/><polygon points="364,33.9 416,31.3 390,88.8"/><polygon points="484,25.6 536,19.5 510,78.8"/>
+  </g>
+  <path d="M0 10 Q300 60 600 10" fill="none" stroke="#e46a9b" stroke-width="3" stroke-linecap="round"/>
+  <path d="M0 10 Q300 60 600 10" fill="none" stroke="#fff" stroke-width="1" stroke-dasharray="3 6" stroke-linecap="round" opacity=".8"/>
+</svg>

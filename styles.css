@@ -1,0 +1,371 @@
+/* Hallmark · macrostructure: Long Document · tone: playful scrapbook · anchor hue: bubblegum pink
+ * references: Tweety stationery (opening letter), Brielle collage poster (cover), Olivia watercolor invite (details sheet)
+ * art: hand-drawn SVG stickers in assets/art
+ */
+/* Hallmark · pre-emit critique: P4 H4 E4 S5 R4 V4 */
+@import url('tokens.css');
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; min-width: 320px; overflow-x: clip; }
+html { scroll-behavior: smooth; }
+body {
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  background:
+    radial-gradient(circle, #ffffffb3 0 1.6px, transparent 2.2px) 0 0 / 26px 26px,
+    var(--color-paper);
+}
+button, input, textarea { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+img { user-select: none; }
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 3px; }
+
+/* ---------- Header & footer ---------- */
+.site-header { max-width: 1100px; margin: auto; padding: 22px clamp(16px, 5vw, 60px); display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.wordmark { color: var(--color-raspberry); text-decoration: none; font: 1.7rem/1 var(--font-script); white-space: nowrap; }
+.wordmark-star { display: inline-block; margin-right: 4px; color: #f2c23a; transform: rotate(-12deg); }
+.header-note { color: var(--color-muted); font-family: var(--font-hand); font-size: 1.1rem; transform: rotate(-2deg); }
+.site-footer { display: flex; justify-content: space-between; gap: 20px; padding: 22px clamp(16px, 5vw, 60px); border-top: 2px dashed var(--color-rule); color: var(--color-muted); font-family: var(--font-hand); font-size: 1rem; }
+.site-footer span:last-child { font-family: var(--font-body); font-size: .65rem; font-weight: 700; letter-spacing: .12em; white-space: nowrap; }
+
+/* ---------- Shared: bubble name letters (Brielle) ---------- */
+.name-tiles { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0 .02em; font: 1em/1 var(--font-bubble); }
+.tile {
+  display: inline-block;
+  padding: 0 .02em;
+  color: transparent;
+  -webkit-text-stroke: .028em #b13d72;
+  background: radial-gradient(circle, #fff 0 .028em, transparent .034em) 0 0 / .16em .16em, #f39cc0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(.035em .035em 0 #fff) drop-shadow(-.03em -.03em 0 #fff) drop-shadow(.03em -.03em 0 #fff) drop-shadow(-.03em .03em 0 #fff) drop-shadow(.03em .07em 0 #b8497566);
+  transform: rotate(-4deg);
+}
+.tile:nth-child(5n + 2) { background: linear-gradient(90deg, #e86ea255 50%, transparent 0) 0 0 / .14em .14em, linear-gradient(#e86ea255 50%, transparent 0) 0 0 / .14em .14em, #fde3ee; -webkit-background-clip: text; background-clip: text; transform: rotate(3deg) translateY(.03em); }
+.tile:nth-child(5n + 3) { background: radial-gradient(circle at 30% 30%, #fff 0 .012em, transparent .02em) 0 0 / .07em .07em, linear-gradient(160deg, #f68cbb, #d6418a); -webkit-background-clip: text; background-clip: text; transform: rotate(-2deg); }
+.tile:nth-child(5n + 4) { background: radial-gradient(circle, #ffd84d 0 .022em, #fff .028em .055em, transparent .06em) 0 0 / .2em .2em, #c48ae0; -webkit-background-clip: text; background-clip: text; -webkit-text-stroke-color: #7d4aa4; transform: rotate(4deg) translateY(-.02em); }
+.tile:nth-child(5n + 5) { background: radial-gradient(circle, #f06fa2 0 .03em, #fff .036em .05em, transparent .055em) 0 0 / .18em .18em, #f8b04f; -webkit-background-clip: text; background-clip: text; -webkit-text-stroke-color: #c0572d; transform: rotate(-3deg); }
+.tile-word { display: inline-flex; align-items: center; white-space: nowrap; margin: 0 .1em; }
+.tile.tile-apostrophe { align-self: flex-start; margin-left: .04em; font-size: .78em; background: radial-gradient(circle, #ffd84d 0 .025em, #fff .03em .06em, transparent .065em) 0 0 / .22em .22em, #ef7aa9; -webkit-background-clip: text; background-clip: text; transform: rotate(8deg); }
+.tape { position: absolute; z-index: 3; top: 0; left: 50%; width: 42%; translate: -50% -55%; rotate: -5deg; pointer-events: none; }
+
+/* ---------- Opening letter (Tweety stationery) ---------- */
+.welcome-page { max-width: 1100px; margin: auto; padding: 8px 16px 72px; }
+.letter-card {
+  position: relative;
+  container-type: inline-size;
+  display: block;
+  width: min(100%, 540px);
+  aspect-ratio: 3 / 4.35;
+  margin: 0 auto;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 22px;
+  color: var(--color-ink);
+  cursor: pointer;
+  text-align: center;
+  background:
+    repeating-linear-gradient(180deg, #fff4f8 0 4.6%, #fbd6e5 4.6% 8.4%);
+  box-shadow: 0 26px 50px #a4446c33, 0 3px 0 #e7a3c0, inset 0 0 0 1px #fff;
+  transition: transform var(--dur-medium) var(--ease-out), box-shadow var(--dur-medium) var(--ease-out);
+}
+.letter-card:hover { transform: translateY(-4px) rotate(-.6deg); box-shadow: 0 32px 60px #a4446c40, 0 3px 0 #e7a3c0; }
+.letter-card:active { transform: translateY(0); }
+.letter-card:focus-visible { outline-offset: 6px; }
+.letter-card > * { position: absolute; }
+.letter-strip {
+  inset: 0 auto 0 0;
+  width: 41%;
+  background: radial-gradient(circle, #ffffff80 0 .75cqi, transparent .9cqi) 0 0 / 4.4cqi 4.4cqi, radial-gradient(circle, #ffffff40 0 .5cqi, transparent .65cqi) 2.2cqi 2.2cqi / 4.4cqi 4.4cqi, #f472a8;
+  clip-path: polygon(0 0, 100% 0, 95% 5%, 100% 10%, 94% 16%, 99% 22%, 95% 28%, 100% 34%, 94% 41%, 99% 47%, 95% 53%, 100% 60%, 94% 66%, 99% 72%, 95% 79%, 100% 85%, 94% 92%, 99% 100%, 0 100%);
+}
+.letter-vine { z-index: 3; top: 12%; left: 28.5cqi; width: 25cqi; rotate: 1.5deg; pointer-events: none; }
+.letter-bunting { z-index: 6; top: -.6%; left: 1%; width: 98%; }
+.letter-corner-tape { z-index: 7; top: 2.5%; left: -4%; width: 20cqi; rotate: -38deg; }
+.snap { z-index: 4; display: block; padding: 2cqi 2cqi 6.5cqi; background: #fffdfb; box-shadow: 0 1.2cqi 2.4cqi #7a2a4d40; }
+.snap-photo { left: 5%; top: 13.5%; width: 31cqi; rotate: -6deg; }
+.snap-photo > img:first-child { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 15%; background: #8fd0e8; filter: grayscale(1) contrast(1.05); }
+.snap-age { left: 9%; top: 45.5%; width: 26cqi; rotate: 7deg; }
+.snap-age em { display: grid; place-items: center; aspect-ratio: 1; background: radial-gradient(circle, #ffffff70 0 .6cqi, transparent .75cqi) 0 0 / 3.4cqi 3.4cqi, #a9d67f; color: #fff; font: 15cqi/1 var(--font-bubble); font-style: normal; -webkit-text-stroke: .5cqi #d6418a; paint-order: stroke fill; text-shadow: .6cqi .6cqi 0 #d6418a; }
+.snap-age small { position: absolute; left: 0; right: 0; bottom: 1.2cqi; color: var(--color-raspberry); font: 4.2cqi/1 var(--font-script); }
+.snap-disco { left: 4%; top: 71%; width: 27cqi; rotate: -5deg; }
+.snap-disco-ball { display: block; width: 100%; aspect-ratio: 1; padding: 2cqi; object-fit: contain; background: radial-gradient(circle, #fff7 0 .6cqi, transparent .75cqi) 0 0 / 3.4cqi 3.4cqi, #f9cf6a; }
+.letter-star { z-index: 5; filter: drop-shadow(.4cqi .6cqi 0 #a8436733); }
+.letter-star-one { left: 32%; top: 39%; width: 11cqi; rotate: -14deg; }
+.letter-star-two { right: 7%; top: 70%; width: 9cqi; rotate: 12deg; }
+.letter-body { z-index: 5; top: 17%; left: 43%; right: 4%; display: flex; flex-direction: column; align-items: center; }
+.letter-hello { color: var(--color-raspberry); font: 10.5cqi/1 var(--font-script); rotate: -4deg; text-shadow: .4cqi .4cqi 0 #fff; }
+.letter-line { margin: 1.5cqi 0 2.4cqi; color: #a0466f; font: 5.4cqi/1 var(--font-hand); }
+.letter-body .name-tiles { font-size: 12.5cqi; }
+.letter-body .tiles-long { font-size: 8.6cqi; }
+.letter-body .tiles-xlong { font-size: 6.6cqi; }
+.letter-party { margin-top: 3cqi; padding: 0 1.5cqi; color: var(--color-hot-pink); font: 8cqi/1.1 var(--font-script); background: linear-gradient(transparent 55%, #fbe38a 55% 88%, transparent 88%); rotate: -2deg; }
+.letter-sparkles { z-index: 4; right: 3%; top: 49%; width: 17cqi; }
+.letter-butterfly { z-index: 5; left: 47%; top: 61%; width: 18cqi; rotate: -14deg; filter: drop-shadow(.4cqi .8cqi .4cqi #8a416742); animation: flutter 3.6s var(--ease-in-out) infinite alternate; }
+.letter-open {
+  z-index: 8; left: 45%; right: 5%; bottom: 8.5%;
+  display: flex; align-items: center; gap: 2.2cqi;
+  padding: 2.2cqi 3.4cqi 2.2cqi 1.6cqi;
+  border-radius: 999px;
+  background: var(--color-raspberry);
+  color: #fff;
+  font: 700 3.3cqi/1.15 var(--font-body);
+  letter-spacing: .04em;
+  text-align: left;
+  box-shadow: 0 1.1cqi 0 #7d244d;
+  transition: transform var(--dur-medium) var(--ease-out);
+}
+.letter-card:hover .letter-open { transform: translateY(-.8cqi); }
+.letter-seal { flex: 0 0 auto; display: grid; place-items: center; width: 8.5cqi; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #ff8fb6, #d6336f 70%); color: #fff; font-size: 4.2cqi; box-shadow: inset 0 0 0 .6cqi #ffffff55, 0 0 0 .5cqi #fff; animation: thump 1.8s var(--ease-in-out) infinite; }
+.letter-fineprint { z-index: 5; right: 5%; bottom: 3%; color: #b56a8d; font: 2.8cqi/1 var(--font-hand); letter-spacing: .03em; }
+
+@keyframes flutter { from { transform: translateY(0) rotate(0); } to { transform: translateY(-1.4cqi) rotate(6deg); } }
+@keyframes thump { 0%, 70%, 100% { transform: scale(1); } 80% { transform: scale(1.14); } 90% { transform: scale(.98); } }
+
+/* ---------- Cover poster (Brielle collage) ---------- */
+.invitation-page { max-width: 1100px; margin: auto; padding: 18px clamp(12px, 4vw, 60px) 88px; }
+.back-button { display: inline-flex; margin: 0 0 18px; padding: 8px 16px; border: 2px solid #fff; border-radius: 999px; background: var(--color-bubblegum); color: var(--color-raspberry); cursor: pointer; font-size: .74rem; font-weight: 700; letter-spacing: .06em; box-shadow: 0 3px 0 #e7a3c0; transform: rotate(-1.5deg); transition: transform var(--dur-fast) var(--ease-out); }
+.back-button:hover { transform: rotate(0) translateY(-2px); }
+/* The cover is taped onto the watercolor sheet just under its bunting, so both read as one scrapbook page. */
+.invitation-cover { position: relative; width: min(100%, 560px); margin: 0 auto; rotate: -.8deg; }
+/* Watercolor paper like the sheet below: cream paper, soft pink washes bleeding in from the edges, white sticker edge and washi tape like the cutout cards. */
+.cover-poster {
+  position: relative;
+  container-type: inline-size;
+  aspect-ratio: 736 / 1135;
+  overflow: hidden;
+  border: 6px solid #fff;
+  border-radius: 18px;
+  background:
+    radial-gradient(ellipse 55% 30% at 50% 44%, #fffaf3d9, transparent 72%),
+    radial-gradient(ellipse 75% 42% at 0% 100%, #f6bfd2b8, transparent 70%),
+    radial-gradient(ellipse 65% 50% at 100% 80%, #f7c5d7c4, transparent 68%),
+    radial-gradient(ellipse 70% 30% at 85% 0%, #f9d2dfb3, transparent 70%),
+    radial-gradient(ellipse 45% 30% at 0% 38%, #fbe2b37a, transparent 70%),
+    radial-gradient(ellipse 40% 26% at 100% 40%, #cfe6f280, transparent 70%),
+    radial-gradient(circle, #f2a9c455 0 1.4px, transparent 1.9px) 0 0 / 24px 24px,
+    url('assets/paper-texture.webp') center / 500px 500px repeat,
+    #fcefe9;
+  box-shadow: 0 24px 55px #a4446c2e, 0 3px 0 #efc4d4;
+  isolation: isolate;
+}
+.cover-poster > * { position: absolute; }
+.cover-tape { position: absolute; z-index: 9; top: -14px; width: 26%; pointer-events: none; }
+.cover-tape-left { left: -5%; rotate: -34deg; }
+.cover-tape-right { right: -5%; rotate: 32deg; }
+.poster-sticker { z-index: 6; display: block; filter: drop-shadow(.4cqi .7cqi 0 #a8436733); pointer-events: none; }
+.poster-banner { z-index: 4; top: -1%; left: -2%; width: 104%; pointer-events: none; filter: drop-shadow(0 .8cqi .8cqi #a4446c26); }
+.poster-cake { z-index: 2; left: -9%; bottom: -2%; width: 108cqi; pointer-events: none; filter: drop-shadow(0 .8cqi 1cqi #a4446c2b); }
+.poster-star-top { top: 15%; left: 4%; width: 11cqi; rotate: 10deg; }
+.poster-intro { z-index: 5; top: 10.5%; left: 14%; right: 14%; color: #e2407f; font: 6.4cqi/1.05 var(--font-script); text-align: center; transform: rotate(-2deg); text-shadow: .3cqi .3cqi 0 #fff, -.3cqi -.3cqi 0 #fff; }
+.poster-name { z-index: 5; top: 17%; left: 3%; right: 3%; height: 15%; display: grid; place-items: center; }
+.poster-name .name-tiles { font-size: 17cqi; }
+.poster-name .tiles-long { font-size: 11.5cqi; }
+.poster-name .tiles-xlong { font-size: 8.4cqi; }
+.poster-age { z-index: 4; top: 31.5%; left: 16%; width: 52cqi; aspect-ratio: 1; display: grid; place-items: center; background: url('assets/art/age-badge.svg') center / contain no-repeat; filter: drop-shadow(0 1.4cqi 1.6cqi #9c3b6440); rotate: -6deg; }
+.poster-age-inner { display: flex; align-items: flex-start; color: transparent; font: 10cqi/.9 var(--font-bubble); background: radial-gradient(circle at 30% 30%, #fff 0 .5cqi, transparent .8cqi) 0 0 / 2.6cqi 2.6cqi, linear-gradient(170deg, #f9a3c7, #d6418a); -webkit-background-clip: text; background-clip: text; -webkit-text-stroke: .5cqi #b13d72; filter: drop-shadow(.6cqi .6cqi 0 #fff) drop-shadow(-.5cqi -.5cqi 0 #fff); }
+.poster-age-number .poster-age-inner { font-size: 22cqi; }
+.poster-age-inner small { margin: .05em 0 0 .08em; color: #7d3a8c; -webkit-text-stroke: 0; font: .3em/1 var(--font-hand); background: none; }
+.flower-top-right { top: 31%; right: 18%; width: 13cqi; rotate: 20deg; }
+.poster-star-right { top: 45%; right: 4%; width: 14cqi; rotate: -14deg; }
+.poster-star-left { top: 44%; left: 3%; width: 14cqi; rotate: 12deg; }
+.poster-star-bottom { top: 66%; left: 2%; width: 11cqi; rotate: -8deg; z-index: 4; }
+.poster-star-top, .poster-star-left, .poster-star-right, .poster-star-bottom, .dress-code-sparkles { animation: star-sparkle 2.8s ease-in-out infinite; }
+.poster-star-left { animation-delay: -.7s; }
+.poster-star-right { animation-delay: -1.5s; }
+.poster-star-bottom { animation-delay: -2.1s; }
+.dress-code-sparkles { animation-delay: -1.1s; }
+@keyframes star-sparkle {
+  0%, 100% { transform: scale(.94); filter: drop-shadow(0 0 0 #fff8c2) brightness(1); }
+  42% { transform: scale(1.16); filter: drop-shadow(0 0 10px #fff8c2) brightness(1.25); }
+  58% { transform: scale(1); filter: drop-shadow(0 0 3px #fff8c2) brightness(1.08); }
+}
+.butterfly-sticker { display: block; aspect-ratio: 3 / 2; }
+.butterfly-sticker img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; pointer-events: none; }
+.butterfly-wing { transform-origin: 50% 50%; animation: butterfly-wingbeat .46s ease-in-out infinite; }
+.butterfly-wing-left { clip-path: inset(0 50% 0 0); }
+.butterfly-wing-right { clip-path: inset(0 0 0 50%); }
+.butterfly-body { clip-path: inset(0 47% 0 47%); }
+.poster-butterfly-two .butterfly-wing, .frame-butterfly-left .butterfly-wing { animation-delay: -.14s; }
+.frame-butterfly-right .butterfly-wing { animation-delay: -.28s; }
+@keyframes butterfly-wingbeat { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(.45); } }
+.poster-butterfly { z-index: 6; filter: drop-shadow(.4cqi .8cqi .4cqi #8a416742); }
+.poster-butterfly-two { top: 39%; right: 4%; width: 17cqi; rotate: 18deg; }
+.poster-butterfly-one { top: 75%; left: 37%; width: 13cqi; rotate: -15deg; }
+.poster-party-title { z-index: 6; top: 61%; left: 6%; padding: .8cqi 2.4cqi; color: #d9649a; font: 6cqi/1 var(--font-hand); letter-spacing: .06em; background: repeating-linear-gradient(90deg, #fde7efe6 0 2.2cqi, #fbd5e4e6 2.2cqi 4.4cqi); box-shadow: 0 .5cqi .8cqi #a4446c1f; rotate: -1.5deg; }
+.poster-caterpillar { top: 67.5%; left: 13%; width: 26cqi; rotate: -4deg; }
+.poster-photo { z-index: 3; right: -5%; bottom: 0; width: 66%; height: 44%; display: flex; justify-content: center; align-items: flex-end; filter: drop-shadow(-.8cqi 0 0 #fff) drop-shadow(.8cqi 0 0 #fff) drop-shadow(0 -.8cqi 0 #fff) drop-shadow(-.6cqi .8cqi 0 #a44a6f55); }
+.poster-photo img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: bottom right; filter: grayscale(1); }
+.poster-hat { z-index: 7; right: 14%; bottom: 34.5%; width: 20cqi; rotate: 12deg; }
+
+/* ---------- Invitation sheet (Olivia watercolor) ---------- */
+.invitation-sheet {
+  position: relative;
+  width: min(100%, 900px);
+  margin: 0 auto;
+  /* --u is one source pixel of the 1086×1448 frame artwork at the sheet's rendered width */
+  --u: calc(min(100cqi, 900px) / 1086);
+  /* Top padding clears only the bunting; the cover poster sits in the rest of the frame's open top band. */
+  padding: calc(var(--u) * 250) calc(var(--u) * 115) calc(var(--u) * 470);
+  border: 1px solid transparent;
+  /* Seamless build of the frame: its side band (rows 470–1386) loops cleanly, so repeats down a long sheet read as one border. */
+  border-image-source: url('assets/birthday-frame-seamless.webp');
+  border-image-slice: 470 215 520 215 fill;
+  border-image-width: calc(var(--u) * 470) calc(var(--u) * 215) calc(var(--u) * 520);
+  border-image-repeat: stretch round;
+  box-shadow: 0 20px 52px oklch(58% .055 18 / .16);
+}
+.invitation-page { container-type: inline-size; }
+.invitation-sheet > * { position: relative; z-index: 2; }
+.invitation-sheet > .frame-butterfly { position: absolute; z-index: 1; pointer-events: none; filter: drop-shadow(0 3px 2px #8a41672e); }
+.frame-butterfly-top { top: calc(var(--u) * 30); right: calc(var(--u) * 140); width: calc(var(--u) * 130); rotate: 14deg; }
+.frame-butterfly-left { top: calc(var(--u) * 540); left: calc(var(--u) * -6); width: calc(var(--u) * 160); rotate: -10deg; }
+.frame-butterfly-right { bottom: calc(var(--u) * 520); right: calc(var(--u) * -4); width: calc(var(--u) * 120); rotate: 16deg; opacity: .9; filter: saturate(.6) brightness(1.08) drop-shadow(0 3px 2px #8a41672e); }
+.invitation-sheet > .candle-flames { position: absolute; z-index: 3; left: 0; bottom: 0; width: calc(var(--u) * 230); height: calc(var(--u) * 520); pointer-events: none; }
+.candle-flames span {
+  position: absolute;
+  bottom: calc(var(--u) * 323);
+  width: calc(var(--u) * 20);
+  height: calc(var(--u) * 42);
+  background: radial-gradient(ellipse at 50% 78%, #fffbea 0 17%, #ffda73 38%, #f5a848 75%, #f5a84800 100%);
+  clip-path: polygon(50% 0, 68% 29%, 89% 60%, 81% 84%, 62% 100%, 35% 98%, 10% 72%, 30% 36%);
+  filter: drop-shadow(0 0 calc(var(--u) * 9) #ffba55);
+  transform-origin: 50% 100%;
+  animation: candle-flicker 1.15s ease-in-out infinite;
+}
+.candle-flames span:nth-child(1) { left: calc(var(--u) * 129); animation-delay: -.2s; }
+.candle-flames span:nth-child(2) { left: calc(var(--u) * 166); height: calc(var(--u) * 46); animation-delay: -.75s; }
+.candle-flames span:nth-child(3) { left: calc(var(--u) * 200); animation-delay: -.4s; }
+@keyframes candle-flicker {
+  0%, 100% { transform: rotate(-3deg) scale(.86, 1); opacity: .65; }
+  27% { transform: rotate(4deg) scale(1.08, .88); opacity: .95; }
+  55% { transform: rotate(-5deg) scale(.8, 1.12); opacity: .8; }
+  78% { transform: rotate(3deg) scale(1.02, .94); opacity: 1; }
+}
+
+/* Cutout paper pieces: the paper lives on a masked pseudo-element so the parent can wear a white sticker edge and a soft shadow. */
+.cutout { position: relative; isolation: isolate; filter: drop-shadow(2.5px 0 0 #fff) drop-shadow(-2.5px 0 0 #fff) drop-shadow(0 2.5px 0 #fff) drop-shadow(0 -2.5px 0 #fff) drop-shadow(0 8px 10px #a4446c2e); }
+.cutout::before { content: ''; position: absolute; inset: 0; z-index: -1; }
+.torn::before { clip-path: polygon(0 2%, 6% 0, 12% 1.8%, 19% .4%, 26% 2.2%, 33% .6%, 41% 2%, 48% 0, 56% 1.6%, 63% .3%, 71% 2.1%, 78% .5%, 86% 1.9%, 93% .2%, 100% 1.5%, 99.2% 12%, 100% 25%, 98.8% 38%, 100% 50%, 99% 63%, 100% 76%, 98.9% 88%, 100% 98.5%, 93% 100%, 86% 98.2%, 78% 99.7%, 71% 98%, 63% 99.8%, 56% 98.3%, 48% 100%, 41% 98.1%, 33% 99.6%, 26% 97.9%, 19% 99.7%, 12% 98.2%, 6% 100%, 0 98.4%, .9% 88%, 0 76%, 1% 63%, 0 50%, .8% 38%, 0 25%, 1% 12%); }
+.pinked::before { -webkit-mask: conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) top / 16px 51% repeat-x, conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / 16px 51% repeat-x; mask: conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) top / 16px 51% repeat-x, conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / 16px 51% repeat-x; }
+
+/* Butterflies flutter along a dotted doodle between sections */
+.butterfly-flight { position: relative; z-index: 4; height: clamp(96px, 15vw, 140px); margin: 10px -4%; pointer-events: none; }
+.butterfly-flight svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.flight-route { fill: none; stroke: #e98ab3; stroke-width: 2; stroke-dasharray: 1 9; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.flight-butterfly { position: absolute; top: 0; left: 0; width: clamp(58px, 9vw, 88px); filter: drop-shadow(0 8px 6px #8a416733); }
+.flight-butterfly .butterfly-sticker { position: relative; width: 100%; }
+.butterfly-flight + * { margin-top: 6px !important; }
+
+.party-details { position: relative; min-width: 0; text-align: center; }
+.party-details-kicker, .panel-kicker { margin: 0; color: var(--color-hot-pink); font-size: .7rem; font-weight: 700; letter-spacing: .24em; }
+.party-details-kicker::before, .party-details-kicker::after { content: ' ★ '; color: #f2c23a; }
+.party-details h2, .dress-code-copy h2, .wishes-intro h2 {
+  margin: 6px 0 0;
+  color: #e0508e;
+  font: clamp(2.6rem, 7vw, 4.4rem)/1 var(--font-script);
+  text-shadow: 2px 2px 0 #fff, -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 0 4px 10px #e0508e2e;
+  overflow-wrap: anywhere;
+}
+.countdown-scrapbook { width: min(100%, 590px); margin: 34px auto 0; padding: 32px 32px 26px; transform: rotate(-1deg); }
+.countdown-scrapbook::before { background: repeating-linear-gradient(0deg, var(--color-card) 0 27px, var(--color-countdown-line) 28px 29px), var(--color-card); }
+.countdown-tape { position: absolute; width: 100px; top: -21px; left: 50%; transform: translateX(-50%) rotate(4deg); pointer-events: none; }
+.countdown-star { position: absolute; width: clamp(36px, 8vw, 62px); pointer-events: none; filter: drop-shadow(0 3px 2px var(--color-countdown-shadow)); }
+.countdown-star-left { left: -24px; top: 28px; transform: rotate(-16deg); }
+.countdown-star-right { right: -18px; bottom: 16px; transform: rotate(14deg); }
+.countdown-eyebrow { display: block; color: var(--color-raspberry); font-size: .68rem; font-weight: 700; letter-spacing: .19em; }
+.countdown-units { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 20px; }
+.countdown-unit { min-width: 0; padding: 13px 4px 10px; background: var(--color-countdown-tile); border: 1px dashed var(--color-countdown-border); box-shadow: 2px 3px 0 var(--color-countdown-shadow); }
+.countdown-unit:nth-child(2) { transform: rotate(2deg); background: var(--color-countdown-blue); }
+.countdown-unit:nth-child(3) { transform: rotate(-2deg); background: var(--color-countdown-yellow); }
+.countdown-unit:nth-child(4) { transform: rotate(1deg); background: var(--color-countdown-lilac); }
+.countdown-unit strong { display: block; color: var(--color-raspberry); font: clamp(2rem, 6vw, 3.5rem)/1 var(--font-bubble); font-variant-numeric: tabular-nums; }
+.countdown-unit span { display: block; margin-top: 6px; color: var(--color-ink); font-size: .6rem; font-weight: 700; letter-spacing: .12em; }
+.countdown-caption { display: block; margin-top: 20px; color: var(--color-raspberry); font: 1.35rem/1 var(--font-hand); }
+.countdown-pending { margin: 26px 0 7px; color: var(--color-raspberry); font: 1.5rem/1.2 var(--font-hand); }
+.party-details-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 3vw, 28px); margin-top: 44px; }
+.party-details-grid > div { min-width: 0; padding: 32px 14px 26px; rotate: -2deg; }
+.party-details-grid > div::before { background: repeating-linear-gradient(180deg, #fff 0 14px, #fdeef4 14px 26px); }
+.party-details-grid > div:nth-child(2)::before { background: radial-gradient(circle, #fff 0 3px, transparent 3.6px) 0 0 / 18px 18px, #fde3ee; }
+.party-details-grid > div:nth-child(3)::before { background: linear-gradient(90deg, #cfe9f566 50%, transparent 0) 0 0 / 20px 20px, linear-gradient(#cfe9f566 50%, transparent 0) 0 0 / 20px 20px, #fff; }
+.party-details-grid > div:nth-child(2) { rotate: 1.6deg; translate: 0 8px; }
+.party-details-grid > div:nth-child(3) { rotate: -1deg; }
+.party-details-grid .tape { width: 64%; max-width: 110px; }
+.detail-label { color: var(--color-hot-pink); font-size: .68rem; font-weight: 700; letter-spacing: .2em; }
+.party-details-grid p { margin: 8px 0 0; color: var(--color-ink); font: clamp(1.4rem, 2.6vw, 1.9rem)/1.15 var(--font-hand); overflow-wrap: anywhere; }
+.rsvp-link { display: inline-flex; gap: 8px; margin-top: 34px; padding: 12px 22px; border-radius: 999px; background: var(--color-hot-pink); color: #fff; text-decoration: none; font-size: .74rem; font-weight: 700; letter-spacing: .16em; box-shadow: 0 4px 0 #b8336f; transition: transform var(--dur-medium) var(--ease-out); }
+.rsvp-link:hover { transform: translateY(-2px); }
+
+.invitation-note { width: fit-content; max-width: min(100%, 30ch); margin: 56px auto 0; padding: 18px clamp(34px, 7vw, 60px); color: var(--color-raspberry); font: clamp(1.7rem, 4vw, 2.5rem)/1.15 var(--font-script); text-align: center; overflow-wrap: anywhere; rotate: -1.5deg; }
+.invitation-note::before { background: repeating-linear-gradient(90deg, #fde7ef 0 12px, #fbd5e4 12px 24px); clip-path: polygon(0 0, 100% 0, 94% 50%, 100% 100%, 0 100%, 6% 50%); }
+.invitation-note::before, .invitation-note::after { content: '✦'; margin: 0 .3em; color: #f2c23a; font-size: .7em; }
+
+/* Dress code: striped stationery card with a polka strip */
+.dress-code-section { position: relative; margin: 72px auto 0; padding: 36px clamp(18px, 4vw, 40px) 32px clamp(96px, 18%, 150px); display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 18px; rotate: -.6deg; }
+.dress-code-section::before { background: repeating-linear-gradient(180deg, #fff4f8 0 18px, #fbdde9 18px 32px); }
+.dress-code-section::after { content: ''; position: absolute; z-index: -1; inset: 0 auto 0 0; width: clamp(78px, 15%, 128px); background: radial-gradient(circle, #ffffff80 0 3px, transparent 3.6px) 0 0 / 16px 16px, #f472a8; clip-path: polygon(0 0, 100% 0, 92% 12%, 100% 25%, 92% 38%, 100% 50%, 92% 63%, 100% 76%, 92% 88%, 100% 100%, 0 100%); }
+.dress-code-section .tape { left: 70%; width: 120px; rotate: 4deg; }
+.dress-code-mark { position: absolute; left: clamp(14px, 3%, 30px); top: 50%; width: clamp(70px, 13%, 110px); translate: 0 -50%; rotate: -8deg; perspective: 360px; filter: drop-shadow(0 6px 8px #6e648940); }
+.dress-code-mark img { display: block; width: 100%; }
+.spinning-disco-ball { animation: disco-spin 4.8s linear infinite; }
+@keyframes disco-spin { to { transform: rotateY(360deg); } }
+.dress-code-copy { min-width: 0; text-align: left; }
+.dress-code-copy p { max-width: 50ch; margin: 8px 0 0; color: var(--color-ink); font: clamp(1.3rem, 2.2vw, 1.75rem)/1.2 var(--font-hand); overflow-wrap: anywhere; }
+.dress-code-sparkles { width: clamp(44px, 7vw, 64px); align-self: start; rotate: 14deg; }
+
+/* Wishes: lined notepaper */
+.wishes-section { position: relative; margin: 84px auto 0; padding: 40px clamp(18px, 4vw, 44px) 34px clamp(56px, 9%, 84px); display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1fr); gap: clamp(22px, 4vw, 48px); rotate: .5deg; }
+.wishes-section::before { background: linear-gradient(90deg, transparent clamp(40px, 6.5%, 62px), #f39cbf clamp(40px, 6.5%, 62px) calc(clamp(40px, 6.5%, 62px) + 2px), transparent 0), repeating-linear-gradient(180deg, #fffdfd 0 31px, #f5d0de 31px 32px); }
+.wishes-section .tape { left: 30%; width: 130px; rotate: -7deg; }
+.wishes-intro { display: flex; align-items: flex-start; gap: 8px; text-align: left; }
+.wishes-intro h2 { font-size: clamp(2.3rem, 4.6vw, 3.5rem); overflow-wrap: break-word; }
+.wishes-doodle { color: var(--color-hot-pink); font: 3.6rem/.8 var(--font-script); transform: rotate(-15deg); }
+.wishes-intro p { max-width: 33ch; margin: 10px 0 0; color: var(--color-muted); font: 1.2rem/1.3 var(--font-hand); }
+.wishes-form { display: grid; gap: 16px; text-align: left; }
+.wishes-form label { display: block; min-width: 0; color: var(--color-raspberry); font-size: .72rem; font-weight: 700; letter-spacing: .06em; }
+.wishes-form input, .wishes-form textarea { display: block; width: 100%; min-width: 0; margin-top: 8px; padding: 12px 14px; border: 2px solid #f5c3d6; border-radius: 14px; background: #fff; color: var(--color-ink); font: 400 .92rem var(--font-body); transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out); }
+.wishes-form textarea { min-height: 116px; resize: vertical; }
+.wishes-form input::placeholder, .wishes-form textarea::placeholder { color: var(--color-muted); opacity: .7; }
+.wishes-form input:hover, .wishes-form textarea:hover { border-color: var(--color-pink); }
+.wishes-form input:focus, .wishes-form textarea:focus { border-color: var(--color-hot-pink); box-shadow: 0 0 0 4px var(--color-pink-soft); outline: none; }
+.wishes-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+.primary-button { display: inline-flex; justify-content: space-between; align-items: center; gap: 14px; min-width: 190px; padding: 14px 20px; border: 0; border-radius: 999px; background: var(--color-hot-pink); color: #fff; cursor: pointer; font-size: .86rem; font-weight: 700; white-space: nowrap; box-shadow: 0 4px 0 #b8336f; transition: transform var(--dur-medium) var(--ease-out); }
+.primary-button:hover { transform: translateY(-2px); }
+.primary-button:active { transform: translateY(1px); box-shadow: 0 2px 0 #b8336f; }
+.wishes-actions p { margin: 0; color: var(--color-muted); font-size: .75rem; line-height: 1.4; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 700px) {
+  .party-details-grid { grid-template-columns: minmax(0, 1fr); gap: 26px; margin-top: 36px; }
+  .party-details-grid > div:nth-child(2) { translate: 0; }
+  .wishes-section { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 540px) {
+  .site-header { padding: 18px 16px; }
+  .header-note { display: none; }
+  .welcome-page { padding: 4px 16px 56px; }
+  .letter-card, .cover-poster { border-radius: 18px; }
+  .invitation-page { padding-inline: 16px; }
+  .invitation-sheet { padding-inline: 16px; }
+  .countdown-scrapbook { margin-top: 28px; padding: 27px 13px 20px; }
+  .countdown-units { gap: 5px; margin-top: 15px; }
+  .countdown-unit { padding: 11px 2px 8px; }
+  .countdown-unit strong { font-size: clamp(1.6rem, 7vw, 2.3rem); }
+  .countdown-unit span { font-size: .5rem; letter-spacing: .04em; }
+  .countdown-star-left { left: -13px; top: 39px; }
+  .countdown-star-right { right: -10px; bottom: 13px; }
+  .countdown-eyebrow { font-size: .57rem; letter-spacing: .1em; }
+  .invitation-note { margin-top: 44px; }
+  .dress-code-section { grid-template-columns: minmax(0, 1fr); margin-top: 60px; padding: 32px 18px 26px 92px; }
+  .dress-code-sparkles { display: none; }
+  .dress-code-mark { width: 62px; left: 10px; }
+  .wishes-section { margin-top: 70px; padding: 36px 16px 28px 50px; }
+  .wishes-doodle { font-size: 2.8rem; }
+  .wishes-actions .primary-button { width: 100%; }
+  .site-footer { flex-direction: column; gap: 6px; font-size: .9rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: .01ms !important; animation: none !important; }
+}

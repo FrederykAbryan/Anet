@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 210">
+  <path d="M100 34 q-6-10 0-18 q6 8 0 18z" fill="#f9c74f" stroke="#f08a4b" stroke-width="1.5"/>
+  <rect x="96" y="34" width="8" height="30" rx="2" fill="#b98be6"/><path d="M96 40l8-4M96 48l8-4M96 56l8-4" stroke="#fff" stroke-width="2"/>
+  <path d="M30 186 h140 l-14 10 h-112z" fill="#cfe7f5" stroke="#8fbfdc" stroke-width="2"/>
+  <path d="M84 196 h32 l6 12 h-44z" fill="#cfe7f5" stroke="#8fbfdc" stroke-width="2"/>
+  <rect x="40" y="120" width="120" height="66" rx="10" fill="#f7b6cf" stroke="#de86aa" stroke-width="2"/>
+  <path d="M40 132 q0-12 12-12 h96 q12 0 12 12 v6 q-8 10-14 0 q-8 12-16 0 q-8 12-16 0 q-8 12-16 0 q-8 12-16 0 q-8 12-16 0 q-6 10-12 0z" fill="#fff4f8" stroke="#f2bcd2" stroke-width="1.5"/>
+  <path d="M40 166 q30 10 60 0 q30-10 60 0" stroke="#fff" stroke-width="3" fill="none" stroke-dasharray="1 7" stroke-linecap="round"/>
+  <rect x="58" y="70" width="84" height="52" rx="9" fill="#fbcde0" stroke="#de86aa" stroke-width="2"/>
+  <path d="M58 82 q0-12 12-12 h60 q12 0 12 12 v4 q-7 10-12 0 q-7 12-14 0 q-7 12-14 0 q-7 12-14 0 q-7 12-14 0 q-6 10-12 0z" fill="#fff4f8" stroke="#f2bcd2" stroke-width="1.5"/>
+  <g stroke="#a9c9ef" stroke-width="2.5" fill="none" stroke-linecap="round"><path d="M40 150 q30 18 60 8 q30 10 60-8"/><path d="M92 158 q-14-12-16 2 q8 6 16-2zM108 158 q14-12 16 2 q-8 6-16-2zM98 160 l-8 16M102 160 l8 16"/></g>
+  <g stroke="#5b8a3c" stroke-width="2" fill="none"><path d="M66 66 q2-10 8-12M88 64 q2-10 8-12M112 64 q2-10 8-12M134 66 q2-10 8-12M52 116 q2-10 8-12M148 116 q2-10 8-12"/></g>
+  <g fill="#e2384f"><circle cx="66" cy="68" r="7"/><circle cx="88" cy="66" r="7"/><circle cx="112" cy="66" r="7"/><circle cx="134" cy="68" r="7"/><circle cx="52" cy="118" r="7"/><circle cx="148" cy="118" r="7"/></g>
+  <g fill="#fff" opacity=".7"><circle cx="64" cy="66" r="2"/><circle cx="86" cy="64" r="2"/><circle cx="110" cy="64" r="2"/><circle cx="132" cy="66" r="2"/><circle cx="50" cy="116" r="2"/><circle cx="146" cy="116" r="2"/></g>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 300">
+  <defs><path id="s" d="M0-10 2.9-4 9.5-3.1 4.7 1.5 5.9 8.1 0 5 -5.9 8.1 -4.7 1.5 -9.5-3.1 -2.9-4Z" stroke-linejoin="round"/>
+  <path id="t" d="M0-10 Q1 -1 10 0 Q1 1 0 10 Q-1 1 -10 0 Q-1 -1 0-10Z"/></defs>
+  <g fill="#f6c143" stroke="#e39a2b" stroke-width="1.2">
+    <use href="#s" transform="translate(20 20) scale(.7)"/><use href="#s" transform="translate(44 36) scale(1)"/><use href="#s" transform="translate(70 58) scale(.8) rotate(12)"/><use href="#s" transform="translate(92 86) scale(1.3) rotate(-8)"/><use href="#s" transform="translate(110 120) scale(.9)"/><use href="#s" transform="translate(124 156) scale(1.4) rotate(10)"/><use href="#s" transform="translate(132 196) scale(1)"/><use href="#s" transform="translate(136 236) scale(1.6) rotate(-12)"/><use href="#s" transform="translate(138 280) scale(.9)"/>
+  </g>
+  <g fill="#f8d77a"><use href="#t" transform="translate(32 60) scale(.5)"/><use href="#t" transform="translate(116 70) scale(.6)"/><use href="#t" transform="translate(100 180) scale(.5)"/><use href="#t" transform="translate(150 140) scale(.45)"/><use href="#t" transform="translate(108 256) scale(.6)"/></g>
+  <g fill="#f3a7c6"><circle cx="58" cy="20" r="2.2"/><circle cx="84" cy="44" r="1.8"/><circle cx="140" cy="104" r="2"/><circle cx="114" cy="218" r="2"/></g>
+</svg>

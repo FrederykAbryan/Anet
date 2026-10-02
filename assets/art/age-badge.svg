@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220">
+  <defs>
+    <pattern id="hearts" width="22" height="22" patternUnits="userSpaceOnUse"><path d="M11 16 C4 11 5 6 8.5 6 C10 6 11 7.5 11 7.5 C11 7.5 12 6 13.5 6 C17 6 18 11 11 16Z" fill="#fff"/></pattern>
+    <g id="f"><circle cx="110" cy="110" r="72"/><circle cx="110" cy="38" r="34"/><circle cx="161" cy="59" r="34"/><circle cx="182" cy="110" r="34"/><circle cx="161" cy="161" r="34"/><circle cx="110" cy="182" r="34"/><circle cx="59" cy="161" r="34"/><circle cx="38" cy="110" r="34"/><circle cx="59" cy="59" r="34"/></g>
+  </defs>
+  <use href="#f" fill="#f0a2c3" transform="translate(110 110) scale(1.045) translate(-110 -110)"/>
+  <use href="#f" fill="#fbe1ec"/>
+  <use href="#f" fill="url(#hearts)" opacity=".9"/>
+  <circle cx="110" cy="110" r="66" fill="#fde9f1" opacity=".75"/>
+  <circle cx="110" cy="110" r="66" fill="none" stroke="#f0a2c3" stroke-width="2.5" stroke-dasharray="5 5"/>
+</svg>

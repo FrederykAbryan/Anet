@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 34">
+  <defs><pattern id="d" width="9" height="9" patternUnits="userSpaceOnUse"><circle cx="4.5" cy="4.5" r="1.8" fill="#fff"/></pattern></defs>
+  <polygon points="3,2 7,6 3,10 7,14 3,18 7,22 3,26 7,30 4,33 116,33 113,29 117,25 113,21 117,17 113,13 117,9 113,5 117,1" fill="#cdb2f2" opacity=".85"/>
+  <polygon points="3,2 7,6 3,10 7,14 3,18 7,22 3,26 7,30 4,33 116,33 113,29 117,25 113,21 117,17 113,13 117,9 113,5 117,1" fill="url(#d)" opacity=".7"/>
+</svg>
