@@ -331,9 +331,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .letter-name-long { font-size: 7.8cqi; }
 .letter-party { z-index: 2; top: 43%; left: 8%; right: 8%; margin: 0; padding: 0; rotate: 0deg; color: var(--poster-red); background: none; font: 700 4.8cqi/1 var(--font-body); letter-spacing: .13em; }
 .letter-rule { z-index: 2; top: 47.5%; left: 17%; right: 17%; height: .28cqi; background: var(--poster-gold); }
-.letter-record { z-index: 2; top: 51%; left: 12%; width: 48cqi; aspect-ratio: 1; border-radius: 50%; background: repeating-radial-gradient(circle, var(--poster-vinyl) 0 .45cqi, var(--poster-groove) .5cqi .62cqi, var(--poster-vinyl) .7cqi 1.6cqi); box-shadow: 0 1cqi 1.5cqi var(--poster-shadow); }
-.letter-record::before { content: ''; position: absolute; inset: 31%; border-radius: 50%; border: .6cqi solid var(--poster-gold); background: var(--poster-red); }
+.letter-record { z-index: 2; top: 51%; left: 12%; width: 48cqi; aspect-ratio: 1; border-radius: 50%; background: repeating-radial-gradient(circle, var(--poster-vinyl) 0 .45cqi, var(--poster-groove) .5cqi .62cqi, var(--poster-vinyl) .7cqi 1.6cqi); box-shadow: 0 1cqi 1.5cqi var(--poster-shadow); animation: vinyl-spin 12s linear infinite; }
+.letter-record::before { content: 'SIDE A'; position: absolute; inset: 31%; display: grid; place-items: start center; padding-top: 4cqi; border-radius: 50%; border: .6cqi solid var(--poster-gold); background: var(--poster-red); color: var(--poster-paper); font: 700 2.5cqi/1 var(--font-body); letter-spacing: .12em; }
 .letter-record span { position: absolute; inset: 47%; border-radius: 50%; background: var(--poster-paper); }
+@keyframes vinyl-spin { to { transform: rotate(360deg); } }
 .letter-photo { z-index: 3; top: 49%; right: 12%; width: 35cqi; padding: 1.2cqi 1.2cqi 4.2cqi; rotate: 6deg; background: var(--poster-paper); box-shadow: .4cqi .8cqi 1.4cqi var(--poster-shadow); }
 .letter-photo > img:first-child { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center top; filter: grayscale(1) sepia(.18) contrast(1.05); }
 .letter-photo-tape { position: absolute; top: -5%; left: 25%; width: 50%; opacity: .75; }
