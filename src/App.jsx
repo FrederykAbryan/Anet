@@ -8,13 +8,8 @@ import blueButterfly from '../assets/paper-butterfly-blue.webp';
 import yellowButterfly from '../assets/paper-butterfly-yellow.webp';
 import scrapbookVine from '../assets/scrapbook-vine-slim.webp';
 import welcomePhotoPlaceholder from '../assets/welcome-photo-placeholder.webp';
-import scrapbookBanner from '../assets/scrapbook-banner.webp';
-import scrapbookCake from '../assets/scrapbook-footer-cutout.webp';
 import bunting from '../assets/art/bunting.svg';
 import discoBall from '../assets/art/disco-ball.svg';
-import partyHat from '../assets/art/party-hat.svg';
-import flower from '../assets/art/flower.svg';
-import caterpillar from '../assets/art/caterpillar.svg';
 import sparkleTrail from '../assets/art/sparkle-trail.svg';
 import starYellow from '../assets/art/star-yellow.svg';
 import starPink from '../assets/art/star-pink.svg';
@@ -106,22 +101,21 @@ function PosterArtwork({ invite }) {
   const age = invite.age?.trim();
   const photo = invite.photo?.trim() || welcomePhotoPlaceholder;
   return <>
-      <Art src={scrapbookBanner} className="poster-banner" />
-      <Art src={flower} className="poster-sticker flower-top-right" />
-      <Art src={starYellow} className="poster-sticker poster-star-top" />
-      <Art src={starPink} className="poster-sticker poster-star-left" />
-      <Art src={starBlue} className="poster-sticker poster-star-right" />
-      <Art src={starLilac} className="poster-sticker poster-star-bottom" />
-      <span className="poster-intro">{guest ? `Heyy ${guest}, you’re` : 'You’re'} invited to</span>
-      <span className="poster-name" aria-label={`${name}'s`}><NameTiles name={name} /></span>
-      <span className={`poster-age ${age ? 'poster-age-number' : ''}`} aria-label={age ? `${age}th birthday` : 'Birthday party'}><span className="poster-age-inner">{age || 'PARTY'}<small>{age ? 'TH' : 'TIME!'}</small></span></span>
-      <span className="poster-party-title">BIRTHDAY PARTY!!</span>
-      <Art src={caterpillar} className="poster-sticker poster-caterpillar" />
-      <ButterflySticker src={pinkButterfly} className="poster-butterfly poster-butterfly-one" />
-      <ButterflySticker src={blueButterfly} className="poster-butterfly poster-butterfly-two" />
-      <Art src={scrapbookCake} className="poster-cake" />
+      <span className="poster-edition" aria-hidden="true">THE BIRTHDAY EDITION <span>◆</span> VOL. 01</span>
+      <span className="poster-intro">{guest ? `${guest}, you're invited to` : "You're invited to"}</span>
+      <span className="poster-name">{name}</span>
+      <span className="poster-subtitle">THE BIRTHDAY SESSION</span>
+      <span className="poster-divider" aria-hidden="true" />
+      <span className="poster-record" aria-hidden="true"><span /></span>
+      <span className="poster-cassette" aria-hidden="true">
+        <span className="poster-cassette-label">SIDE A <span>★</span> A NIGHT TO REMEMBER</span>
+        <span className="poster-cassette-window"><i /><b>THE PARTY MIX</b><i /></span>
+        <span className="poster-cassette-foot">PLAY IT LOUD <span>● &nbsp; ● &nbsp; ●</span> ALL NIGHT LONG</span>
+      </span>
       <span className="poster-photo" aria-hidden="true"><img src={photo} onError={(event) => { event.currentTarget.src = welcomePhotoPlaceholder; }} alt="" /></span>
-      <Art src={partyHat} className="poster-sticker poster-hat" />
+      <span className="poster-age">{age ? `TURNING ${age}` : 'ONE NIGHT ONLY'}</span>
+      <span className="poster-ticket"><small>ADMIT ONE</small><strong>BIRTHDAY<br />PARTY</strong><em>GOOD MUSIC · GOOD COMPANY</em></span>
+      <span className="poster-footer">AN INVITATION TO CELEBRATE <span>✦</span> SAVE THE DATE</span>
   </>;
 }
 
@@ -158,11 +152,9 @@ function WelcomePage({ invite, onOpen }) {
 function InvitationCover({ invite }) {
   const name = invite.name?.trim() || 'Your Name';
   return <section className="invitation-cover" aria-label="Birthday invitation cover">
-    <div className="cover-poster" role="img" aria-label={`${name}'s birthday party scrapbook cover`}>
+    <div className="cover-poster" role="img" aria-label={`${name}'s retro music birthday party cover`}>
       <PosterArtwork invite={invite} />
     </div>
-    <Art src={tapePink} className="cover-tape cover-tape-left" />
-    <Art src={tapeBlue} className="cover-tape cover-tape-right" />
   </section>;
 }
 

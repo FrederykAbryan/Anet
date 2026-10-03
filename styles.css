@@ -343,3 +343,49 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; animation: none !important; }
 }
+
+/* Hallmark · pre-emit critique: P4 H4 E4 S5 R4 V4 */
+/* Vintage music cover; scoped to the invitation poster. */
+.invitation-cover { filter: drop-shadow(0 12px 16px var(--poster-shadow)); }
+.cover-poster {
+  border: 1.3cqi solid var(--poster-paper);
+  border-radius: 2.4cqi;
+  background:
+    radial-gradient(ellipse 62% 48% at 0% 88%, var(--poster-blush), transparent 80%),
+    radial-gradient(ellipse 48% 38% at 100% 44%, var(--poster-blue-wash), transparent 75%),
+    url('assets/paper-texture.webp') center / 45cqi repeat,
+    var(--poster-paper);
+  box-shadow: inset 0 0 0 .3cqi var(--poster-gold), inset 0 0 0 .8cqi var(--poster-paper);
+}
+.cover-poster::before { content: ''; position: absolute; inset: 7% 0 auto; height: 39%; background: linear-gradient(var(--poster-rose-wash), var(--poster-rose-wash)), url('assets/paper-texture.webp') center / 45cqi repeat; transform: skewY(-3deg) scaleY(1.04); box-shadow: 0 .5cqi 0 var(--poster-gold); }
+.cover-poster::after { content: ''; position: absolute; z-index: 8; inset: 0; pointer-events: none; background: url('assets/birthday-frame-mature.webp') center / 100% 100% no-repeat; opacity: .18; mix-blend-mode: multiply; }
+.poster-edition { z-index: 4; top: 2.5%; left: 5%; right: 5%; display: flex; justify-content: space-between; color: var(--poster-ink); font: 700 2.5cqi/1 var(--font-body); letter-spacing: .2em; }
+.poster-edition span { color: var(--poster-red); }
+.poster-intro { z-index: 4; top: 10%; left: 5%; right: 5%; color: var(--poster-paper); font: 600 3.2cqi/1 var(--font-body); letter-spacing: .26em; text-align: center; text-transform: uppercase; transform: none; text-shadow: none; }
+.poster-name { z-index: 4; top: 14%; left: 4%; right: 4%; height: auto; max-height: 19%; display: block; overflow: hidden; color: var(--poster-paper); font: 700 clamp(2rem, 11cqi, 6rem)/.92 var(--font-display); letter-spacing: -.065em; text-align: center; text-transform: uppercase; overflow-wrap: anywhere; }
+.poster-subtitle { z-index: 4; top: 34%; left: 5%; right: 5%; color: var(--poster-deep-rose); font: 700 5.6cqi/1 var(--font-body); letter-spacing: .11em; text-align: center; }
+.poster-divider { z-index: 4; top: 40.5%; left: 9%; right: 9%; height: .35cqi; background: var(--poster-gold); }
+.poster-record { z-index: 1; top: 52%; left: -24%; width: 97cqi; aspect-ratio: 1; border-radius: 50%; background: repeating-radial-gradient(circle, var(--poster-vinyl) 0 .45cqi, var(--poster-groove) .5cqi .62cqi, var(--poster-vinyl) .7cqi 1.6cqi); box-shadow: 0 .8cqi 1.2cqi var(--poster-shadow); }
+.poster-record::before { content: ''; position: absolute; inset: 31%; border-radius: 50%; background: var(--poster-red); border: 1cqi solid var(--poster-ink); }
+.poster-record span { position: absolute; inset: 47%; border-radius: 50%; background: var(--poster-paper); }
+.poster-cassette { z-index: 5; top: 43%; left: 9%; width: 82%; height: 19%; padding: 2.8cqi; rotate: 7deg; color: var(--poster-ink); background: var(--poster-paper); border: .65cqi solid var(--poster-ink); border-radius: 2cqi; box-shadow: .6cqi 1cqi 1.2cqi var(--poster-shadow); }
+.poster-cassette::before, .poster-cassette::after { content: '×'; position: absolute; top: .5cqi; color: var(--poster-ink); font: 700 3cqi/1 var(--font-body); }
+.poster-cassette::before { left: 1cqi; }
+.poster-cassette::after { right: 1cqi; }
+.poster-cassette-label { display: flex; justify-content: space-between; color: var(--poster-ink); font: 700 3.2cqi/1 var(--font-body); letter-spacing: .08em; white-space: nowrap; }
+.poster-cassette-label span { color: var(--poster-red); }
+.poster-cassette-window { display: flex; justify-content: space-around; align-items: center; height: 47%; margin-top: 1.5cqi; padding: 0 3cqi; background: var(--poster-ink); border-radius: 1cqi; color: var(--poster-paper); }
+.poster-cassette-window i { width: 11cqi; aspect-ratio: 1; border: 1.3cqi dashed var(--poster-gold); border-radius: 50%; }
+.poster-cassette-window b { font: 700 2.2cqi/1 var(--font-body); letter-spacing: .06em; white-space: nowrap; }
+.poster-cassette-foot { display: flex; justify-content: space-between; margin-top: 1.5cqi; font: 700 1.9cqi/1 var(--font-body); letter-spacing: .1em; }
+.poster-photo { z-index: 3; right: -4%; bottom: 4%; width: 58%; height: 38%; display: block; overflow: hidden; border: 1.3cqi solid var(--poster-paper); rotate: 5deg; background: var(--poster-tan); box-shadow: -.5cqi .9cqi 1cqi var(--poster-shadow); filter: none; }
+.poster-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center top; filter: grayscale(1) sepia(.18) contrast(1.05); }
+.poster-age { z-index: 6; top: 64%; left: 7%; width: auto; aspect-ratio: auto; display: block; padding: 1cqi 2cqi; color: var(--poster-paper); background: var(--poster-deep-rose); font: 700 3.7cqi/1 var(--font-body); letter-spacing: .12em; rotate: -8deg; }
+.poster-ticket { z-index: 6; left: 1%; bottom: 12%; width: 53%; height: 17%; display: flex; flex-direction: column; justify-content: center; padding: 3cqi 4cqi; rotate: -13deg; color: var(--poster-ink); background: var(--poster-paper); border: .3cqi solid var(--poster-gold); box-shadow: .5cqi .8cqi 1cqi var(--poster-shadow); }
+.poster-ticket::after { content: ''; position: absolute; top: 6%; bottom: 6%; right: 10%; border-right: .4cqi dashed var(--poster-red); }
+.poster-ticket small { color: var(--poster-red); font: 700 2.4cqi/1 var(--font-body); letter-spacing: .2em; }
+.poster-ticket strong { margin-top: 1cqi; font: 700 7cqi/.85 var(--font-display); letter-spacing: -.05em; }
+.poster-ticket em { margin-top: 1cqi; font: 700 1.9cqi/1 var(--font-body); letter-spacing: .05em; white-space: nowrap; }
+.poster-footer { z-index: 7; bottom: 2%; left: 5%; right: 5%; display: flex; justify-content: space-between; color: var(--poster-ink); background: var(--poster-paper); border-top: .3cqi solid var(--poster-gold); padding: 1.6cqi; font: 700 2.1cqi/1 var(--font-body); letter-spacing: .14em; }
+.poster-footer span { color: var(--poster-gold); }
+@media (max-width: 540px) { .cover-poster { border-radius: 2.4cqi; } }
