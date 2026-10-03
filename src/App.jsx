@@ -6,15 +6,10 @@ import { useGSAP } from '@gsap/react';
 import pinkButterfly from '../assets/paper-butterfly.webp';
 import blueButterfly from '../assets/paper-butterfly-blue.webp';
 import yellowButterfly from '../assets/paper-butterfly-yellow.webp';
-import scrapbookVine from '../assets/scrapbook-vine-slim.webp';
 import welcomePhotoPlaceholder from '../assets/welcome-photo-placeholder.webp';
-import bunting from '../assets/art/bunting.svg';
 import discoBall from '../assets/art/disco-ball.svg';
-import sparkleTrail from '../assets/art/sparkle-trail.svg';
 import starYellow from '../assets/art/star-yellow.svg';
-import starPink from '../assets/art/star-pink.svg';
 import starBlue from '../assets/art/star-blue.svg';
-import starLilac from '../assets/art/star-lilac.svg';
 import tapePink from '../assets/art/tape-pink.svg';
 import tapeBlue from '../assets/art/tape-blue.svg';
 import tapeGreen from '../assets/art/tape-green.svg';
@@ -83,18 +78,6 @@ function Header({ onHome }) {
   return <header className="site-header"><a className="wordmark" href="/" onClick={(event) => { event.preventDefault(); onHome(); }}><span className="wordmark-star" aria-hidden="true">★</span> a little party</a><span className="header-note">A birthday invite, made with love</span></header>;
 }
 
-function NameTiles({ name }) {
-  const words = name.toUpperCase().split(/\s+/).filter(Boolean);
-  const longest = Math.max(...words.map((word) => word.length + 1));
-  const size = longest > 10 || name.length > 16 ? 'tiles-xlong' : longest > 7 || name.length > 9 ? 'tiles-long' : '';
-  return <span className={`name-tiles ${size}`} aria-hidden="true">
-    {words.map((word, wordIndex) => <span className="tile-word" key={`${word}-${wordIndex}`}>
-      {[...word].map((letter, index) => <span className="tile" key={`${letter}-${index}`}>{letter}</span>)}
-      {wordIndex === words.length - 1 && <span className="tile tile-apostrophe">’S</span>}
-    </span>)}
-  </span>;
-}
-
 function PosterArtwork({ invite }) {
   const name = invite.name?.trim() || 'Your Name';
   const guest = invite.guest?.trim();
@@ -126,25 +109,17 @@ function WelcomePage({ invite, onOpen }) {
   const photo = invite.photo?.trim() || welcomePhotoPlaceholder;
   return <main className="welcome-page">
     <button type="button" className="letter-card" onClick={onOpen} aria-label={`Open the invitation to ${name}'s birthday party`}>
-      <Art src={bunting} className="letter-bunting" />
-      <span className="letter-strip" aria-hidden="true" />
-      <Art src={scrapbookVine} className="letter-vine" />
-      <span className="snap snap-photo" aria-hidden="true"><img src={photo} onError={(event) => { event.currentTarget.src = welcomePhotoPlaceholder; }} alt="" /><Art src={tapePink} className="tape" /></span>
-      <span className="snap snap-age" aria-hidden="true"><em>{age || '♡'}</em><small>{age ? 'years young!' : 'party time!'}</small><Art src={tapeBlue} className="tape" /></span>
-      <span className="snap snap-disco" aria-hidden="true"><Art src={discoBall} className="snap-disco-ball" /><Art src={tapeGreen} className="tape" /></span>
-      <Art src={starYellow} className="letter-star letter-star-one" />
-      <Art src={starPink} className="letter-star letter-star-two" />
-      <span className="letter-body">
-        <span className="letter-hello">Heyy{guest ? ` ${guest}` : ''}!</span>
-        <span className="letter-line">you’re invited to</span>
-        <NameTiles name={name} />
-        <span className="letter-party">birthday party!!</span>
-      </span>
-      <Art src={sparkleTrail} className="letter-sparkles" />
-      <Art src={pinkButterfly} className="letter-butterfly" />
-      <Art src={tapeLilac} className="letter-corner-tape" />
-      <span className="letter-open"><span className="letter-seal" aria-hidden="true">♥</span>Tap to open your invitation</span>
-      <span className="letter-fineprint" aria-hidden="true">✿ made with love ✿</span>
+      <span className="letter-issue">THE BIRTHDAY EDITION <span>✦</span> VOL. 01</span>
+      <span className="letter-greeting">{guest ? `FOR ${guest}` : 'A PERSONAL INVITATION'}</span>
+      <span className="letter-line">YOU’RE INVITED TO</span>
+      <span className={`letter-name ${name.length > 13 ? 'letter-name-long' : ''}`}>{name}</span>
+      <span className="letter-party">THE BIRTHDAY SESSION</span>
+      <span className="letter-rule" aria-hidden="true" />
+      <span className="letter-record" aria-hidden="true"><span /></span>
+      <span className="letter-photo" aria-hidden="true"><img src={photo} onError={(event) => { event.currentTarget.src = welcomePhotoPlaceholder; }} alt="" /><Art src={tapePink} className="letter-photo-tape" /><small>THE GUEST OF HONOR</small></span>
+      <span className="letter-age">{age ? `TURNING ${age}` : 'ONE NIGHT ONLY'}</span>
+      <span className="letter-open"><span className="letter-open-mark" aria-hidden="true">▶</span> OPEN YOUR INVITATION <span aria-hidden="true">↗</span></span>
+      <span className="letter-fineprint">A little celebration, made with love</span>
     </button>
   </main>;
 }

@@ -28,100 +28,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .site-footer { display: flex; justify-content: space-between; gap: 20px; padding: 22px clamp(16px, 5vw, 60px); border-top: 2px dashed var(--color-rule); color: var(--color-muted); font-family: var(--font-hand); font-size: 1rem; }
 .site-footer span:last-child { font-family: var(--font-body); font-size: .65rem; font-weight: 700; letter-spacing: .12em; white-space: nowrap; }
 
-/* ---------- Shared: bubble name letters (Brielle) ---------- */
-.name-tiles { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0 .02em; font: 1em/1 var(--font-bubble); }
-.tile {
-  display: inline-block;
-  padding: 0 .02em;
-  color: transparent;
-  -webkit-text-stroke: .028em #b13d72;
-  background: radial-gradient(circle, #fff 0 .028em, transparent .034em) 0 0 / .16em .16em, #f39cc0;
-  -webkit-background-clip: text;
-  background-clip: text;
-  filter: drop-shadow(.035em .035em 0 #fff) drop-shadow(-.03em -.03em 0 #fff) drop-shadow(.03em -.03em 0 #fff) drop-shadow(-.03em .03em 0 #fff) drop-shadow(.03em .07em 0 #b8497566);
-  transform: rotate(-4deg);
-}
-.tile:nth-child(5n + 2) { background: linear-gradient(90deg, #e86ea255 50%, transparent 0) 0 0 / .14em .14em, linear-gradient(#e86ea255 50%, transparent 0) 0 0 / .14em .14em, #fde3ee; -webkit-background-clip: text; background-clip: text; transform: rotate(3deg) translateY(.03em); }
-.tile:nth-child(5n + 3) { background: radial-gradient(circle at 30% 30%, #fff 0 .012em, transparent .02em) 0 0 / .07em .07em, linear-gradient(160deg, #f68cbb, #d6418a); -webkit-background-clip: text; background-clip: text; transform: rotate(-2deg); }
-.tile:nth-child(5n + 4) { background: radial-gradient(circle, #ffd84d 0 .022em, #fff .028em .055em, transparent .06em) 0 0 / .2em .2em, #c48ae0; -webkit-background-clip: text; background-clip: text; -webkit-text-stroke-color: #7d4aa4; transform: rotate(4deg) translateY(-.02em); }
-.tile:nth-child(5n + 5) { background: radial-gradient(circle, #f06fa2 0 .03em, #fff .036em .05em, transparent .055em) 0 0 / .18em .18em, #f8b04f; -webkit-background-clip: text; background-clip: text; -webkit-text-stroke-color: #c0572d; transform: rotate(-3deg); }
-.tile-word { display: inline-flex; align-items: center; white-space: nowrap; margin: 0 .1em; }
-.tile.tile-apostrophe { align-self: flex-start; margin-left: .04em; font-size: .78em; background: radial-gradient(circle, #ffd84d 0 .025em, #fff .03em .06em, transparent .065em) 0 0 / .22em .22em, #ef7aa9; -webkit-background-clip: text; background-clip: text; transform: rotate(8deg); }
 .tape { position: absolute; z-index: 3; top: 0; left: 50%; width: 42%; translate: -50% -55%; rotate: -5deg; pointer-events: none; }
-
-/* ---------- Opening letter (Tweety stationery) ---------- */
-.welcome-page { max-width: 1100px; margin: auto; padding: 8px 16px 72px; }
-.letter-card {
-  position: relative;
-  container-type: inline-size;
-  display: block;
-  width: min(100%, 540px);
-  aspect-ratio: 3 / 4.35;
-  margin: 0 auto;
-  padding: 0;
-  overflow: hidden;
-  border: 0;
-  border-radius: 22px;
-  color: var(--color-ink);
-  cursor: pointer;
-  text-align: center;
-  background:
-    repeating-linear-gradient(180deg, #fff4f8 0 4.6%, #fbd6e5 4.6% 8.4%);
-  box-shadow: 0 26px 50px #a4446c33, 0 3px 0 #e7a3c0, inset 0 0 0 1px #fff;
-  transition: transform var(--dur-medium) var(--ease-out), box-shadow var(--dur-medium) var(--ease-out);
-}
-.letter-card:hover { transform: translateY(-4px) rotate(-.6deg); box-shadow: 0 32px 60px #a4446c40, 0 3px 0 #e7a3c0; }
-.letter-card:active { transform: translateY(0); }
-.letter-card:focus-visible { outline-offset: 6px; }
-.letter-card > * { position: absolute; }
-.letter-strip {
-  inset: 0 auto 0 0;
-  width: 41%;
-  background: radial-gradient(circle, #ffffff80 0 .75cqi, transparent .9cqi) 0 0 / 4.4cqi 4.4cqi, radial-gradient(circle, #ffffff40 0 .5cqi, transparent .65cqi) 2.2cqi 2.2cqi / 4.4cqi 4.4cqi, #f472a8;
-  clip-path: polygon(0 0, 100% 0, 95% 5%, 100% 10%, 94% 16%, 99% 22%, 95% 28%, 100% 34%, 94% 41%, 99% 47%, 95% 53%, 100% 60%, 94% 66%, 99% 72%, 95% 79%, 100% 85%, 94% 92%, 99% 100%, 0 100%);
-}
-.letter-vine { z-index: 3; top: 12%; left: 28.5cqi; width: 25cqi; rotate: 1.5deg; pointer-events: none; }
-.letter-bunting { z-index: 6; top: -.6%; left: 1%; width: 98%; }
-.letter-corner-tape { z-index: 7; top: 2.5%; left: -4%; width: 20cqi; rotate: -38deg; }
-.snap { z-index: 4; display: block; padding: 2cqi 2cqi 6.5cqi; background: #fffdfb; box-shadow: 0 1.2cqi 2.4cqi #7a2a4d40; }
-.snap-photo { left: 5%; top: 13.5%; width: 31cqi; rotate: -6deg; }
-.snap-photo > img:first-child { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 15%; background: #8fd0e8; filter: grayscale(1) contrast(1.05); }
-.snap-age { left: 9%; top: 45.5%; width: 26cqi; rotate: 7deg; }
-.snap-age em { display: grid; place-items: center; aspect-ratio: 1; background: radial-gradient(circle, #ffffff70 0 .6cqi, transparent .75cqi) 0 0 / 3.4cqi 3.4cqi, #a9d67f; color: #fff; font: 15cqi/1 var(--font-bubble); font-style: normal; -webkit-text-stroke: .5cqi #d6418a; paint-order: stroke fill; text-shadow: .6cqi .6cqi 0 #d6418a; }
-.snap-age small { position: absolute; left: 0; right: 0; bottom: 1.2cqi; color: var(--color-raspberry); font: 4.2cqi/1 var(--font-script); }
-.snap-disco { left: 4%; top: 71%; width: 27cqi; rotate: -5deg; }
-.snap-disco-ball { display: block; width: 100%; aspect-ratio: 1; padding: 2cqi; object-fit: contain; background: radial-gradient(circle, #fff7 0 .6cqi, transparent .75cqi) 0 0 / 3.4cqi 3.4cqi, #f9cf6a; }
-.letter-star { z-index: 5; filter: drop-shadow(.4cqi .6cqi 0 #a8436733); }
-.letter-star-one { left: 32%; top: 39%; width: 11cqi; rotate: -14deg; }
-.letter-star-two { right: 7%; top: 70%; width: 9cqi; rotate: 12deg; }
-.letter-body { z-index: 5; top: 17%; left: 43%; right: 4%; display: flex; flex-direction: column; align-items: center; }
-.letter-hello { color: var(--color-raspberry); font: 10.5cqi/1 var(--font-script); rotate: -4deg; text-shadow: .4cqi .4cqi 0 #fff; }
-.letter-line { margin: 1.5cqi 0 2.4cqi; color: #a0466f; font: 5.4cqi/1 var(--font-hand); }
-.letter-body .name-tiles { font-size: 12.5cqi; }
-.letter-body .tiles-long { font-size: 8.6cqi; }
-.letter-body .tiles-xlong { font-size: 6.6cqi; }
-.letter-party { margin-top: 3cqi; padding: 0 1.5cqi; color: var(--color-hot-pink); font: 8cqi/1.1 var(--font-script); background: linear-gradient(transparent 55%, #fbe38a 55% 88%, transparent 88%); rotate: -2deg; }
-.letter-sparkles { z-index: 4; right: 3%; top: 49%; width: 17cqi; }
-.letter-butterfly { z-index: 5; left: 47%; top: 61%; width: 18cqi; rotate: -14deg; filter: drop-shadow(.4cqi .8cqi .4cqi #8a416742); animation: flutter 3.6s var(--ease-in-out) infinite alternate; }
-.letter-open {
-  z-index: 8; left: 45%; right: 5%; bottom: 8.5%;
-  display: flex; align-items: center; gap: 2.2cqi;
-  padding: 2.2cqi 3.4cqi 2.2cqi 1.6cqi;
-  border-radius: 999px;
-  background: var(--color-raspberry);
-  color: #fff;
-  font: 700 3.3cqi/1.15 var(--font-body);
-  letter-spacing: .04em;
-  text-align: left;
-  box-shadow: 0 1.1cqi 0 #7d244d;
-  transition: transform var(--dur-medium) var(--ease-out);
-}
-.letter-card:hover .letter-open { transform: translateY(-.8cqi); }
-.letter-seal { flex: 0 0 auto; display: grid; place-items: center; width: 8.5cqi; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #ff8fb6, #d6336f 70%); color: #fff; font-size: 4.2cqi; box-shadow: inset 0 0 0 .6cqi #ffffff55, 0 0 0 .5cqi #fff; animation: thump 1.8s var(--ease-in-out) infinite; }
-.letter-fineprint { z-index: 5; right: 5%; bottom: 3%; color: #b56a8d; font: 2.8cqi/1 var(--font-hand); letter-spacing: .03em; }
-
-@keyframes flutter { from { transform: translateY(0) rotate(0); } to { transform: translateY(-1.4cqi) rotate(6deg); } }
-@keyframes thump { 0%, 70%, 100% { transform: scale(1); } 80% { transform: scale(1.14); } 90% { transform: scale(.98); } }
 
 /* ---------- Cover poster (Brielle collage) ---------- */
 .invitation-page { max-width: 1100px; margin: auto; padding: 18px clamp(12px, 4vw, 60px) 88px; }
@@ -389,3 +296,52 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .poster-footer { z-index: 7; bottom: 2%; left: 5%; right: 5%; display: flex; justify-content: space-between; color: var(--poster-ink); background: var(--poster-paper); border-top: .3cqi solid var(--poster-gold); padding: 1.6cqi; font: 700 2.1cqi/1 var(--font-body); letter-spacing: .14em; }
 .poster-footer span { color: var(--poster-gold); }
 @media (max-width: 540px) { .cover-poster { border-radius: 2.4cqi; } }
+
+/* Hallmark · pre-emit critique: P4 H4 E4 S5 R4 V4 */
+/* Opening invitation: the same watercolor paper and music ephemera as the cover. */
+.welcome-page { max-width: 1100px; margin: auto; padding: 16px 16px 72px; }
+.letter-card {
+  position: relative;
+  container-type: inline-size;
+  display: block;
+  width: min(100%, 540px);
+  aspect-ratio: 3 / 4.35;
+  margin: 0 auto;
+  padding: 0;
+  overflow: hidden;
+  border: .8cqi solid var(--poster-paper);
+  border-radius: 1.8cqi;
+  color: var(--poster-ink);
+  cursor: pointer;
+  text-align: center;
+  background: url('assets/birthday-frame-mature.webp') center / 100% 100% no-repeat, var(--poster-paper);
+  box-shadow: 0 20px 35px var(--poster-shadow), inset 0 0 0 .3cqi var(--poster-gold);
+  transition: transform var(--dur-medium) var(--ease-out), box-shadow var(--dur-medium) var(--ease-out);
+}
+.letter-card:hover { transform: translateY(-4px) rotate(-.35deg); box-shadow: 0 25px 42px var(--poster-shadow); }
+.letter-card:active { transform: translateY(0); }
+.letter-card:focus-visible { outline-offset: 6px; }
+.letter-card > * { position: absolute; }
+.letter-card::before { content: ''; position: absolute; inset: 2.5%; border: .25cqi solid var(--poster-gold); border-radius: .8cqi; pointer-events: none; }
+.letter-issue { z-index: 2; top: 4%; left: 10%; right: 10%; display: flex; justify-content: space-between; font: 700 2.4cqi/1 var(--font-body); letter-spacing: .12em; color: var(--poster-deep-rose); }
+.letter-issue span { color: var(--poster-gold); }
+.letter-greeting { z-index: 2; top: 18%; left: 13%; right: 13%; color: var(--poster-deep-rose); font: 700 2.8cqi/1 var(--font-body); letter-spacing: .2em; text-transform: uppercase; overflow-wrap: anywhere; }
+.letter-line { z-index: 2; top: 25%; left: 8%; right: 8%; margin: 0; color: var(--poster-deep-rose); font: 700 3cqi/1 var(--font-body); letter-spacing: .24em; }
+.letter-name { z-index: 2; top: 30%; left: 9%; right: 9%; max-height: 12%; overflow: hidden; color: var(--poster-deep-rose); font: 700 10cqi/.9 var(--font-display); letter-spacing: -.035em; word-spacing: .13em; text-transform: uppercase; overflow-wrap: anywhere; }
+.letter-name-long { font-size: 7.8cqi; }
+.letter-party { z-index: 2; top: 43%; left: 8%; right: 8%; margin: 0; padding: 0; rotate: 0deg; color: var(--poster-red); background: none; font: 700 4.8cqi/1 var(--font-body); letter-spacing: .13em; }
+.letter-rule { z-index: 2; top: 47.5%; left: 17%; right: 17%; height: .28cqi; background: var(--poster-gold); }
+.letter-record { z-index: 2; top: 51%; left: 12%; width: 48cqi; aspect-ratio: 1; border-radius: 50%; background: repeating-radial-gradient(circle, var(--poster-vinyl) 0 .45cqi, var(--poster-groove) .5cqi .62cqi, var(--poster-vinyl) .7cqi 1.6cqi); box-shadow: 0 1cqi 1.5cqi var(--poster-shadow); }
+.letter-record::before { content: ''; position: absolute; inset: 31%; border-radius: 50%; border: .6cqi solid var(--poster-gold); background: var(--poster-red); }
+.letter-record span { position: absolute; inset: 47%; border-radius: 50%; background: var(--poster-paper); }
+.letter-photo { z-index: 3; top: 49%; right: 12%; width: 35cqi; padding: 1.2cqi 1.2cqi 4.2cqi; rotate: 6deg; background: var(--poster-paper); box-shadow: .4cqi .8cqi 1.4cqi var(--poster-shadow); }
+.letter-photo > img:first-child { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center top; filter: grayscale(1) sepia(.18) contrast(1.05); }
+.letter-photo-tape { position: absolute; top: -5%; left: 25%; width: 50%; opacity: .75; }
+.letter-photo small { display: block; margin-top: 1cqi; color: var(--poster-deep-rose); font: 700 2cqi/1 var(--font-body); letter-spacing: .02em; white-space: nowrap; }
+.letter-age { z-index: 4; top: 69%; left: 10%; padding: 1cqi 2cqi; rotate: -8deg; background: var(--poster-deep-rose); color: var(--poster-paper); font: 700 3.1cqi/1 var(--font-body); letter-spacing: .1em; }
+.letter-open { z-index: 5; left: 15%; right: 15%; bottom: 8%; justify-content: center; gap: 2cqi; padding: 2cqi 3cqi; border: .35cqi solid var(--poster-gold); border-radius: .6cqi; color: var(--poster-paper); background: var(--poster-deep-rose); box-shadow: 0 .6cqi 1cqi var(--poster-shadow); font: 700 clamp(.7rem, 2.8cqi, .95rem)/1 var(--font-body); letter-spacing: .07em; white-space: nowrap; text-align: center; }
+.letter-card:hover .letter-open { transform: translateY(-.5cqi); }
+.letter-open-mark { flex: 0 0 auto; font-size: 1em; color: var(--poster-gold); }
+.letter-open > span:last-child { margin-left: auto; font-size: 1.3em; }
+.letter-fineprint { z-index: 2; left: 10%; right: 10%; bottom: 3%; color: var(--poster-deep-rose); font: 700 clamp(.55rem, 2cqi, .7rem)/1 var(--font-body); letter-spacing: .08em; }
+@media (max-width: 540px) { .letter-card { border-radius: 1.8cqi; } }
