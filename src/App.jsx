@@ -60,7 +60,7 @@ function ButterflyFlight({ src, variant = 0 }) {
   </div>;
 }
 
-const defaults = { guest: '', name: '', age: '', date: 'October 21, 2026', time: '', place: '', dressCode: '', note: '', email: '', photo: '' };
+const defaults = { guest: '', name: 'Anet', age: '', date: 'October 21, 2026', time: '', place: '', dressCode: '', note: '', email: '', photo: '' };
 const keys = Object.keys(defaults);
 const validEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email || '');
 
@@ -84,7 +84,7 @@ function Header({ onHome }) {
 }
 
 function PosterArtwork({ invite }) {
-  const name = invite.name?.trim() || 'Your Name';
+  const name = invite.name?.trim() || 'Anet';
   const displayName = `${name}'s`;
   const guest = invite.guest?.trim();
   const age = invite.age?.trim();
@@ -137,7 +137,7 @@ function WelcomePage({ invite, onOpen }) {
 }
 
 function InvitationCover({ invite }) {
-  const name = invite.name?.trim() || 'Your Name';
+  const name = invite.name?.trim() || 'Anet';
   return <section className="invitation-cover" aria-label="Birthday invitation cover">
     <div className="cover-poster" role="img" aria-label={`${name}'s retro music birthday party cover`}>
       <PosterArtwork invite={invite} />
@@ -202,7 +202,7 @@ function PartyCountdown({ date, time }) {
 }
 
 function EventDetails({ invite }) {
-  const name = invite.name?.trim() || 'Your Name';
+  const name = invite.name?.trim() || 'Anet';
   return <section className="party-details" aria-labelledby="party-details-title">
     <p className="party-details-kicker">THE CELEBRATION</p>
     <PartyCountdown date={invite.date} time={invite.time} />
