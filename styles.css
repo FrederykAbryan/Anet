@@ -189,8 +189,18 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .dress-code-section .tape { left: 70%; width: 120px; rotate: 4deg; }
 .dress-code-mark { position: absolute; left: clamp(14px, 3%, 30px); top: 50%; width: clamp(70px, 13%, 110px); translate: 0 -50%; rotate: -8deg; perspective: 360px; filter: drop-shadow(0 6px 8px #6e648940); }
 .dress-code-mark img { display: block; width: 100%; }
-.spinning-disco-ball { animation: disco-spin 4.8s linear infinite; }
-@keyframes disco-spin { to { transform: rotateY(360deg); } }
+.spinning-disco-ball {
+  transform-origin: center;
+  transform-style: preserve-3d;
+  animation: disco-sway 5.4s ease-in-out infinite alternate;
+}
+@keyframes disco-sway {
+  from { transform: rotateY(-14deg) rotateZ(-2deg); }
+  to { transform: rotateY(14deg) rotateZ(2deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .spinning-disco-ball { animation: none; transform: none; }
+}
 .dress-code-copy { min-width: 0; text-align: left; }
 .dress-code-copy p { max-width: 50ch; margin: 8px 0 0; color: var(--color-ink); font: clamp(1.3rem, 2.2vw, 1.75rem)/1.2 var(--font-hand); overflow-wrap: anywhere; }
 .dress-code-sparkles { width: clamp(44px, 7vw, 64px); align-self: start; rotate: 14deg; }
