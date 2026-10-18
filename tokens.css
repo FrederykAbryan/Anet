@@ -1,4 +1,11 @@
 :root {
+  --color-stage-paper: oklch(94% 0.045 350);
+  --color-stage-ink: oklch(43% 0.18 354);
+  --color-stage-pink: oklch(50% 0.23 355);
+  --color-stage-button: oklch(46% 0.22 355);
+  --color-stage-light: oklch(99% 0.008 80);
+  --color-stage-focus: oklch(31% 0.09 220);
+  --font-stage: 'Caveat Brush', 'Patrick Hand', cursive;
   --color-paper: oklch(96% 0.019 20);
   --color-paper-deep: oklch(92% 0.027 18);
   --color-card: oklch(98% 0.013 48);
@@ -15,6 +22,7 @@
   --font-hand: 'Patrick Hand', 'Comic Sans MS', cursive;
   --font-body: 'DM Sans', Arial, sans-serif;
   --font-script: 'Caveat Brush', 'Patrick Hand', cursive;
+  --font-cursive: 'Caveat', 'Patrick Hand', cursive;
   --font-bubble: 'Chewy', 'Fraunces', Georgia, serif;
   --color-bubblegum: #f8cbd9;
   --color-stripe: #fde4ee;
@@ -44,6 +52,19 @@
   --poster-blue-wash: #b9cbd495;
   --poster-rose-wash: #a96673dc;
   --poster-deep-rose: #5d3940;
+  --welcome-cream: #f5e8c3;
+  --welcome-paper: #efe0b7;
+  --welcome-red: #b53932;
+  --welcome-orange: #d8893b;
+  --welcome-ink: #24211e;
+  --welcome-muted: #6e5b47;
+  --welcome-vinyl: #151515;
+  --welcome-groove: #4c4945;
+  --welcome-line: #9b8260;
+  --welcome-shadow: #26191277;
+  --welcome-vignette: #4b2b162b;
+  --welcome-tape: #d6b68fbb;
+  --font-welcome: Impact, 'Arial Narrow', sans-serif;
   --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 16px;

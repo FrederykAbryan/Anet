@@ -346,3 +346,867 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .letter-open > span:last-child { margin-left: auto; font-size: 1.3em; }
 .letter-fineprint { z-index: 2; left: 10%; right: 10%; bottom: 3%; color: var(--poster-deep-rose); font: 700 clamp(.55rem, 2cqi, .7rem)/1 var(--font-body); letter-spacing: .08em; }
 @media (max-width: 540px) { .letter-card { border-radius: 1.8cqi; } }
+
+/* ---------- Fairytale stage invitation (TikTok reference adaptation) ----------
+   Keep the existing invitation content and interactions; restyle the full journey
+   as a playful pink-curtain party with a sunny arch and pastel paper details. */
+:root {
+  --stage-pink: #f12491;
+  --stage-pink-deep: #cb1874;
+  --stage-pink-light: #ff72bb;
+  --stage-yellow: #ffe20b;
+  --stage-lilac: #d9c7f4;
+  --stage-blue: #bcecf1;
+  --stage-paper: #fff6fb;
+  --stage-ink: #71315a;
+}
+body {
+  color: var(--stage-ink);
+  background:
+    radial-gradient(circle at 50% 4%, #fff9 0 2px, transparent 2.5px) 0 0 / 28px 28px,
+    linear-gradient(90deg, #ffe8f5, #fff5fb 28%, #fff5fb 72%, #ffe8f5);
+}
+.site-header { position: relative; }
+.wordmark { color: var(--stage-pink-deep); }
+.header-note { color: #87366b; }
+.site-footer { border-color: #e86aaa; color: #87366b; }
+.back-button { background: var(--stage-yellow); color: var(--stage-pink-deep); box-shadow: 0 3px 0 #d9b900; }
+
+/* Entrance card becomes a framed stage poster rather than a record-shop collage. */
+.letter-card {
+  border: 8px solid #fff8fd;
+  border-radius: 28px;
+  color: var(--stage-ink);
+  background:
+    radial-gradient(ellipse at 50% 50%, #ffffffa8 0 30%, transparent 72%),
+    repeating-linear-gradient(90deg, #ffb7dd 0 12%, #ffd9ec 12% 24%, #ffb7dd 24% 36%),
+    var(--stage-paper);
+  box-shadow: 0 18px 40px #b92b7550, inset 0 0 0 2px #ef9dcc;
+}
+.letter-card::before { inset: 3%; border: 3px double #ef9dcc; border-radius: 18px; }
+.letter-card .collage-grid { inset: 0; background: linear-gradient(180deg, transparent 0 15%, #fff7fbcc 15% 77%, transparent 77%); }
+.letter-card .collage-poster { top: 18%; left: 13%; right: 13%; height: 57%; padding: 8% 6%; border-radius: 48% 48% 8% 8% / 25% 25% 5% 5%; background: var(--stage-yellow); box-shadow: inset 0 0 0 3px #fff4a8, inset 0 0 0 8px #f4cc00, 0 8px 18px #7d3e5c30; }
+.letter-card .poster-topline { color: #8b3e67; }
+.letter-card .poster-topline { color: #8b3e67; position: absolute; top: 5%; left: 6%; right: 6%; font: 700 2.3cqi/1.1 var(--font-body); letter-spacing: .1em; }
+.letter-card .poster-title { position: absolute; top: 18%; left: 4%; right: 4%; color: var(--stage-pink-deep); font: 900 11cqi/.86 var(--font-bubble); letter-spacing: -.04em; text-shadow: 2px 2px #fff3a8; }
+.letter-card .poster-title em { color: #7c4b9a; font-style: normal; }
+.letter-card .poster-name-line { position: absolute; top: 72%; left: 5%; right: 5%; font: 700 3.3cqi/1.15 var(--font-hand); letter-spacing: .08em; }
+.letter-card .poster-doors { position: absolute; bottom: 6%; left: 5%; right: 5%; font: 700 2.3cqi/1.2 var(--font-body); letter-spacing: .08em; }
+.letter-card .poster-name-line, .letter-card .poster-doors { color: #74375f; }
+.letter-card .collage-boombox, .letter-card .collage-cassette, .letter-card .collage-record { display: none; }
+.letter-card .collage-ticket { top: 76%; left: 15%; right: 15%; width: auto; color: #fff; background: var(--stage-pink-deep); border-color: #fff; display: grid; gap: 2px; padding: 2.5cqi; font-size: 2.4cqi; }
+.letter-card .collage-photo { display: none; }
+.letter-card .collage-caption { bottom: 13%; color: #7b3160; font: 700 2.3cqi/1.15 var(--font-hand); }
+.letter-card .letter-open { bottom: 4%; left: 20%; right: 20%; padding: 3cqi 2cqi; border: 0; border-radius: 999px; color: #fff; background: var(--stage-pink-deep); box-shadow: 0 4px 0 #9d155b; }
+
+/* Full invitation: soft floral center, candy-pink side curtains, bunting header. */
+.invitation-sheet {
+  overflow: hidden;
+  border: 0;
+  border-radius: 34px;
+  padding: clamp(28px, 5vw, 54px) clamp(22px, 7vw, 76px) clamp(52px, 8vw, 90px);
+  background:
+    linear-gradient(90deg, #f32a96 0 8%, transparent 8% 92%, #f32a96 92%),
+    radial-gradient(circle at 24% 32%, #fff 0 3px, transparent 3.8px) 0 0 / 48px 52px,
+    radial-gradient(circle at 67% 65%, #ffd3e9 0 4px, transparent 5px) 0 0 / 65px 70px,
+    repeating-linear-gradient(90deg, #fff4fa 0 46px, #ffe8f3 46px 92px);
+  box-shadow: 0 24px 60px #b92b7530, inset 0 0 0 6px #fff;
+}
+.invitation-sheet::before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 7%;
+  right: 7%;
+  height: 62px;
+  background: repeating-linear-gradient(90deg, #ffe84a 0 28px, transparent 28px 48px);
+  clip-path: polygon(0 0, 100% 0, 100% 26%, 92% 100%, 84% 26%, 76% 100%, 68% 26%, 60% 100%, 52% 26%, 44% 100%, 36% 26%, 28% 100%, 20% 26%, 12% 100%, 4% 26%, 0 100%);
+  pointer-events: none;
+}
+.invitation-cover { width: min(100%, 620px); margin: 36px auto 22px; rotate: 0deg; }
+.cover-poster {
+  border: 7px solid #fff;
+  border-radius: 48% 48% 26px 26px / 18% 18% 26px 26px;
+  background:
+    radial-gradient(circle at 20% 42%, #fff 0 5px, transparent 6px) 0 0 / 42px 46px,
+    radial-gradient(circle at 75% 67%, #f4dafa 0 6px, transparent 7px) 0 0 / 56px 62px,
+    repeating-linear-gradient(90deg, #fbe2f0 0 30px, #fff4fa 30px 60px),
+    #fff3fa;
+  box-shadow: 0 16px 32px #ad34753b, inset 0 0 0 4px #ffd2e8;
+}
+.cover-poster::before {
+  inset: 31% 10% 12%;
+  height: auto;
+  border-radius: 48% 48% 12px 12px / 22% 22% 12px 12px;
+  background: var(--stage-yellow);
+  transform: none;
+  box-shadow: inset 0 0 0 3px #fff4a3, inset 0 0 0 9px #efcd00;
+}
+.cover-poster::after { opacity: .08; mix-blend-mode: multiply; }
+.poster-edition { color: var(--stage-pink-deep); }
+.poster-intro { color: #fff; text-shadow: 0 2px 6px #962159; }
+.poster-name { color: var(--stage-pink-deep); text-shadow: 2px 2px #fff4a8; }
+.poster-subtitle { color: #7a3f86; }
+.poster-divider { background: #edc900; }
+.poster-record { background: repeating-radial-gradient(circle, #f3b7d6 0 .45cqi, #fff1f8 .5cqi .62cqi, #e996c3 .7cqi 1.6cqi); }
+.poster-record::before { background: var(--stage-pink); border-color: #fff3a8; }
+.poster-cassette { color: var(--stage-ink); background: #fff7fb; border-color: #d83b88; }
+.poster-cassette-window { color: #fff; background: #b9387a; }
+.poster-age { color: var(--stage-pink-deep); background: var(--stage-yellow); border: 2px solid #fff; box-shadow: 0 4px 12px #9a28533d; }
+.poster-ticket { color: var(--stage-pink-deep); background: #fff; border-color: var(--stage-yellow); }
+.poster-footer { color: #fff; background: var(--stage-pink-deep); border-color: #ffe44b; }
+
+/* Event information and guest interactions sit on rounded pastel stationery. */
+.party-details-kicker, .panel-kicker, .detail-label { color: var(--stage-pink-deep); }
+.party-details h2, .dress-code-copy h2, .wishes-intro h2 { color: var(--stage-pink-deep); text-shadow: 2px 2px 0 #fff, 0 4px 10px #e0508e24; }
+.countdown-scrapbook::before { background: var(--stage-yellow); }
+.countdown-unit, .countdown-unit:nth-child(n) { background: #fff8fc; border-color: #e97ab2; box-shadow: 2px 3px 0 #d78aaf55; }
+.countdown-unit:nth-child(2) { background: #d9f3f5; }
+.countdown-unit:nth-child(3) { background: #fff3a9; }
+.countdown-unit:nth-child(4) { background: #e9ddf8; }
+.countdown-unit strong, .countdown-eyebrow, .countdown-caption, .countdown-pending { color: var(--stage-pink-deep); }
+.party-details-grid > div::before { background: #fff9fc; }
+.party-details-grid > div:nth-child(2)::before { background: #e7f6f7; }
+.party-details-grid > div:nth-child(3)::before { background: #fff4ad; }
+.rsvp-link, .primary-button { background: var(--stage-pink-deep); box-shadow: 0 4px 0 #951052; }
+.invitation-note::before { background: var(--stage-yellow); }
+.dress-code-section::before { background: #e4f5f4; }
+.dress-code-section::after { background: radial-gradient(circle, #ffffffa0 0 3px, transparent 3.6px) 0 0 / 16px 16px, var(--stage-pink); }
+.wishes-section::before { background: linear-gradient(90deg, transparent clamp(40px, 6.5%, 62px), #ea8ab7 clamp(40px, 6.5%, 62px) calc(clamp(40px, 6.5%, 62px) + 2px), transparent 0), repeating-linear-gradient(180deg, #fffdfd 0 31px, #f4d5e4 31px 32px); }
+.wishes-form input, .wishes-form textarea { border-color: #f2b4d0; }
+.wishes-form input:focus, .wishes-form textarea:focus { border-color: var(--stage-pink-deep); box-shadow: 0 0 0 4px #f9d3e7; }
+@media (max-width: 540px) {
+  .invitation-sheet { border-radius: 24px; padding: 22px 14px 50px; }
+  .invitation-sheet::before { height: 42px; }
+  .invitation-cover { margin-top: 28px; }
+  .cover-poster::before { inset: 31% 8% 12%; }
+}
+
+/* Save-the-date calendar inspired by the supplied pink stationery reference. */
+.party-details {
+  margin: 18px auto 0;
+  padding: clamp(18px, 4vw, 34px) clamp(12px, 3vw, 26px);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle, #fff8 0 2px, transparent 2.8px) 0 0 / 34px 36px,
+    repeating-linear-gradient(90deg, #f8cde0 0 22px, #fff0f7 22px 44px, #d8eff5 44px 66px, #fff0f7 66px 88px);
+}
+.party-details-kicker { color: #ac356d; }
+.countdown-scrapbook.calendar-card {
+  position: relative;
+  width: min(100%, 740px);
+  margin: 8px auto 28px;
+  padding: 22px 0 0;
+  overflow: visible;
+  transform: none;
+  filter: none;
+  background: transparent;
+  box-shadow: none;
+}
+.calendar-card::before { display: none; }
+.calendar-envelope {
+  position: absolute;
+  top: 14px;
+  left: clamp(4px, 4vw, 30px);
+  z-index: 1;
+  color: #d92888;
+  font-size: clamp(2.4rem, 8vw, 4rem);
+  line-height: 1;
+  rotate: -12deg;
+  filter: drop-shadow(1px 2px 0 #fff);
+}
+.calendar-disco {
+  position: absolute;
+  top: 0;
+  right: clamp(0px, 3vw, 24px);
+  width: clamp(54px, 13vw, 94px);
+  height: auto;
+  filter: drop-shadow(0 4px 4px #7b559433);
+}
+.calendar-title {
+  margin: 0 auto 24px;
+  padding: 0 82px;
+  color: #e4248a;
+  font: 800 clamp(1.55rem, 4.3vw, 2rem)/1 var(--font-hand);
+  text-align: center;
+  text-shadow: 1px 2px 0 #fff;
+}
+.calendar-title span {
+  display: block;
+  margin-top: -2px;
+  font: 500 clamp(4.5rem, 15vw, 6.4rem)/.82 var(--font-cursive);
+}
+.calendar-days {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 2px solid #e34496;
+  background: #fff3f9c9;
+  box-shadow: 0 7px 0 #efafd0;
+  transform: rotate(-3deg) skewX(-.4deg);
+  transform-origin: center;
+}
+.calendar-days::after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  inset: -3px -2px -2px -3px;
+  border: 2px solid #d52d80;
+  border-radius: 2px 4px 1px 3px;
+  opacity: .55;
+  transform: rotate(.7deg) skewX(.5deg);
+  pointer-events: none;
+}
+.calendar-day {
+  position: relative;
+  min-width: 0;
+  min-height: clamp(126px, 34vw, 190px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 2px 8px;
+  border-right: 2px solid #e34496;
+  text-align: center;
+}
+.calendar-day:last-child { border-right: 0; }
+.calendar-day:nth-child(1) .calendar-weekday { transform: rotate(-2deg) translateX(-1px); }
+.calendar-day:nth-child(2) .calendar-weekday { transform: rotate(1deg); }
+.calendar-day:nth-child(3) .calendar-weekday { transform: rotate(-1deg) translateX(1px); }
+.calendar-weekday {
+  color: #bf3478;
+  font: 700 clamp(.95rem, 3.4vw, 1.25rem)/1.05 var(--font-hand);
+  overflow-wrap: anywhere;
+  -webkit-text-stroke: .3px currentColor;
+}
+.calendar-number {
+  position: relative;
+  isolation: isolate;
+  width: clamp(66px, 19vw, 112px);
+  height: clamp(66px, 19vw, 112px);
+  display: grid;
+  place-items: center;
+  margin-top: 9px;
+  color: #ec1889;
+  font: 400 clamp(3.4rem, 14vw, 6.3rem)/.88 var(--font-script);
+  font-variant-numeric: tabular-nums;
+  -webkit-text-stroke: .7px currentColor;
+}
+.calendar-day:nth-child(1) .calendar-number { transform: rotate(-4deg) translateY(1px); }
+.calendar-day:nth-child(2) .calendar-number { transform: rotate(2deg) translateY(-1px); }
+.calendar-day:nth-child(3) .calendar-number { transform: rotate(4deg) translateY(1px); }
+.calendar-day-party .calendar-number::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 5px 0;
+  border: 3px solid #a91c30;
+  border-radius: 50%;
+  transform: rotate(-7deg) scaleX(1.06);
+}
+.calendar-party-label {
+  margin-top: -4px;
+  color: #cf277f;
+  font: 700 1.25rem/1 var(--font-cursive);
+  -webkit-text-stroke: .35px currentColor;
+  rotate: -8deg;
+}
+.event-info-card {
+  width: min(100%, 680px);
+  margin: 32px auto 0;
+  padding: clamp(24px, 5vw, 42px) clamp(16px, 4vw, 34px) clamp(22px, 4vw, 34px);
+  border-radius: 30px;
+  background:
+    radial-gradient(circle, #ffffffa6 0 2px, transparent 2.8px) 0 0 / 24px 24px,
+    #c8e8f8;
+  box-shadow: 0 7px 0 #9bcce6;
+}
+.event-info-card h2 {
+  margin: 0 0 18px;
+  color: #d92c83;
+  font-size: clamp(2.1rem, 6vw, 3.4rem);
+  font-family: var(--font-cursive);
+  font-style: normal;
+  text-align: center;
+}
+.event-info-card .party-details-grid {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  margin-top: 0;
+}
+.event-info-card .party-details-grid > div,
+.event-info-card .party-details-grid > div:nth-child(n) {
+  display: grid;
+  grid-template-columns: minmax(72px, 24%) minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  min-height: 56px;
+  padding: 10px 12px;
+  rotate: 0deg;
+  translate: 0;
+  text-align: left;
+}
+.event-info-card .party-details-grid > div::before { background: #e2f3fc; }
+.event-info-card .party-details-grid .tape { display: none; }
+.event-info-card .detail-label {
+  color: #c22b78;
+  font: 800 .9rem/1 var(--font-hand);
+  letter-spacing: 0;
+}
+.event-info-card .party-details-grid p {
+  margin: 0;
+  color: #8b2764;
+  font: 700 clamp(1.12rem, 3.7vw, 1.5rem)/1.15 var(--font-hand);
+}
+@media (max-width: 540px) {
+  .party-details { margin-inline: -2px; padding: 16px 10px 22px; }
+  .calendar-title { margin-bottom: 19px; padding-inline: 48px; }
+  .calendar-day { min-height: 126px; padding-top: 9px; }
+  .calendar-weekday { font-size: clamp(.92rem, 3.4vw, 1.05rem); }
+  .calendar-number { margin-top: 12px; }
+  .calendar-party-label { font-size: 1rem; }
+  .event-info-card { margin-top: 26px; padding: 24px 14px; }
+}
+
+/* Scrapbook collage treatment for the invitation cover only. */
+.invitation-page .cover-poster {
+  position: relative;
+  overflow: hidden;
+  border: 6px solid #fff;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle, #fff9 0 3px, transparent 4px) 0 0 / 34px 38px,
+    radial-gradient(circle, #f3a6c5a6 0 2px, transparent 3px) 14px 18px / 48px 52px,
+    linear-gradient(145deg, #ffe6ef, #f8c7dc 58%, #ffe9ef);
+  box-shadow: 0 13px 0 #e99abd, 0 18px 30px #ac34733d, inset 0 0 0 3px #fff9fb;
+}
+.invitation-page .cover-poster::before {
+  inset: 2.5% 2.5% 2.5%;
+  height: auto;
+  border: 2px dashed #f188b5;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #fff7fb55, #f7b5d322);
+  transform: rotate(.35deg);
+  box-shadow: inset 0 0 0 2px #fff8;
+}
+.invitation-page .cover-poster::after { opacity: .12; mix-blend-mode: multiply; }
+.invitation-page .poster-edition { color: #bb4e7e; }
+.invitation-page .poster-intro {
+  color: #fff;
+  text-shadow: 0 2px 5px #b03f79;
+}
+.invitation-page .poster-name {
+  color: #cf397b;
+  font-family: var(--font-bubble);
+  letter-spacing: .015em;
+  text-shadow: 1px 1px 0 #fff, 3px 4px 0 #e89bb9;
+  transform: rotate(-1.5deg);
+}
+.invitation-page .poster-name .name-tiles > span {
+  display: inline-block;
+  margin-inline: .015em;
+  padding: 0 .025em;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  background: linear-gradient(145deg, #fff2f8, #f4b9d2);
+  box-shadow: 1px 2px 0 #d985a8;
+}
+.invitation-page .poster-name .name-tiles > span:nth-child(3n + 2) {
+  background: linear-gradient(145deg, #fff6dc, #f7d4a9);
+  transform: rotate(2deg) translateY(-2px);
+}
+.invitation-page .poster-name .name-tiles > span:nth-child(3n) {
+  background: linear-gradient(145deg, #f5e6fa, #d9b9e4);
+  transform: rotate(-2deg) translateY(1px);
+}
+.invitation-page .poster-subtitle {
+  color: #a94d79;
+  font-family: var(--font-cursive);
+  letter-spacing: .04em;
+  transform: rotate(-1deg);
+}
+.invitation-page .poster-divider { background: #ef90b7; }
+.invitation-page .poster-record {
+  border: 3px solid #fff;
+  background:
+    radial-gradient(circle, #fff8 0 2px, transparent 3px) 0 0 / 16px 16px,
+    radial-gradient(circle, #f3afd0 0 54%, #e77aa9 55% 64%, #f5b4d0 65% 100%);
+  box-shadow: 0 4px 0 #d86b9b;
+}
+.invitation-page .poster-record::before {
+  background: #f7d4e6;
+  border-color: #fff;
+  box-shadow: 0 1px 0 #d77ca2;
+}
+.invitation-page .poster-cassette {
+  color: #934168;
+  background: #fff8f2;
+  border: 3px solid #ec6f9f;
+  border-radius: 7px;
+  box-shadow: 0 5px 0 #d979a0, 0 9px 12px #a43c6933;
+  transform: rotate(-4deg);
+}
+.invitation-page .poster-cassette-window {
+  color: #fff;
+  background: #d94c8a;
+}
+.invitation-page .poster-ticket {
+  color: #bd3c76;
+  background: #fffaf0;
+  border: 3px solid #f3c84d;
+  box-shadow: 0 5px 0 #d991aa, 0 8px 12px #a43c6930;
+  transform: rotate(3deg);
+}
+.invitation-page .poster-ticket::after { border-color: #df7e9f; }
+.invitation-page .poster-age {
+  color: #d53d7f;
+  background: #fff6fb;
+  border: 3px solid #ed90b7;
+  border-radius: 44% 56% 48% 52%;
+  box-shadow: 0 4px 0 #d884a5, 0 7px 12px #a43c6930;
+  rotate: -5deg;
+}
+.invitation-page .poster-age-inner { color: #d53d7f; text-shadow: 1px 2px #f8d4e4; }
+.invitation-page .poster-photo {
+  border: 5px solid #fff;
+  box-shadow: 0 5px 0 #d882a5, 0 9px 15px #7a405033;
+  rotate: 2deg;
+}
+.invitation-page .poster-photo img { filter: grayscale(1) contrast(1.04); }
+.invitation-page .poster-star-top,
+.invitation-page .poster-star-left,
+.invitation-page .poster-star-right,
+.invitation-page .poster-star-bottom,
+.invitation-page .flower-top-right,
+.invitation-page .poster-butterfly,
+.invitation-page .poster-caterpillar,
+.invitation-page .poster-cake {
+  filter: drop-shadow(1px 3px 2px #95416a48);
+}
+.invitation-page .poster-footer {
+  color: #fff;
+  background: #d83f82;
+  border-color: #ffe6a1;
+  box-shadow: 0 3px 0 #a9346b;
+  transform: rotate(-1deg);
+}
+.invitation-page .invitation-sheet {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+.invitation-page .invitation-sheet::before { content: none; display: none; }
+.invitation-page .invitation-cover {
+  width: min(100%, 500px);
+  margin: 16px auto 28px;
+  rotate: -.7deg;
+}
+.invitation-page .poster-name {
+  color: #cf397b;
+  font-family: var(--font-bubble);
+  letter-spacing: .015em;
+  text-shadow: 1px 1px 0 #fff, 3px 4px 0 #e89bb9;
+  transform: rotate(-1.5deg);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: .12em;
+}
+.invitation-page .poster-name-word {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+.invitation-page .poster-name .name-tiles {
+  display: inline-block;
+  margin-inline: .015em;
+  padding: 0 .035em;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  background: linear-gradient(145deg, #fff2f8, #f4b9d2);
+  color: #cf397b;
+  -webkit-text-fill-color: #cf397b;
+  text-shadow: 0 1px 0 #fff;
+  box-shadow: 1px 2px 0 #d985a8;
+}
+.invitation-page .poster-name .name-tiles:nth-child(3n + 2) {
+  background: linear-gradient(145deg, #fff6dc, #f7d4a9);
+  transform: rotate(2deg) translateY(-2px);
+}
+.invitation-page .poster-name .name-tiles:nth-child(3n) {
+  background: linear-gradient(145deg, #f5e6fa, #d9b9e4);
+  transform: rotate(-2deg) translateY(1px);
+}
+.invitation-page .poster-name .name-space {
+  padding-inline: .12em;
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+.invitation-page .poster-name .name-tiles > * {
+  display: inline-block;
+  margin-inline: .015em;
+  padding: 0 .025em;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  color: #d33d7c;
+  -webkit-text-fill-color: #d33d7c;
+  text-shadow: 1px 1px 0 #fff;
+  box-shadow: 1px 2px 0 #d985a8;
+}
+.invitation-page .poster-name .name-tiles > *:nth-child(3n + 2) {
+  color: #bd5284;
+  -webkit-text-fill-color: #bd5284;
+  background: linear-gradient(145deg, #fff6dc, #f7d4a9);
+  transform: rotate(2deg) translateY(-2px);
+}
+.invitation-page .poster-name .name-tiles > *:nth-child(3n) {
+  color: #96528a;
+  -webkit-text-fill-color: #96528a;
+  background: linear-gradient(145deg, #f5e6fa, #d9b9e4);
+  transform: rotate(-2deg) translateY(1px);
+}
+
+/* One cohesive scrapbook invitation: collage cover, party calendar, details. */
+.invitation-page .cover-poster {
+  min-height: 0;
+  aspect-ratio: 0.66;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle, #fff 0 2px, transparent 2.8px) 0 0 / 25px 27px,
+    radial-gradient(circle, #f8c8da 0 4px, transparent 4.8px) 12px 9px / 38px 42px,
+    linear-gradient(145deg, #fff4f8, #f9d6e4 54%, #ffedf3);
+  box-shadow: 0 10px 0 #e99abd, 0 17px 26px #ad47703b, inset 0 0 0 3px #fff;
+}
+.invitation-page .cover-poster::before {
+  inset: 2.5%;
+  border: 1px dashed #df8eae;
+  border-radius: 17px;
+  background: linear-gradient(145deg, #fff5f9a8, #f5c8da54);
+  box-shadow: inset 0 0 0 3px #fff7;
+  transform: rotate(.2deg);
+}
+.invitation-page .cover-poster::after { opacity: .08; }
+.invitation-page .poster-edition {
+  position: absolute;
+  top: 4%;
+  left: 8%;
+  right: 8%;
+  color: #a95579;
+  font: 800 clamp(.52rem, 2.6cqi, .8rem)/1 var(--font-hand);
+  letter-spacing: .16em;
+  text-align: center;
+}
+.invitation-page .poster-edition span { color: #e9a842; }
+.invitation-page .poster-intro {
+  position: absolute;
+  top: 9%;
+  left: 8%;
+  right: 8%;
+  color: #a34670;
+  font: 600 clamp(.75rem, 3.1cqi, .95rem)/1.15 var(--font-hand);
+  text-align: center;
+  text-shadow: none;
+}
+.invitation-page .poster-name {
+  position: absolute;
+  top: 13%;
+  left: 4%;
+  right: 4%;
+  width: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: .12em;
+  color: #d33978;
+  font: 400 clamp(2rem, 12cqi, 4.25rem)/1 var(--font-bubble);
+  letter-spacing: 0;
+  text-shadow: none;
+  transform: rotate(-1deg);
+}
+.invitation-page .poster-name-word { display: inline-flex; flex-wrap: nowrap; white-space: nowrap; }
+.invitation-page .poster-name-multi {
+  top: 12%;
+  flex-wrap: wrap;
+  font-size: clamp(1.45rem, 8.2cqi, 2.7rem);
+  line-height: 1;
+}
+.invitation-page .poster-name-multi + .poster-subtitle { top: 31%; }
+.invitation-page .poster-name-multi ~ .poster-age { top: 42%; }
+.invitation-page .poster-name .name-tiles {
+  display: inline-block;
+  margin: 0 .015em;
+  padding: .015em .035em;
+  border: 2px solid #fff;
+  border-radius: 3px;
+  background: linear-gradient(145deg, #fff8fa, #f1b9d0);
+  color: #d13d7c;
+  -webkit-text-fill-color: #d13d7c;
+  text-shadow: 0 1px #fff;
+  box-shadow: 0 3px 0 #d887a8;
+}
+.invitation-page .poster-name .name-tiles:nth-child(3n + 2) {
+  background: repeating-linear-gradient(135deg, #fff5d8 0 4px, #f5d2a6 4px 7px);
+  color: #bd477b;
+  -webkit-text-fill-color: #bd477b;
+  transform: rotate(2deg) translateY(-2px);
+}
+.invitation-page .poster-name .name-tiles:nth-child(3n) {
+  background: repeating-linear-gradient(45deg, #f7edf9 0 4px, #dfc9e8 4px 7px);
+  color: #9d518d;
+  -webkit-text-fill-color: #9d518d;
+  transform: rotate(-2deg) translateY(1px);
+}
+.invitation-page .poster-subtitle {
+  position: absolute;
+  top: 26%;
+  left: 10%;
+  right: 10%;
+  color: #d13f82;
+  font: 400 clamp(1.35rem, 7.4cqi, 2.3rem)/1 var(--font-cursive);
+  text-align: center;
+  text-shadow: 1px 2px #fff;
+  transform: rotate(-2deg);
+}
+.invitation-page .poster-age {
+  position: absolute;
+  top: 36%;
+  left: 36%;
+  width: 29%;
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 4%;
+  border: 4px solid #fff;
+  border-radius: 48% 52% 46% 54%;
+  outline: 2px dashed #e589ad;
+  color: #d73c80;
+  background: radial-gradient(circle, #fff7fb 0 52%, #f7d0e0 53% 100%);
+  box-shadow: 0 5px 0 #d985a7;
+  rotate: -7deg;
+  z-index: 3;
+}
+.invitation-page .poster-age strong { font: 400 clamp(2rem, 11cqi, 3.5rem)/.9 var(--font-bubble); }
+.invitation-page .poster-age small { margin-top: 2px; font: 800 clamp(.48rem, 2.5cqi, .75rem)/1 var(--font-hand); letter-spacing: .1em; }
+.invitation-page .poster-photo {
+  position: absolute;
+  right: 5%;
+  bottom: 8%;
+  width: 48%;
+  height: 42%;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  rotate: 2deg;
+  z-index: 2;
+}
+.invitation-page .poster-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom center;
+  clip-path: none;
+  filter: grayscale(1) contrast(1.08);
+  mix-blend-mode: multiply;
+}
+.invitation-page .poster-subtitle {
+  font-size: clamp(1.55rem, 8cqi, 2.55rem);
+  font-weight: 700;
+  color: #cf3978;
+  text-shadow: 1px 2px #fff, 2px 3px #e6a0bb;
+  text-transform: none;
+}
+.invitation-page .poster-age {
+  width: 31%;
+  min-width: 92px;
+  background: radial-gradient(circle, #fffafc 0 52%, #f6cbdc 53% 100%);
+}
+.invitation-page .poster-age strong {
+  font-size: clamp(1.7rem, 9cqi, 2.9rem);
+  white-space: nowrap;
+}
+.invitation-page .poster-age small {
+  color: #a74770;
+  font-size: clamp(.43rem, 2cqi, .65rem);
+}
+.invitation-page .poster-sticker-flower-alt {
+  top: 50%;
+  left: 10%;
+  color: #e7538b;
+  font-size: clamp(1.5rem, 7.5cqi, 2.5rem);
+  rotate: 13deg;
+}
+.invitation-page .poster-sticker-star-alt {
+  top: 58%;
+  right: 12%;
+  color: #51a8ca;
+  font-size: clamp(1.3rem, 6.5cqi, 2rem);
+  rotate: -12deg;
+}
+.invitation-page .poster-sticker-butterfly-alt {
+  left: 35%;
+  bottom: 31%;
+  font-size: clamp(1.2rem, 6cqi, 2rem);
+  rotate: -14deg;
+}
+.invitation-page .poster-sticker-flower,
+.invitation-page .poster-sticker-flower-alt { text-shadow: 1px 2px #fff, 2px 3px #d98aaa; }
+.invitation-page .poster-sticker-star { color: #f1b733; text-shadow: 1px 2px #fff; }
+.invitation-page .poster-sticker-butterfly,
+.invitation-page .poster-sticker-butterfly-alt { filter: drop-shadow(1px 3px 1px #9d456e40); }
+.invitation-page .poster-caterpillar {
+  left: 6%;
+  bottom: 34%;
+  z-index: 7;
+  filter: drop-shadow(1px 3px 1px #8a3f6133);
+}
+.invitation-page .poster-caterpillar-art {
+  display: inline-block;
+  font-size: clamp(1.7rem, 8cqi, 2.6rem);
+  line-height: 1;
+  rotate: -10deg;
+  -webkit-text-stroke: 1px #fff;
+}
+.invitation-page .poster-party-hat {
+  position: absolute;
+  top: -8%;
+  right: 18%;
+  width: 0;
+  height: 0;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-bottom: 37px solid #f2bf4e;
+  filter: drop-shadow(1px 2px 0 #fff);
+  rotate: 13deg;
+}
+.invitation-page .poster-party-hat::after {
+  content: '✦';
+  position: absolute;
+  top: -43px;
+  left: -5px;
+  color: #e94f8c;
+  font: 14px/1 var(--font-hand);
+}
+.invitation-page .poster-sticker {
+  position: absolute;
+  z-index: 4;
+  line-height: 1;
+  filter: drop-shadow(1px 3px 1px #9d456e40);
+}
+.invitation-page .poster-sticker-flower {
+  top: 36%;
+  left: 8%;
+  color: #f0b64b;
+  font: 400 clamp(2rem, 10cqi, 3.3rem)/1 var(--font-cursive);
+  rotate: -12deg;
+}
+.invitation-page .poster-sticker-star {
+  top: 31%;
+  right: 8%;
+  color: #e4b13f;
+  font-size: clamp(1.4rem, 7cqi, 2.2rem);
+  rotate: 12deg;
+}
+.invitation-page .poster-sticker-butterfly {
+  right: 5%;
+  bottom: 39%;
+  font-size: clamp(1.4rem, 7cqi, 2.3rem);
+  rotate: 10deg;
+}
+.invitation-page .poster-caterpillar {
+  position: absolute;
+  left: 7%;
+  bottom: 36%;
+  display: flex;
+  align-items: center;
+  z-index: 4;
+  rotate: -8deg;
+}
+.invitation-page .poster-caterpillar i {
+  width: clamp(9px, 3.2cqi, 14px);
+  aspect-ratio: 1;
+  margin-left: -2px;
+  border: 1.5px solid #fff;
+  border-radius: 50%;
+  background: #8dbb7b;
+  box-shadow: 0 2px 0 #65956b;
+}
+.invitation-page .poster-caterpillar i:nth-child(even) { background: #f1cc5d; }
+.invitation-page .poster-ticket {
+  position: absolute;
+  left: 5%;
+  bottom: 12%;
+  width: 55%;
+  min-height: 23%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5% 6%;
+  border: 3px solid #f0c550;
+  color: #9a416b;
+  background: #fff9e9;
+  box-shadow: 0 5px 0 #d987a8, 0 8px 12px #963b6533;
+  rotate: -5deg;
+  z-index: 5;
+}
+.invitation-page .poster-ticket small { font: 800 clamp(.5rem, 2.7cqi, .8rem)/1 var(--font-hand); letter-spacing: .12em; }
+.invitation-page .poster-ticket strong { color: #d1437f; font: 400 clamp(1.05rem, 5.8cqi, 1.8rem)/.88 var(--font-bubble); }
+.invitation-page .poster-ticket em { margin-top: 5px; font: 700 clamp(.45rem, 2.25cqi, .7rem)/1.1 var(--font-hand); font-style: normal; }
+.invitation-page .poster-footer {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  bottom: 3%;
+  width: auto;
+  color: #fff;
+  background: #d84683;
+  border: 2px solid #fff;
+  box-shadow: 0 3px 0 #a9346b;
+  font: 800 clamp(.5rem, 2.5cqi, .8rem)/1 var(--font-hand);
+  letter-spacing: .1em;
+  transform: rotate(-1deg);
+  z-index: 6;
+}
+
+.invitation-page .party-details {
+  border: 2px solid #fff;
+  background:
+    radial-gradient(circle, #fff 0 2px, transparent 2.8px) 0 0 / 25px 27px,
+    radial-gradient(circle, #f6c9da 0 3px, transparent 3.8px) 11px 16px / 38px 42px,
+    linear-gradient(155deg, #fff4f8, #f8dce8);
+  box-shadow: 0 8px 0 #e8a3bf;
+}
+.invitation-page .event-info-card {
+  border: 3px solid #fff;
+  border-radius: 28px 22px 30px 23px;
+  background:
+    radial-gradient(circle, #fff 0 2px, transparent 2.8px) 0 0 / 22px 23px,
+    linear-gradient(145deg, #fff7fa, #f8d9e6);
+  box-shadow: 0 7px 0 #e6a0ba;
+  rotate: -.7deg;
+}
+.invitation-page .event-info-card .party-details-grid > div::before { background: #fff9f1; }
+.invitation-page .event-info-card .party-details-grid p { color: #9d3c6e; }
+.invitation-page .event-info-card .detail-label { color: #cb397a; }
+.invitation-page .rsvp-link,
+.invitation-page .primary-button {
+  color: #fff;
+  background: #d83f82;
+  border: 2px solid #fff;
+  box-shadow: 0 4px 0 #a9346b;
+}
+.invitation-page .dress-code-section,
+.invitation-page .wishes-section,
+.invitation-page .invitation-note {
+  border: 2px solid #fff;
+  border-radius: 26px;
+  background:
+    radial-gradient(circle, #fff 0 2px, transparent 2.8px) 0 0 / 24px 25px,
+    linear-gradient(145deg, #fff4f8, #f8dce8);
+  box-shadow: 0 7px 0 #e5a1bc;
+}
