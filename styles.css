@@ -194,7 +194,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 120 / 154;
+  aspect-ratio: 1 / 1;
   isolation: isolate;
 }
 .disco-globe-canvas,

@@ -149,7 +149,7 @@ export default function DiscoGlobe({ className = '' }) {
         scene.add(blueLight);
 
         texture = makeMirrorTexture(THREE);
-        geometry = new THREE.SphereGeometry(0.92, 64, 48);
+        geometry = new THREE.SphereGeometry(0.84, 64, 48);
         material = new THREE.MeshPhysicalMaterial({
           map: texture,
           metalness: 0.52,
