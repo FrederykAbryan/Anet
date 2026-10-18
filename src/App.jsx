@@ -9,7 +9,7 @@ import yellowButterfly from '../assets/paper-butterfly-yellow.webp';
 import welcomePhotoPlaceholder from '../assets/welcome-photo-placeholder.webp';
 import scrapbookPortrait from '../assets/anet-scrapbook-portrait.webp';
 import stageCover from '../assets/anet-theatrical-cover.webp';
-import discoBall from '../assets/art/disco-ball.svg';
+import DiscoGlobe from './DiscoGlobe.jsx';
 import starYellow from '../assets/art/star-yellow.svg';
 import starBlue from '../assets/art/star-blue.svg';
 import tapePink from '../assets/art/tape-pink.svg';
@@ -184,7 +184,7 @@ function PartyCountdown({ date, time }) {
 
   return <section className="countdown-scrapbook calendar-card" aria-label="Save the date">
     <span className="calendar-envelope" aria-hidden="true">✉</span>
-    <Art src={discoBall} className="calendar-disco" />
+    <DiscoGlobe className="calendar-disco" />
     <h3 className="calendar-title">Save the <span>Date!</span></h3>
     {target ? <div className="calendar-days" role="list" aria-label={`Three-day calendar centered on ${eventDateLabel}`}>
       {days.map((day, index) => {
@@ -240,7 +240,7 @@ function Wishes({ invite }) {
 function DressCode({ invite }) {
   return <section className="dress-code-section cutout torn"aria-labelledby="dress-code-title">
     <Art src={tapeLilac} className="tape" />
-    <div className="dress-code-mark" aria-hidden="true"><img src={discoBall} alt="" className="spinning-disco-ball" /></div>
+    <div className="dress-code-mark" aria-hidden="true"><DiscoGlobe className="dress-code-globe" /></div>
     <div className="dress-code-copy">
       <span className="panel-kicker">WHAT TO WEAR</span>
       <h2 id="dress-code-title">Dress code</h2>
