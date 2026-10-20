@@ -125,9 +125,8 @@ function PosterArtwork({ invite }) {
 function WelcomePage({ invite, onOpen }) {
   const name = invite.name?.trim() || 'Anet';
   const guest = invite.guest?.trim();
-  const age = invite.age?.trim();
   const date = invite.date?.trim() || 'Date to be announced';
-  const celebration = age === '17' ? 'Sweet Seventeen' : age ? `Birthday · ${age}` : 'Birthday Celebration';
+  const celebration = 'Sweet Seventeen';
   return <main className="welcome-page stage-welcome">
     <section className="stage-cover" aria-labelledby="stage-name">
       <img className="stage-artwork" src={stageArtwork} alt="" aria-hidden="true" width="1024" height="1792" fetchPriority="high" draggable="false" />
