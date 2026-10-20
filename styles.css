@@ -1107,6 +1107,25 @@ body {
   line-height: 1;
   rotate: -10deg;
   -webkit-text-stroke: 1px #fff;
+  transform-origin: 50% 100%;
+  animation:
+    caterpillar-walk 9s ease-in-out infinite,
+    caterpillar-inch .45s ease-in-out infinite alternate;
+}
+/* translate/scale walk + turn around; transform does the inching wiggle */
+@keyframes caterpillar-walk {
+  0%    { translate: 0 0; scale: -1 1; }
+  46%   { translate: 30cqi 0; scale: -1 1; }
+  50%   { translate: 30cqi 0; scale: 1 1; }
+  96%   { translate: 0 0; scale: 1 1; }
+  100%  { translate: 0 0; scale: -1 1; }
+}
+@keyframes caterpillar-inch {
+  from { transform: scale(1, 1) translateY(0); }
+  to   { transform: scale(1.1, .88) translateY(1px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .invitation-page .poster-caterpillar-art { animation: none; }
 }
 .invitation-page .poster-party-hat {
   position: absolute;
