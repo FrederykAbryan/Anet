@@ -4,7 +4,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
 import { useGSAP } from '@gsap/react';
 import pinkButterfly from '../assets/paper-butterfly.webp';
-import blueButterfly from '../assets/paper-butterfly-blue.webp';
 import yellowButterfly from '../assets/paper-butterfly-yellow.webp';
 import welcomePhotoPlaceholder from '../assets/welcome-photo-placeholder.webp';
 import scrapbookPortrait from '../assets/anet-scrapbook-portrait.webp';
@@ -222,25 +221,6 @@ function EventDetails({ invite }) {
   </section>;
 }
 
-function Wishes({ invite }) {
-  const [from, setFrom] = useState('');
-  const [wish, setWish] = useState('');
-  const [message, setMessage] = useState('');
-  function sendWish(event) {
-    event.preventDefault();
-    if (!validEmail(invite.email)) { setMessage('Wishes are not open yet. Please check back soon.'); return; }
-    const subject = `A birthday wish for ${invite.name || 'you'}!`;
-    const body = `${wish.trim()}\n\nWith love,\n${from.trim()}`;
-    window.location.href = `mailto:${invite.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setMessage('Your email app is opening with your wish.');
-  }
-  return <section className="wishes-section cutout torn"aria-labelledby="wishes-title">
-    <Art src={tapePink} className="tape" />
-    <div className="wishes-intro"><span className="wishes-doodle" aria-hidden="true">♡</span><div><span className="panel-kicker">A LITTLE EXTRA LOVE</span><h2 id="wishes-title">Leave a birthday wish</h2><p>Good wishes make the day even sweeter. Write yours below.</p></div></div>
-    <form className="wishes-form" onSubmit={sendWish}><label>Your name<input value={from} onChange={(event) => setFrom(event.target.value)} required maxLength="50" placeholder="Your name" /></label><label>Your wish<textarea value={wish} onChange={(event) => setWish(event.target.value)} required maxLength="500" rows="4" placeholder="Wishing you the happiest birthday..." /></label><div className="wishes-actions"><button className="primary-button" type="submit">Send your wish <span aria-hidden="true">↗</span></button><p role="status" aria-live="polite">{message || (validEmail(invite.email) ? 'Opens your email app to send your wish.' : 'Wishes will open when the invitation is ready.')}</p></div></form>
-  </section>;
-}
-
 function DressCode({ invite }) {
   return <section className="dress-code-section cutout torn"aria-labelledby="dress-code-title">
     <Art src={tapeLilac} className="tape" />
@@ -262,11 +242,7 @@ function InvitationPage({ invite, onBack }) {
       <ButterflyFlight src={yellowButterfly} variant={0} />
       <EventDetails invite={invite} />
       <ButterflyFlight src={pinkButterfly} variant={1} />
-      <p className="invitation-note cutout">{invite.note || 'Cake, confetti & good company await!'}</p>
-      <ButterflyFlight src={blueButterfly} variant={2} />
       <DressCode invite={invite} />
-      <ButterflyFlight src={yellowButterfly} variant={3} />
-      <Wishes invite={invite} />
     </div>
   </main>;
 }
