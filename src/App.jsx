@@ -112,7 +112,6 @@ function WelcomePage({ invite, onOpen }) {
       <img className="stage-artwork" src={stageArtwork} alt="" aria-hidden="true" width="1024" height="1792" fetchPriority="high" draggable="false" />
       <img className="stage-child-cutout stage-child-teddy" src={stageChildTeddy} alt="" aria-hidden="true" draggable="false" />
       <img className="stage-child-cutout stage-child-hat" src={stageChildHat} alt="" aria-hidden="true" draggable="false" />
-      <p className="stage-overture" aria-hidden="true">Oh La La!</p>
       <div className={`stage-copy${name.length > 24 ? ' stage-copy-long' : ''}${name.length > 50 ? ' stage-copy-extra-long' : ''}`}>
         <p className="stage-greeting">You’re invited to</p>
         <h1 id="stage-name">{name}’s</h1>

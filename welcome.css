@@ -180,15 +180,6 @@ body:has(.stage-welcome) .site-footer { display: none; }
 }
 .stage-child-teddy { left: 2%; width: 45%; transform: rotate(-5deg); }
 .stage-child-hat { right: 3%; width: 32%; transform: rotate(4deg); }
-.stage-overture {
-  position: absolute;
-  inset: 21% 20% auto;
-  margin: 0;
-  color: var(--color-stage-pink);
-  font: 400 12cqi/1.1 var(--font-stage);
-  text-align: center;
-  rotate: -5deg;
-}
 .stage-copy {
   position: absolute;
   z-index: 2;
