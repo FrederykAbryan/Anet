@@ -12,6 +12,7 @@ import stageChildTeddy from '../assets/anet-child-teddy-cutout.webp';
 import stageChildHat from '../assets/anet-child-hat-cutout.webp';
 import venuePhoto from '../assets/venue-braci.webp';
 import DiscoGlobe from './DiscoGlobe.jsx';
+import { invite, venue } from './invite.ts';
 import starYellow from '../assets/art/star-yellow.svg';
 import starBlue from '../assets/art/star-blue.svg';
 import tapePink from '../assets/art/tape-pink.svg';
@@ -62,32 +63,11 @@ function ButterflyFlight({ src, variant = 0 }) {
   </div>;
 }
 
-const venue = {
-  name: 'Braci by Matoa Group',
-  address: 'Jl. Sulanjana No.5, Tamansari, Bandung Wetan, Kota Bandung, Jawa Barat',
-  mapsUrl: 'https://share.google/7XrHGOtATT5XqetpF',
-  directionsUrl: `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('Braci by Matoa Group, Jl. Sulanjana No.5, Bandung')}`,
-  embedUrl: `https://www.google.com/maps?q=${encodeURIComponent('Braci by Matoa Group, Jl. Sulanjana No.5, Bandung')}&output=embed`,
-};
-
-const defaults = { guest: '', name: 'Anet', age: '', date: 'October 21, 2026', time: '', place: venue.name, dressCode: '', note: '', email: '', photo: '' };
-const keys = Object.keys(defaults);
 const validEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email || '');
 
-function readInvite() {
-  const params = new URLSearchParams(window.location.search);
-  return Object.fromEntries(keys.map((key) => {
-    const value = params.has(key) ? params.get(key) : defaults[key];
-    return [key, (value ?? '').slice(0, key === 'photo' ? 2048 : 100)];
-  }));
-}
-
-function pathWithInvite(path, invite) {
-  const params = new URLSearchParams();
-  for (const key of keys) if (invite[key]?.trim()) params.set(key, invite[key].trim());
-  const query = params.toString();
-  return `${path}${query ? `?${query}` : ''}`;
-}
+// Only the guest name comes from the link (?guest=...); everything else lives in invite.ts.
+const readGuest = () => (new URLSearchParams(window.location.search).get('guest') ?? invite.guest).slice(0, 100);
+const withGuest = (path, guest) => guest.trim() ? `${path}?${new URLSearchParams({ guest: guest.trim() })}` : path;
 
 function Header({ onHome }) {
   return <header className="site-header"><a className="wordmark" href="/" onClick={(event) => { event.preventDefault(); onHome(); }}><span className="wordmark-star" aria-hidden="true">★</span> a little party</a><span className="header-note">A birthday invite, made with love</span></header>;
@@ -275,17 +255,18 @@ function InvitationPage({ invite, onBack }) {
 }
 
 export default function App() {
-  const [invite, setInvite] = useState(readInvite);
+  const [guest, setGuest] = useState(readGuest);
   const [page, setPage] = useState(window.location.pathname === '/invitation' ? 'invitation' : 'welcome');
+  const guestInvite = { ...invite, guest };
   useEffect(() => {
-    const onPopState = () => { setPage(window.location.pathname === '/invitation' ? 'invitation' : 'welcome'); setInvite(readInvite()); };
+    const onPopState = () => { setPage(window.location.pathname === '/invitation' ? 'invitation' : 'welcome'); setGuest(readGuest()); };
     window.addEventListener('popstate', onPopState);
     return () => window.removeEventListener('popstate', onPopState);
   }, []);
   function navigate(next) {
-    window.history.pushState(null, '', pathWithInvite(next === 'welcome' ? '/' : '/invitation', invite));
+    window.history.pushState(null, '', withGuest(next === 'welcome' ? '/' : '/invitation', guest));
     setPage(next);
     window.scrollTo({ top: 0, behavior: 'auto' });
   }
-  return <><Header onHome={() => navigate('welcome')} />{page === 'welcome' ? <WelcomePage invite={invite} onOpen={() => navigate('invitation')} /> : <InvitationPage invite={invite} onBack={() => navigate('welcome')} />}<footer className="site-footer"><span>Made for the moments we remember.</span><span>★ &nbsp; A LITTLE PARTY</span></footer></>;
+  return <><Header onHome={() => navigate('welcome')} />{page === 'welcome' ? <WelcomePage invite={guestInvite} onOpen={() => navigate('invitation')} /> : <InvitationPage invite={guestInvite}onBack={() => navigate('welcome')} />}<footer className="site-footer"><span>Made for the moments we remember.</span><span>★ &nbsp; A LITTLE PARTY</span></footer></>;
 }
