@@ -8,7 +8,9 @@ import blueButterfly from '../assets/paper-butterfly-blue.webp';
 import yellowButterfly from '../assets/paper-butterfly-yellow.webp';
 import welcomePhotoPlaceholder from '../assets/welcome-photo-placeholder.webp';
 import scrapbookPortrait from '../assets/anet-scrapbook-portrait.webp';
-import stageCover from '../assets/anet-theatrical-cover.webp';
+import stageArtwork from '../assets/anet-theatrical-cover-stage.webp';
+import stageChildTeddy from '../assets/anet-child-teddy-cutout.webp';
+import stageChildHat from '../assets/anet-child-hat-cutout.webp';
 import DiscoGlobe from './DiscoGlobe.jsx';
 import starYellow from '../assets/art/star-yellow.svg';
 import starBlue from '../assets/art/star-blue.svg';
@@ -120,7 +122,9 @@ function WelcomePage({ invite, onOpen }) {
   const celebration = age === '17' ? 'Sweet Seventeen' : age ? `Birthday · ${age}` : 'Birthday Celebration';
   return <main className="welcome-page stage-welcome">
     <section className="stage-cover" aria-labelledby="stage-name">
-      <img className="stage-artwork" src={stageCover} alt="" aria-hidden="true" width="1024" height="1792" fetchPriority="high" draggable="false" />
+      <img className="stage-artwork" src={stageArtwork} alt="" aria-hidden="true" width="1024" height="1792" fetchPriority="high" draggable="false" />
+      <img className="stage-child-cutout stage-child-teddy" src={stageChildTeddy} alt="" aria-hidden="true" draggable="false" />
+      <img className="stage-child-cutout stage-child-hat" src={stageChildHat} alt="" aria-hidden="true" draggable="false" />
       <p className="stage-overture" aria-hidden="true">Oh La La!</p>
       <div className={`stage-copy${name.length > 24 ? ' stage-copy-long' : ''}${name.length > 50 ? ' stage-copy-extra-long' : ''}`}>
         <p className="stage-greeting">You’re invited to</p>
