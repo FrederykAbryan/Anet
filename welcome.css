@@ -148,6 +148,7 @@ body:has(.stage-welcome) .site-footer { display: none; }
   min-height: 100svh;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 .stage-cover {
   position: relative;
@@ -256,4 +257,83 @@ body:has(.stage-welcome) .site-footer { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .stage-open { transition: none; }
   .stage-open:hover, .stage-open:active { transform: none; }
+}
+
+/* Theatrical stage curtain transition between WelcomePage and InvitationPage */
+.stage-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+.stage-transition-valance {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  height: clamp(44px, 7vh, 68px);
+  background: repeating-linear-gradient(90deg, #ffe875 0 28px, transparent 28px 46px);
+  clip-path: polygon(0 0, 100% 0, 100% 24%, 92% 100%, 84% 24%, 76% 100%, 68% 24%, 60% 100%, 52% 24%, 44% 100%, 36% 24%, 28% 100%, 20% 24%, 12% 100%, 4% 24%, 0 100%);
+  filter: drop-shadow(0 4px 8px #a9346b40);
+}
+.stage-transition-curtain {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 51%;
+  z-index: 1;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #e6689b 0 6%,
+      #f6a8c9 6% 13%,
+      #d84984 13% 20%,
+      #f293bb 20% 27%
+    );
+  box-shadow: 0 0 40px #71315a55;
+}
+.stage-transition-curtain-left {
+  left: 0;
+  border-right: 4px solid #f0c550;
+}
+.stage-transition-curtain-right {
+  right: 0;
+  border-left: 4px solid #f0c550;
+}
+.stage-transition-crest {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: clamp(18px, 4vw, 26px) clamp(28px, 6vw, 42px);
+  border: 4px solid #fff;
+  border-radius: 999px;
+  outline: 2px dashed #f0c550;
+  background: linear-gradient(145deg, #fff8fb, #f9d6e4);
+  color: var(--color-stage-pink);
+  box-shadow: 0 8px 0 #d985a8, 0 16px 32px #71315a45;
+  text-align: center;
+}
+.stage-transition-sparkle {
+  color: #e9a842;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+.stage-transition-crest strong {
+  font: 400 clamp(2rem, 6vw, 2.8rem)/1 var(--font-stage);
+  color: var(--color-stage-pink);
+}
+.stage-transition-crest small {
+  font: 700 clamp(0.85rem, 2.4vw, 1.05rem)/1.1 var(--font-hand);
+  color: var(--color-stage-ink);
+  letter-spacing: 0.06em;
 }

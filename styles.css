@@ -32,7 +32,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 
 /* ---------- Cover poster (Brielle collage) ---------- */
 .invitation-page { max-width: 1100px; margin: auto; padding: 18px clamp(12px, 4vw, 60px) 88px; }
-.back-button { display: inline-flex; margin: 0 0 18px; padding: 8px 16px; border: 2px solid #fff; border-radius: 999px; background: var(--color-bubblegum); color: var(--color-raspberry); cursor: pointer; font-size: .74rem; font-weight: 700; letter-spacing: .06em; box-shadow: 0 3px 0 #e7a3c0; transform: rotate(-1.5deg); transition: transform var(--dur-fast) var(--ease-out); }
+.back-button { position: relative; z-index: 10; display: inline-flex; margin: 0 0 18px; padding: 8px 16px; border: 2px solid #fff; border-radius: 999px; background: var(--color-bubblegum); color: var(--color-raspberry); cursor: pointer; font-size: .74rem; font-weight: 700; letter-spacing: .06em; box-shadow: 0 3px 0 #e7a3c0; transform: rotate(-1.5deg); transition: transform var(--dur-fast) var(--ease-out); }
 .back-button:hover { transform: rotate(0) translateY(-2px); }
 /* The cover is taped onto the watercolor sheet just under its bunting, so both read as one scrapbook page. */
 .invitation-cover { position: relative; width: min(100%, 560px); margin: 0 auto; rotate: -.8deg; }

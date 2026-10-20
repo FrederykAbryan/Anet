@@ -103,11 +103,48 @@ function PosterArtwork({ invite }) {
 }
 
 function WelcomePage({ invite, onOpen }) {
+  const root = useRef(null);
+  const [opening, setOpening] = useState(false);
+  const { contextSafe } = useGSAP({ scope: root });
   const name = invite.name?.trim() || 'Anet';
   const guest = invite.guest?.trim();
   const date = invite.date?.trim() || 'Date to be announced';
   const celebration = 'Sweet Seventeen';
-  return <main className="welcome-page stage-welcome">
+
+  useGSAP(() => {
+    const media = gsap.matchMedia();
+    media.add('(prefers-reduced-motion: no-preference)', () => {
+      gsap.timeline({ defaults: { ease: 'power3.out' } })
+        .from('.stage-cover', { scale: 0.96, autoAlpha: 0, duration: 0.5 })
+        .from('.stage-child-teddy', { xPercent: -30, yPercent: 10, rotation: -14, autoAlpha: 0, duration: 0.55, ease: 'back.out(1.5)' }, '-=0.3')
+        .from('.stage-child-hat', { xPercent: 30, yPercent: 10, rotation: 14, autoAlpha: 0, duration: 0.55, ease: 'back.out(1.5)' }, '<')
+        .from('.stage-copy > *', { y: 16, autoAlpha: 0, stagger: 0.06, duration: 0.42 }, '-=0.35')
+        .from('.stage-opening', { y: 14, scale: 0.92, autoAlpha: 0, duration: 0.4, ease: 'back.out(1.8)' }, '-=0.25');
+    });
+  }, { scope: root });
+
+  const playExitAnimation = contextSafe(() => {
+    gsap.timeline()
+      .to('.stage-open', { scale: 0.95, duration: 0.1, ease: 'power2.in' })
+      .to('.stage-open', { scale: 1.04, duration: 0.16, ease: 'back.out(2)' })
+      .to('.stage-child-teddy', { xPercent: -40, yPercent: 8, rotation: -14, autoAlpha: 0, duration: 0.42, ease: 'power3.in' }, 0.06)
+      .to('.stage-child-hat', { xPercent: 40, yPercent: 8, rotation: 14, autoAlpha: 0, duration: 0.42, ease: 'power3.in' }, 0.06)
+      .to(['.stage-copy', '.stage-opening'], { y: -18, scale: 0.95, autoAlpha: 0, duration: 0.36, stagger: 0.04, ease: 'power2.in' }, 0.08)
+      .to('.stage-cover', { scale: 1.07, duration: 0.45, ease: 'power2.inOut' }, 0.12);
+  });
+
+  function handleOpen() {
+    if (opening) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      onOpen();
+      return;
+    }
+    setOpening(true);
+    playExitAnimation();
+    onOpen();
+  }
+
+  return <main className="welcome-page stage-welcome" ref={root}>
     <section className="stage-cover" aria-labelledby="stage-name">
       <img className="stage-artwork" src={stageArtwork} alt="" aria-hidden="true" width="1024" height="1792" fetchPriority="high" draggable="false" />
       <img className="stage-child-cutout stage-child-teddy" src={stageChildTeddy} alt="" aria-hidden="true" draggable="false" />
@@ -120,7 +157,7 @@ function WelcomePage({ invite, onOpen }) {
       </div>
       <div className="stage-opening">
         {guest && <p className={`stage-guest${guest.length > 35 ? ' stage-guest-long' : ''}`}>For {guest}</p>}
-        <button type="button" className="stage-open" onClick={onOpen} aria-label={`Open the invitation to ${name}'s birthday party`}>Open Invitation <span aria-hidden="true">✧</span></button>
+        <button type="button" className="stage-open" onClick={handleOpen} disabled={opening} aria-label={`Open the invitation to ${name}'s birthday party`}>Open Invitation <span aria-hidden="true">✧</span></button>
       </div>
     </section>
   </main>;
@@ -241,8 +278,21 @@ function DressCode({ invite }) {
 }
 
 function InvitationPage({ invite, onBack }) {
-  return <main className="page-shell invitation-page">
-    <button className="back-button sheet-back" onClick={onBack}>← Back to hello</button>
+  const root = useRef(null);
+  useGSAP(() => {
+    const media = gsap.matchMedia();
+    media.add('(prefers-reduced-motion: no-preference)', () => {
+      gsap.timeline({ defaults: { ease: 'power3.out' } })
+        .from('.sheet-back', { y: -12, autoAlpha: 0, duration: 0.35, clearProps: 'transform' })
+        .from('.invitation-cover', { y: 36, scale: 0.93, rotation: -2.2, autoAlpha: 0, duration: 0.65, ease: 'back.out(1.35)' }, '-=0.2')
+        .from('.cover-poster .name-tiles', { y: 18, scale: 0.75, autoAlpha: 0, stagger: 0.035, duration: 0.4, ease: 'back.out(2)' }, '-=0.4')
+        .from(['.cover-poster .poster-age', '.cover-poster .poster-photo', '.cover-poster .poster-ticket'], { y: 20, scale: 0.9, autoAlpha: 0, stagger: 0.07, duration: 0.45, ease: 'back.out(1.5)' }, '-=0.3')
+        .from(['.party-details', '.dress-code-section'], { y: 32, autoAlpha: 0, stagger: 0.12, duration: 0.55 }, '-=0.25');
+    });
+  }, { scope: root });
+
+  return <main className="page-shell invitation-page" ref={root}>
+    <button type="button" className="back-button sheet-back" onClick={onBack}>← Back to hello</button>
     <div className="invitation-sheet">
       <InvitationCover invite={invite} />
       <ButterflyFlight src={yellowButterfly} variant={0} />
@@ -256,16 +306,74 @@ function InvitationPage({ invite, onBack }) {
 export default function App() {
   const [guest, setGuest] = useState(readGuest);
   const [page, setPage] = useState(window.location.pathname === '/invitation' ? 'invitation' : 'welcome');
+  const targetPageRef = useRef(page);
+  const transitionRef = useRef(null);
+  const transitionTlRef = useRef(null);
   const guestInvite = { ...invite, guest };
+
   useEffect(() => {
-    const onPopState = () => { setPage(window.location.pathname === '/invitation' ? 'invitation' : 'welcome'); setGuest(readGuest()); };
+    const onPopState = () => {
+      const next = window.location.pathname === '/invitation' ? 'invitation' : 'welcome';
+      targetPageRef.current = next;
+      setPage(next);
+      setGuest(readGuest());
+    };
     window.addEventListener('popstate', onPopState);
-    return () => window.removeEventListener('popstate', onPopState);
+    return () => {
+      window.removeEventListener('popstate', onPopState);
+      transitionTlRef.current?.kill();
+    };
   }, []);
+
   function navigate(next) {
-    window.history.pushState(null, '', withGuest(next === 'welcome' ? '/' : '/invitation', guest));
-    setPage(next);
-    window.scrollTo({ top: 0, behavior: 'auto' });
+    if (targetPageRef.current === next && page === next) return;
+    targetPageRef.current = next;
+
+    const commitRoute = () => {
+      window.history.pushState(null, '', withGuest(next === 'welcome' ? '/' : '/invitation', guest));
+      setPage(next);
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    };
+
+    transitionTlRef.current?.kill();
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !transitionRef.current) {
+      commitRoute();
+      return;
+    }
+
+    const q = gsap.utils.selector(transitionRef.current);
+    const delay = next === 'invitation' ? 0.1 : 0;
+
+    transitionTlRef.current = gsap.timeline()
+      .set(q('.stage-transition'), { autoAlpha: 1 })
+      .fromTo(q('.stage-transition-curtain-left'), { xPercent: -102 }, { xPercent: 0, duration: 0.44, ease: 'power3.inOut' }, delay)
+      .fromTo(q('.stage-transition-curtain-right'), { xPercent: 102 }, { xPercent: 0, duration: 0.44, ease: 'power3.inOut' }, delay)
+      .fromTo(q('.stage-transition-valance'), { yPercent: -110 }, { yPercent: 0, duration: 0.36, ease: 'back.out(1.4)' }, delay + 0.08)
+      .fromTo(q('.stage-transition-crest'), { scale: 0.5, rotation: -12, autoAlpha: 0 }, { scale: 1, rotation: 0, autoAlpha: 1, duration: 0.32, ease: 'back.out(2)' }, delay + 0.2)
+      .add(commitRoute, delay + 0.48)
+      .to(q('.stage-transition-crest'), { scale: 1.12, autoAlpha: 0, duration: 0.22, ease: 'power2.in' }, delay + 0.56)
+      .to(q('.stage-transition-valance'), { yPercent: -110, duration: 0.32, ease: 'power2.in' }, delay + 0.58)
+      .to(q('.stage-transition-curtain-left'), { xPercent: -102, duration: 0.48, ease: 'power3.inOut' }, delay + 0.58)
+      .to(q('.stage-transition-curtain-right'), { xPercent: 102, duration: 0.48, ease: 'power3.inOut' }, delay + 0.58)
+      .set(q('.stage-transition'), { autoAlpha: 0 });
   }
-  return <><Header onHome={() => navigate('welcome')} />{page === 'welcome' ? <WelcomePage invite={guestInvite} onOpen={() => navigate('invitation')} /> : <InvitationPage invite={guestInvite}onBack={() => navigate('welcome')} />}<footer className="site-footer"><span>Made for the moments we remember.</span><span>★ &nbsp; A LITTLE PARTY</span></footer></>;
+
+  return <>
+    <Header onHome={() => navigate('welcome')} />
+    {page === 'welcome'
+      ? <WelcomePage invite={guestInvite} onOpen={() => navigate('invitation')} />
+      : <InvitationPage invite={guestInvite} onBack={() => navigate('welcome')} />}
+    <footer className="site-footer"><span>Made for the moments we remember.</span><span>★ &nbsp; A LITTLE PARTY</span></footer>
+    <div className="stage-transition" ref={transitionRef} aria-hidden="true">
+      <div className="stage-transition-valance" />
+      <div className="stage-transition-curtain stage-transition-curtain-left" />
+      <div className="stage-transition-curtain stage-transition-curtain-right" />
+      <div className="stage-transition-crest">
+        <span className="stage-transition-sparkle">✦</span>
+        <strong>{guestInvite.name?.trim() || 'Anet'}’s</strong>
+        <small>Sweet Seventeen</small>
+      </div>
+    </div>
+  </>;
 }
