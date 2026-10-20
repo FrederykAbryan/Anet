@@ -691,6 +691,19 @@ body {
   .calendar-party-label { font-size: 1rem; }
   .event-info-card { margin-top: 26px; padding: 24px 14px; }
 }
+.venue-card { display: grid; gap: 12px; margin-top: 16px; padding: 12px; border: 3px solid #fff; border-radius: 22px; background: #fff9f1; box-shadow: 0 5px 0 #e6a0ba; }
+.venue-photo { position: relative; margin: 0; overflow: hidden; border-radius: 16px; rotate: 1deg; }
+.venue-photo img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+.venue-photo figcaption { position: absolute; right: 8px; bottom: 8px; padding: 2px 8px; border-radius: 999px; background: #0008; color: #fff; font-size: .62rem; }
+.venue-copy { text-align: left; }
+.venue-copy strong { display: block; color: #cb397a; font: 800 clamp(1.25rem, 4vw, 1.6rem)/1.1 var(--font-hand); }
+.venue-copy p { margin: 4px 0 0; color: #9d3c6e; font: 600 1rem/1.3 var(--font-hand); }
+.venue-map { display: block; width: 100%; height: 220px; border: 0; border-radius: 16px; }
+.venue-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.venue-button { display: inline-flex; flex: 1 1 160px; justify-content: center; gap: 8px; padding: 12px 18px; border: 2px solid #fff; border-radius: 999px; background: #d83f82; box-shadow: 0 4px 0 #a9346b; color: #fff; font-size: .78rem; font-weight: 800; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
+.venue-button-alt { background: #fff; box-shadow: 0 4px 0 #e6a0ba; color: #cb397a; border-color: #f5c3d6; }
+.venue-button:hover { transform: translateY(-2px); }
+.venue-button:focus-visible { outline: 3px solid var(--color-stage-focus); outline-offset: 3px; }
 
 /* Scrapbook collage treatment for the invitation cover only. */
 .invitation-page .cover-poster {

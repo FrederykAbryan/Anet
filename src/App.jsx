@@ -10,6 +10,7 @@ import scrapbookPortrait from '../assets/anet-scrapbook-portrait.webp';
 import stageArtwork from '../assets/anet-theatrical-cover-stage.webp';
 import stageChildTeddy from '../assets/anet-child-teddy-cutout.webp';
 import stageChildHat from '../assets/anet-child-hat-cutout.webp';
+import venuePhoto from '../assets/venue-braci.webp';
 import DiscoGlobe from './DiscoGlobe.jsx';
 import starYellow from '../assets/art/star-yellow.svg';
 import starBlue from '../assets/art/star-blue.svg';
@@ -61,7 +62,15 @@ function ButterflyFlight({ src, variant = 0 }) {
   </div>;
 }
 
-const defaults = { guest: '', name: 'Anet', age: '', date: 'October 21, 2026', time: '', place: '', dressCode: '', note: '', email: '', photo: '' };
+const venue = {
+  name: 'Braci by Matoa Group',
+  address: 'Jl. Sulanjana No.5, Tamansari, Bandung Wetan, Kota Bandung, Jawa Barat',
+  mapsUrl: 'https://share.google/7XrHGOtATT5XqetpF',
+  directionsUrl: `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('Braci by Matoa Group, Jl. Sulanjana No.5, Bandung')}`,
+  embedUrl: `https://www.google.com/maps?q=${encodeURIComponent('Braci by Matoa Group, Jl. Sulanjana No.5, Bandung')}&output=embed`,
+};
+
+const defaults = { guest: '', name: 'Anet', age: '', date: 'October 21, 2026', time: '', place: venue.name, dressCode: '', note: '', email: '', photo: '' };
 const keys = Object.keys(defaults);
 const validEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email || '');
 
@@ -204,6 +213,24 @@ function PartyCountdown({ date, time }) {
   </section>;
 }
 
+function VenueCard() {
+  return <div className="venue-card">
+    <figure className="venue-photo">
+      <img src={venuePhoto} alt={`Courtyard with a turquoise fountain at ${venue.name}`} width="900" height="675" loading="lazy" />
+      <figcaption>Photo: Hestianingsih / Wolipop (detik.com)</figcaption>
+    </figure>
+    <div className="venue-copy">
+      <strong>{venue.name}</strong>
+      <p>{venue.address}</p>
+    </div>
+    <iframe className="venue-map" src={venue.embedUrl} title={`Map showing ${venue.name}`} loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
+    <div className="venue-actions">
+      <a className="venue-button" href={venue.directionsUrl} target="_blank" rel="noreferrer">Get Directions <span aria-hidden="true">↗</span></a>
+      <a className="venue-button venue-button-alt" href={venue.mapsUrl} target="_blank" rel="noreferrer">Open in Google Maps</a>
+    </div>
+  </div>;
+}
+
 function EventDetails({ invite }) {
   const name = invite.name?.trim() || 'Anet';
   return <section className="party-details" aria-labelledby="party-details-title">
@@ -216,6 +243,7 @@ function EventDetails({ invite }) {
         <div className="cutout pinked"><Art src={tapeBlue} className="tape" /><span className="detail-label">TIME</span><p>{invite.time || 'Time to come'}</p></div>
         <div className="cutout pinked"><Art src={tapeGreen} className="tape" /><span className="detail-label">WHERE</span><p>{invite.place || 'Place to come'}</p></div>
       </div>
+      {invite.place === venue.name && <VenueCard />}
     </div>
     {validEmail(invite.email) && <a className="rsvp-link" href={`mailto:${invite.email}?subject=${encodeURIComponent(`RSVP for ${name}'s birthday`)}`}>RSVP WITH LOVE <span aria-hidden="true">↗</span></a>}
   </section>;
