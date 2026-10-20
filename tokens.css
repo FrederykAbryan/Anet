@@ -1,9 +1,9 @@
 :root {
-  --color-stage-paper: oklch(94% 0.045 350);
-  --color-stage-ink: oklch(43% 0.18 354);
-  --color-stage-pink: oklch(50% 0.23 355);
-  --color-stage-button: oklch(46% 0.22 355);
-  --color-stage-light: oklch(99% 0.008 80);
+  --color-stage-paper: #fff5fb;
+  --color-stage-ink: #71315a;
+  --color-stage-pink: #d33978;
+  --color-stage-button: #d83f82;
+  --color-stage-light: #fff8fc;
   --color-stage-focus: oklch(31% 0.09 220);
   --font-stage: 'Caveat Brush', 'Patrick Hand', cursive;
   --color-paper: oklch(96% 0.019 20);

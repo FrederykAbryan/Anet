@@ -134,7 +134,9 @@ body:has(.welcome-page) .site-footer { border-color: var(--welcome-line); color:
 
 /* Opening surface: one portrait canvas; all invitation copy stays editable. */
 body:has(.stage-welcome) {
-  background: var(--color-stage-paper);
+  background:
+    radial-gradient(circle at 50% 4%, #fff9 0 2px, transparent 2.5px) 0 0 / 28px 28px,
+    linear-gradient(90deg, #ffe8f5, #fff5fb 28%, #fff5fb 72%, #ffe8f5);
   color: var(--color-stage-ink);
 }
 body:has(.stage-welcome) .site-header,
