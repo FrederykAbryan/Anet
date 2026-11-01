@@ -59,6 +59,16 @@ export default function AdminGuests() {
     });
   };
 
+  const replaceGuestLink = (guest) => {
+    if (!window.confirm(`Create a new link for ${guest.name}? The current link will stop working.`)) return;
+    run(async () => {
+      const data = await call('POST', { action: 'reissue', id: guest.id });
+      setCreated({ name: data.name, url: new URL(data.path, window.location.origin).href });
+      setCopied(false);
+      setGuests((await call('GET')).guests);
+    });
+  };
+
   const revokeGuest = (guest) => {
     if (!window.confirm(`Revoke ${guest.name}'s invitation link? It will stop working immediately.`)) return;
     run(async () => {
@@ -78,7 +88,7 @@ export default function AdminGuests() {
 
   return <main className="admin-page">
     <h1>Guest invitations</h1>
-    <p className="admin-note">Each guest gets a private link. The link is shown once — copy it and send it to them.</p>
+    <p className="admin-note">Invitation links are shown once. If you lose one, choose Replace link in the guest list to create a copyable replacement; the old link will stop working.</p>
 
     <form className="admin-card" onSubmit={createGuest}>
       <label>
@@ -109,7 +119,10 @@ export default function AdminGuests() {
       {guests.length === 0 ? <p>No guests yet.</p> : <ul className="admin-guests">
         {guests.map((guest) => <li key={guest.id}>
           <span>{guest.name}{guest.revoked && <em> — revoked</em>}</span>
-          {!guest.revoked && <button type="button" disabled={busy} onClick={() => revokeGuest(guest)}>Revoke</button>}
+          {!guest.revoked && <div className="admin-actions">
+            <button type="button" disabled={busy} onClick={() => replaceGuestLink(guest)}>Replace link</button>
+            <button type="button" disabled={busy} onClick={() => revokeGuest(guest)}>Revoke</button>
+          </div>}
         </li>)}
       </ul>}
     </section>}

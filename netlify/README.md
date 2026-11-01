@@ -22,8 +22,11 @@ Local testing of functions needs `netlify dev` (plain `vite` serves the UI only)
 
 - Open `/admin/guests`, enter the admin key (kept in page memory only), add a
   guest name, and copy the link. **The link is shown once**: only a SHA-256 hash
-  of its token is stored, so it can't be recovered later. Create a new one if lost.
-- "Show guests" lists guests; "Revoke" disables a link immediately.
+  of its token is stored, so it can't be recovered later. Create a replacement
+  if one is lost.
+- "Show guests" lists guests. "Replace link" issues a new copyable link and
+  immediately disables the guest's previous link. "Revoke" disables it without
+  issuing a replacement.
 - Guests open `/invitation/<token>`.
 
 ## Endpoints

@@ -21,6 +21,7 @@ function memoryStore() {
     data,
     async get(key) { return data.has(key) ? structuredClone(data.get(key)) : null; },
     async setJSON(key, value) { data.set(key, structuredClone(value)); },
+    async delete(key) { data.delete(key); },
     async list({ prefix }) { return { blobs: [...data.keys()].filter((key) => key.startsWith(prefix)).map((key) => ({ key })) }; },
   };
 }
@@ -175,4 +176,24 @@ test('guest names are normalized and bounded', () => {
   assert.equal(normalizeGuestName('   '), null);
   assert.equal(normalizeGuestName('x'.repeat(81)), null);
   assert.equal(normalizeGuestName(42), null);
+});
+
+test('replacing an active guest link invalidates the old token and returns a new copyable path', async () => {
+  const ctx = setup();
+  const original = await createGuest(ctx, 'Agni');
+  const response = await ctx.admin(adminRequest('POST', { action: 'reissue', id: original.id }));
+  assert.equal(response.status, 200);
+
+  const replacement = await response.json();
+  const newToken = replacement.path.split('/').pop();
+  assert.equal(replacement.name, 'Agni');
+  assert.match(replacement.path, /^\/invitation\/[A-Za-z0-9_-]{43}$/);
+  assert.notEqual(newToken, original.token);
+  assert.equal((await ctx.invitation(tokenRequest(original.token))).status, 404);
+  assert.equal((await ctx.invitation(tokenRequest(newToken))).status, 200);
+
+  const { guests } = await (await ctx.admin(adminRequest('GET'))).json();
+  assert.equal(guests.length, 2);
+  assert.equal(guests.find(({ id }) => id === original.id).revoked, true);
+  assert.equal(guests.find(({ id }) => id === replacement.id).revoked, false);
 });

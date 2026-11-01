@@ -81,6 +81,26 @@ export function createAdminHandler({ getStore, getSecret, now = () => new Date()
 
       if (request.method === 'POST') {
         const body = await readJsonBody(request);
+        if (body?.action === 'reissue') {
+          const id = body.id;
+          if (typeof id !== 'string' || !GUEST_ID_PATTERN.test(id)) return json(400, { error: 'invalid_id' });
+          const record = await store.get(`${GUEST_PREFIX}${id}`, { type: 'json' });
+          if (!record || record.revokedAt) return json(404, { error: 'not_found' });
+
+          const token = generateToken();
+          const newId = hashToken(token);
+          const timestamp = now().toISOString();
+          await store.setJSON(`${GUEST_PREFIX}${newId}`, { id: newId, name: record.name, createdAt: timestamp, revokedAt: null });
+          try {
+            await store.setJSON(`${GUEST_PREFIX}${id}`, { ...record, revokedAt: timestamp, replacedBy: newId });
+          } catch (error) {
+            try { await store.delete(`${GUEST_PREFIX}${newId}`); } catch { /* best-effort rollback */ }
+            throw error;
+          }
+          // The old hash is revoked; the replacement bearer token is returned once, never stored.
+          return json(200, { id: newId, name: record.name, path: `/invitation/${token}` });
+        }
+
         const name = normalizeGuestName(body?.name);
         if (!name) return json(400, { error: 'invalid_name' });
         const token = generateToken();
