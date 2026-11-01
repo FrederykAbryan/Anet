@@ -309,7 +309,6 @@ function DressCode({ invite }) {
       <span className="panel-kicker">WHAT TO WEAR</span>
       <h2 id="dress-code-title">Dress code</h2>
       <p>{invite.dressCode?.trim() || 'Come dressed for a celebration. The host will add the dress code here.'}</p>
-      <a className="rsvp-link" href="https://docs.google.com/forms/d/e/1FAIpQLSdSQWEEzgtiwLtsWe1rOHhSus7uWJClOEpxaaADdvqC7sFIMw/viewform?usp=publish-editor" target="_blank" rel="noreferrer">Fill out the form <span aria-hidden="true">↗</span></a>
     </div>
     <Art src={starYellow} className="dress-code-sparkles" />
   </section>;
