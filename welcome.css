@@ -155,7 +155,7 @@ body:has(.stage-welcome) .site-footer { display: none; }
   container-type: inline-size;
   isolation: isolate;
   width: min(100%, 480px);
-  aspect-ratio: 4 / 7;
+  aspect-ratio: 9 / 16;
 }
 .stage-artwork {
   position: absolute;
@@ -164,7 +164,7 @@ body:has(.stage-welcome) .site-footer { display: none; }
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: fill;
+  object-fit: cover;
   pointer-events: none;
 }
 .stage-child-cutout {
@@ -252,7 +252,7 @@ body:has(.stage-welcome) .site-footer { display: none; }
 .stage-open:focus-visible { outline: 3px solid var(--color-stage-focus); outline-offset: 4px; }
 .stage-open:disabled { opacity: .55; cursor: not-allowed; transform: none; }
 @media (min-width: 600px) and (min-height: 600px) {
-  .stage-cover { width: min(480px, calc(100svh * 4 / 7)); }
+  .stage-cover { width: min(480px, calc(100svh * 9 / 16)); }
 }
 @media (prefers-reduced-motion: reduce) {
   .stage-open { transition: none; }

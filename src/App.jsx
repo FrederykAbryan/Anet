@@ -6,9 +6,7 @@ import { useGSAP } from '@gsap/react';
 import pinkButterfly from '../assets/paper-butterfly.webp';
 import yellowButterfly from '../assets/paper-butterfly-yellow.webp';
 import welcomePhotoPlaceholder from '../assets/welcome-photo-placeholder.webp';
-import stageArtwork from '../assets/anet-theatrical-cover-stage.webp';
-import stageChildTeddy from '../assets/anet-child-teddy-cutout.webp';
-import stageChildHat from '../assets/anet-child-hat-cutout.webp';
+import stageArtwork from '../assets/anet-birthday-stage-reference.jpg';
 import venuePhoto from '../assets/venue-braci.webp';
 import DiscoGlobe from './DiscoGlobe.jsx';
 import { invite, venue } from './invite.ts';
@@ -105,17 +103,12 @@ function WelcomePage({ invite, onOpen }) {
   const { contextSafe } = useGSAP({ scope: root });
   const name = invite.name?.trim() || 'Anet';
   const guest = invite.guest?.trim();
-  const date = invite.date?.trim() || 'Date to be announced';
-  const celebration = 'Sweet Seventeen';
 
   useGSAP(() => {
     const media = gsap.matchMedia();
     media.add('(prefers-reduced-motion: no-preference)', () => {
       gsap.timeline({ defaults: { ease: 'power3.out' } })
         .from('.stage-cover', { scale: 0.96, autoAlpha: 0, duration: 0.5 })
-        .from('.stage-child-teddy', { xPercent: -30, yPercent: 10, rotation: -14, autoAlpha: 0, duration: 0.55, ease: 'back.out(1.5)' }, '-=0.3')
-        .from('.stage-child-hat', { xPercent: 30, yPercent: 10, rotation: 14, autoAlpha: 0, duration: 0.55, ease: 'back.out(1.5)' }, '<')
-        .from('.stage-copy > *', { y: 16, autoAlpha: 0, stagger: 0.06, duration: 0.42 }, '-=0.35')
         .from('.stage-opening', { y: 14, scale: 0.92, autoAlpha: 0, duration: 0.4, ease: 'back.out(1.8)' }, '-=0.25');
     });
   }, { scope: root });
@@ -124,9 +117,7 @@ function WelcomePage({ invite, onOpen }) {
     gsap.timeline()
       .to('.stage-open', { scale: 0.95, duration: 0.1, ease: 'power2.in' })
       .to('.stage-open', { scale: 1.04, duration: 0.16, ease: 'back.out(2)' })
-      .to('.stage-child-teddy', { xPercent: -40, yPercent: 8, rotation: -14, autoAlpha: 0, duration: 0.42, ease: 'power3.in' }, 0.06)
-      .to('.stage-child-hat', { xPercent: 40, yPercent: 8, rotation: 14, autoAlpha: 0, duration: 0.42, ease: 'power3.in' }, 0.06)
-      .to(['.stage-copy', '.stage-opening'], { y: -18, scale: 0.95, autoAlpha: 0, duration: 0.36, stagger: 0.04, ease: 'power2.in' }, 0.08)
+      .to('.stage-opening', { y: -18, scale: 0.95, autoAlpha: 0, duration: 0.36, ease: 'power2.in' }, 0.08)
       .to('.stage-cover', { scale: 1.07, duration: 0.45, ease: 'power2.inOut' }, 0.12);
   });
 
@@ -142,16 +133,8 @@ function WelcomePage({ invite, onOpen }) {
   }
 
   return <main className="welcome-page stage-welcome" ref={root}>
-    <section className="stage-cover" aria-labelledby="stage-name">
-      <img className="stage-artwork" src={stageArtwork} alt="" aria-hidden="true" width="1024" height="1792" fetchPriority="high" draggable="false" />
-      <img className="stage-child-cutout stage-child-teddy" src={stageChildTeddy} alt="" aria-hidden="true" draggable="false" />
-      <img className="stage-child-cutout stage-child-hat" src={stageChildHat} alt="" aria-hidden="true" draggable="false" />
-      <div className={`stage-copy${name.length > 24 ? ' stage-copy-long' : ''}${name.length > 50 ? ' stage-copy-extra-long' : ''}`}>
-        <p className="stage-greeting">You’re invited to</p>
-        <h1 id="stage-name">{name}’s</h1>
-        <p className="stage-celebration">{celebration}</p>
-        <p className={`stage-date${date.length > 35 ? ' stage-date-long' : ''}`}>{date}</p>
-      </div>
+    <section className="stage-cover" aria-label={`${name}'s birthday invitation`}>
+      <img className="stage-artwork" src={stageArtwork} alt={`${name}'s illustrated birthday invitation with a childhood portrait`} width="720" height="1280" fetchPriority="high" draggable="false" />
       <div className="stage-opening">
         {guest && <p className={`stage-guest${guest.length > 35 ? ' stage-guest-long' : ''}`}>For {guest}</p>}
         <button type="button" className="stage-open" onClick={handleOpen} disabled={opening} aria-label={`Open the invitation to ${name}'s birthday party`}>Open Invitation <span aria-hidden="true">✧</span></button>
