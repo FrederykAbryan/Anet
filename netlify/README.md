@@ -26,7 +26,8 @@ Local testing of functions needs `netlify dev` (plain `vite` serves the UI only)
   if one is lost.
 - "Show guests" lists guests. "Replace link" issues a new copyable link and
   immediately disables the guest's previous link. "Revoke" disables it without
-  issuing a replacement.
+  issuing a replacement. "Delete" permanently removes the guest and invalidates
+  its link; this cannot be undone.
 - Guests open `/invitation/<token>`.
 
 ## Endpoints
@@ -35,7 +36,7 @@ Local testing of functions needs `netlify dev` (plain `vite` serves the UI only)
 | --- | --- | --- | --- |
 | `/.netlify/functions/invitation` | POST `{ token }` | token | `{ guest, event }` or 404 |
 | `/.netlify/functions/invitation-photo` | POST `{ token }` | token | venue photo or 404 |
-| `/.netlify/functions/admin-guests` | GET / POST `{ name }` / DELETE `{ id }` | `Authorization: Bearer <ANET_ADMIN_PASSWORD>` | list / create / revoke |
+| `/.netlify/functions/admin-guests` | GET / POST `{ name }` / DELETE `{ id }` or `{ id, permanent: true }` | `Authorization: Bearer <ANET_ADMIN_PASSWORD>` | list / create / revoke / delete |
 
 ## Event config
 

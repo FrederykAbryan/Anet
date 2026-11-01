@@ -116,6 +116,10 @@ export function createAdminHandler({ getStore, getSecret, now = () => new Date()
         if (typeof id !== 'string' || !GUEST_ID_PATTERN.test(id)) return json(400, { error: 'invalid_id' });
         const record = await store.get(`${GUEST_PREFIX}${id}`, { type: 'json' });
         if (!record) return json(404, { error: 'not_found' });
+        if (body.permanent === true) {
+          await store.delete(`${GUEST_PREFIX}${id}`);
+          return json(200, { id, deleted: true });
+        }
         if (!record.revokedAt) await store.setJSON(`${GUEST_PREFIX}${id}`, { ...record, revokedAt: now().toISOString() });
         return json(200, { id, revoked: true });
       }

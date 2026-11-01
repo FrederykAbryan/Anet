@@ -52,7 +52,7 @@ export default function AdminGuests() {
     run(async () => {
       const data = await call('POST', { name });
       // Built from the current origin so links work on any deployment domain.
-      setCreated({ name: data.name, url: new URL(data.path, window.location.origin).href });
+      setCreated({ id: data.id, name: data.name, url: new URL(data.path, window.location.origin).href });
       setCopied(false);
       setName('');
       setGuests((await call('GET')).guests);
@@ -63,7 +63,7 @@ export default function AdminGuests() {
     if (!window.confirm(`Create a new link for ${guest.name}? The current link will stop working.`)) return;
     run(async () => {
       const data = await call('POST', { action: 'reissue', id: guest.id });
-      setCreated({ name: data.name, url: new URL(data.path, window.location.origin).href });
+      setCreated({ id: data.id, name: data.name, url: new URL(data.path, window.location.origin).href });
       setCopied(false);
       setGuests((await call('GET')).guests);
     });
@@ -73,6 +73,18 @@ export default function AdminGuests() {
     if (!window.confirm(`Revoke ${guest.name}'s invitation link? It will stop working immediately.`)) return;
     run(async () => {
       await call('DELETE', { id: guest.id });
+      setGuests((await call('GET')).guests);
+    });
+  };
+
+  const deleteGuest = (guest) => {
+    if (!window.confirm(`Permanently delete ${guest.name} and invalidate its invitation? This cannot be undone.`)) return;
+    run(async () => {
+      await call('DELETE', { id: guest.id, permanent: true });
+      if (created?.id === guest.id) {
+        setCreated(null);
+        setCopied(false);
+      }
       setGuests((await call('GET')).guests);
     });
   };
@@ -119,10 +131,13 @@ export default function AdminGuests() {
       {guests.length === 0 ? <p>No guests yet.</p> : <ul className="admin-guests">
         {guests.map((guest) => <li key={guest.id}>
           <span>{guest.name}{guest.revoked && <em> — revoked</em>}</span>
-          {!guest.revoked && <div className="admin-actions">
-            <button type="button" disabled={busy} onClick={() => replaceGuestLink(guest)}>Replace link</button>
-            <button type="button" disabled={busy} onClick={() => revokeGuest(guest)}>Revoke</button>
-          </div>}
+          <div className="admin-actions">
+            {!guest.revoked && <>
+              <button type="button" disabled={busy} onClick={() => replaceGuestLink(guest)}>Replace link</button>
+              <button type="button" disabled={busy} onClick={() => revokeGuest(guest)}>Revoke</button>
+            </>}
+            <button type="button" disabled={busy} onClick={() => deleteGuest(guest)}>Delete</button>
+          </div>
         </li>)}
       </ul>}
     </section>}

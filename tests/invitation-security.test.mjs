@@ -197,3 +197,16 @@ test('replacing an active guest link invalidates the old token and returns a new
   assert.equal(guests.find(({ id }) => id === original.id).revoked, true);
   assert.equal(guests.find(({ id }) => id === replacement.id).revoked, false);
 });
+
+test('admin can permanently delete a revoked guest and invalidate the invitation', async () => {
+  const ctx = setup();
+  const guest = await createGuest(ctx, 'Alexan');
+  assert.equal((await ctx.admin(adminRequest('DELETE', { id: guest.id }))).status, 200);
+
+  const response = await ctx.admin(adminRequest('DELETE', { id: guest.id, permanent: true }));
+  assert.equal(response.status, 200);
+  assert.deepEqual(await response.json(), { id: guest.id, deleted: true });
+  assert.equal(ctx.store.data.has(`guest/${guest.id}`), false);
+  assert.deepEqual((await ctx.admin(adminRequest('GET')).then((res) => res.json())).guests, []);
+  assert.equal((await ctx.invitation(tokenRequest(guest.token))).status, 404);
+});
