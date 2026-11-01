@@ -6,7 +6,6 @@ import { useGSAP } from '@gsap/react';
 import pinkButterfly from '../assets/paper-butterfly.webp';
 import yellowButterfly from '../assets/paper-butterfly-yellow.webp';
 import welcomePhotoPlaceholder from '../assets/welcome-photo-placeholder.webp';
-import scrapbookPortrait from '../assets/anet-scrapbook-portrait.webp';
 import stageArtwork from '../assets/anet-theatrical-cover-stage.webp';
 import stageChildTeddy from '../assets/anet-child-teddy-cutout.webp';
 import stageChildHat from '../assets/anet-child-hat-cutout.webp';
@@ -82,14 +81,12 @@ function PosterArtwork({ invite }) {
   const lastTwo = numericAge % 100;
   const ageSuffix = lastTwo >= 11 && lastTwo <= 13 ? 'th' : ({ 1: 'st', 2: 'nd', 3: 'rd' }[numericAge % 10] || 'th');
   const ageLabel = age ? (Number.isFinite(numericAge) ? `${age}${ageSuffix}` : age) : '';
-  const photo = invite.photo?.trim() || scrapbookPortrait;
   return <>
       <span className="poster-edition" aria-hidden="true">A LITTLE PARTY <span>✿</span> INVITATION</span>
       <span className="poster-intro">{guest ? `${guest}, you're invited to` : "You're invited to"}</span>
       <span className={`poster-name${displayName.includes(' ') ? ' poster-name-multi' : ''}`} aria-label={displayName}>{displayName.split(/\s+/u).map((word, wordIndex) => <span className="poster-name-word" key={`${wordIndex}-${word}`}>{Array.from(word, (letter, index) => <span className="name-tiles" aria-hidden="true" key={`${index}-${letter}`}>{letter}</span>)}</span>)}</span>
       <span className="poster-subtitle">Birthday Party!!</span>
       <span className="poster-age"><strong>{ageLabel || '✿'}</strong><small>{ageLabel ? 'BIRTHDAY' : 'LET’S PARTY'}</small></span>
-      <span className={`poster-photo${invite.photo?.trim() ? ' poster-photo-custom' : ''}`} aria-hidden="true"><img src={photo} onError={(event) => { event.currentTarget.src = scrapbookPortrait; }} alt="" />{invite.photo?.trim() && <span className="poster-party-hat" />}</span>
       <span className="poster-sticker poster-sticker-flower" aria-hidden="true">✿</span>
       <span className="poster-sticker poster-sticker-star" aria-hidden="true">★</span>
       <span className="poster-sticker poster-sticker-butterfly" aria-hidden="true">🦋</span>
@@ -272,6 +269,7 @@ function DressCode({ invite }) {
       <span className="panel-kicker">WHAT TO WEAR</span>
       <h2 id="dress-code-title">Dress code</h2>
       <p>{invite.dressCode?.trim() || 'Come dressed for a celebration. The host will add the dress code here.'}</p>
+      <a className="rsvp-link" href="https://docs.google.com/forms/d/e/1FAIpQLSdSQWEEzgtiwLtsWe1rOHhSus7uWJClOEpxaaADdvqC7sFIMw/viewform?usp=publish-editor" target="_blank" rel="noreferrer">Fill out the form <span aria-hidden="true">↗</span></a>
     </div>
     <Art src={starYellow} className="dress-code-sparkles" />
   </section>;
@@ -286,7 +284,7 @@ function InvitationPage({ invite, onBack }) {
         .from('.sheet-back', { y: -12, autoAlpha: 0, duration: 0.35, clearProps: 'transform' })
         .from('.invitation-cover', { y: 36, scale: 0.93, rotation: -2.2, autoAlpha: 0, duration: 0.65, ease: 'back.out(1.35)' }, '-=0.2')
         .from('.cover-poster .name-tiles', { y: 18, scale: 0.75, autoAlpha: 0, stagger: 0.035, duration: 0.4, ease: 'back.out(2)' }, '-=0.4')
-        .from(['.cover-poster .poster-age', '.cover-poster .poster-photo', '.cover-poster .poster-ticket'], { y: 20, scale: 0.9, autoAlpha: 0, stagger: 0.07, duration: 0.45, ease: 'back.out(1.5)' }, '-=0.3')
+        .from(['.cover-poster .poster-age', '.cover-poster .poster-ticket'], { y: 20, scale: 0.9, autoAlpha: 0, stagger: 0.07, duration: 0.45, ease: 'back.out(1.5)' }, '-=0.3')
         .from(['.party-details', '.dress-code-section'], { y: 32, autoAlpha: 0, stagger: 0.12, duration: 0.55 }, '-=0.25');
     });
   }, { scope: root });
