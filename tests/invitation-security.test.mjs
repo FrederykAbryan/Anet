@@ -81,10 +81,11 @@ test('admin rejects missing and wrong keys', async () => {
   assert.equal(checkAdmin(new Request('https://x', { headers: { Authorization: `Basic ${SECRET}` } }), SECRET), 'denied');
 });
 
-test('created guest stores only the token hash, never the token', async () => {
+test('created guest stores a token hash and encrypted copy, never plaintext', async () => {
   const ctx = setup();
   const { token, id } = await createGuest(ctx);
   assert.equal(id, hashToken(token));
+  assert.ok(ctx.store.data.get(`guest/${id}`).encryptedToken);
   const stored = JSON.stringify([...ctx.store.data.entries()]);
   assert.ok(!stored.includes(token));
   assert.ok(stored.includes(hashToken(token)));
@@ -191,6 +192,9 @@ test('replacing an active guest link invalidates the old token and returns a new
   assert.notEqual(newToken, original.token);
   assert.equal((await ctx.invitation(tokenRequest(original.token))).status, 404);
   assert.equal((await ctx.invitation(tokenRequest(newToken))).status, 200);
+  const copiedLink = await ctx.admin(adminRequest('POST', { action: 'get_link', id: replacement.id }));
+  assert.equal(copiedLink.status, 200);
+  assert.deepEqual(await copiedLink.json(), { id: replacement.id, name: 'Agni', path: replacement.path });
 
   const { guests } = await (await ctx.admin(adminRequest('GET'))).json();
   assert.equal(guests.length, 2);
@@ -209,4 +213,30 @@ test('admin can permanently delete a revoked guest and invalidate the invitation
   assert.equal(ctx.store.data.has(`guest/${guest.id}`), false);
   assert.deepEqual((await ctx.admin(adminRequest('GET')).then((res) => res.json())).guests, []);
   assert.equal((await ctx.invitation(tokenRequest(guest.token))).status, 404);
+});
+
+test('admin can copy an active invitation link without storing its token in plaintext', async () => {
+  const ctx = setup();
+  const guest = await createGuest(ctx, 'Agni');
+  const response = await ctx.admin(adminRequest('POST', { action: 'get_link', id: guest.id }));
+  assert.equal(response.status, 200);
+  assert.deepEqual(await response.json(), { id: guest.id, name: guest.name, path: guest.path });
+
+  const record = ctx.store.data.get(`guest/${guest.id}`);
+  assert.ok(record.encryptedToken);
+  assert.ok(!JSON.stringify(record).includes(guest.token));
+  assert.equal((await ctx.admin(adminRequest('DELETE', { id: guest.id }))).status, 200);
+  assert.equal((await ctx.admin(adminRequest('POST', { action: 'get_link', id: guest.id }))).status, 404);
+});
+
+test('legacy guest links without encrypted tokens require replacement before copying', async () => {
+  const ctx = setup();
+  const guest = await createGuest(ctx, 'Legacy');
+  const record = ctx.store.data.get(`guest/${guest.id}`);
+  delete record.encryptedToken;
+  ctx.store.data.set(`guest/${guest.id}`, record);
+
+  const response = await ctx.admin(adminRequest('POST', { action: 'get_link', id: guest.id }));
+  assert.equal(response.status, 409);
+  assert.deepEqual(await response.json(), { error: 'link_unavailable' });
 });

@@ -21,14 +21,15 @@ Local testing of functions needs `netlify dev` (plain `vite` serves the UI only)
 ## Using it
 
 - Open `/admin/guests`, enter the admin key (kept in page memory only), add a
-  guest name, and copy the link. **The link is shown once**: only a SHA-256 hash
-  of its token is stored, so it can't be recovered later. Create a replacement
-  if one is lost.
-- "Show guests" lists guests. "Replace link" issues a new copyable link and
-  immediately disables the guest's previous link. "Revoke" disables it without
-  issuing a replacement. "Delete" permanently removes the guest and invalidates
-  its link; this cannot be undone.
-- Guests open `/invitation/<token>`.
+  guest name, and use the Copy or Replace icon next to the guest. The bearer
+  token is never stored in plaintext: validation uses a SHA-256 hash, while an
+  AES-GCM encrypted copy is available only through the admin endpoint.
+- Guest records created before encrypted-link support cannot be copied again;
+  replace each active link once to create a copyable token. The encryption key
+  is derived from `ANET_ADMIN_PASSWORD`, so changing that value leaves existing
+  invitation links valid but requires replacing them before they can be copied.
+- "Revoke" disables a link. "Delete" permanently removes the guest and
+  invalidates its link; this cannot be undone. Guests open `/invitation/<token>`.
 
 ## Endpoints
 
@@ -36,7 +37,7 @@ Local testing of functions needs `netlify dev` (plain `vite` serves the UI only)
 | --- | --- | --- | --- |
 | `/.netlify/functions/invitation` | POST `{ token }` | token | `{ guest, event }` or 404 |
 | `/.netlify/functions/invitation-photo` | POST `{ token }` | token | venue photo or 404 |
-| `/.netlify/functions/admin-guests` | GET / POST `{ name }` / DELETE `{ id }` or `{ id, permanent: true }` | `Authorization: Bearer <ANET_ADMIN_PASSWORD>` | list / create / revoke / delete |
+| `/.netlify/functions/admin-guests` | GET; POST `{ name }`, `{ action: "get_link", id }`, `{ action: "reissue", id }`; DELETE `{ id }` or `{ id, permanent: true }` | `Authorization: Bearer <ANET_ADMIN_PASSWORD>` | list / create / copy link / reissue / revoke / delete |
 
 ## Event config
 

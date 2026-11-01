@@ -49,3 +49,26 @@
 .admin-guests { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
 .admin-guests li { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .admin-guests em { color: #6b5e70; }
+
+.admin-guests .guest-row-actions { flex-wrap: nowrap; gap: 6px; }
+
+.admin-page button.admin-icon-button {
+  display: inline-grid;
+  place-items: center;
+  inline-size: 38px;
+  block-size: 38px;
+  min-width: 38px;
+  padding: 0;
+  border-radius: 50%;
+  transition: transform 120ms ease, background-color 120ms ease;
+}
+
+.admin-icon-button svg { display: block; width: 18px; height: 18px; }
+.admin-page button.admin-icon-button:hover:not(:disabled) { transform: translateY(-1px); background: #51465a; }
+.admin-page button.admin-icon-button:active:not(:disabled) { transform: translateY(0); }
+.admin-page button.admin-icon-button:focus-visible { outline: 3px solid #a1488a; outline-offset: 2px; }
+
+@media (max-width: 440px) {
+  .admin-guests li { align-items: flex-start; flex-direction: column; }
+  .admin-guests .guest-row-actions { align-self: flex-end; }
+}
