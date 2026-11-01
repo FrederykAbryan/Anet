@@ -7,7 +7,6 @@ import pinkButterfly from '../assets/paper-butterfly.webp';
 import yellowButterfly from '../assets/paper-butterfly-yellow.webp';
 import welcomePhotoPlaceholder from '../assets/welcome-photo-placeholder.webp';
 import stageArtwork from '../assets/anet-birthday-stage-reference.jpg';
-import stageChildPortrait from '../assets/anet-child-portrait-cutout.png';
 import venuePhoto from '../assets/venue-braci.webp';
 import DiscoGlobe from './DiscoGlobe.jsx';
 import { invite, venue } from './invite.ts';
@@ -136,7 +135,6 @@ function WelcomePage({ invite, onOpen }) {
   return <main className="welcome-page stage-welcome" ref={root}>
     <section className="stage-cover" aria-label={`${name}'s birthday invitation`}>
       <img className="stage-artwork" src={stageArtwork} alt={`${name}'s illustrated birthday invitation with a childhood portrait`} width="720" height="1280" fetchPriority="high" draggable="false" />
-      <img className="stage-child-cutout" src={stageChildPortrait} alt="" aria-hidden="true" draggable="false" />
       <div className="stage-opening">
         {guest && <p className={`stage-guest${guest.length > 35 ? ' stage-guest-long' : ''}`}>For {guest}</p>}
         <button type="button" className="stage-open" onClick={handleOpen} disabled={opening} aria-label={`Open the invitation to ${name}'s birthday party`}>Open Invitation <span aria-hidden="true">✧</span></button>
