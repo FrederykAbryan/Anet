@@ -275,6 +275,17 @@ function DressCode({ invite }) {
   </section>;
 }
 
+function GoogleFormSection() {
+  return <section className="google-form-section" aria-labelledby="google-form-title">
+    <span className="google-form-kicker">ONE LAST THING</span>
+    <h2 id="google-form-title">Let us know you’re coming</h2>
+    <p>di isi yh guyss.. Kl g isi g mkn</p>
+    <a className="google-form-button" href="https://docs.google.com/forms/d/e/1FAIpQLSdSQWEEzgtiwLtsWe1rOHhSus7uWJClOEpxaaADdvqC7sFIMw/viewform?usp=publish-editor" target="_blank" rel="noreferrer">
+      Fill out the form <span aria-hidden="true">↗</span>
+    </a>
+  </section>;
+}
+
 function InvitationPage({ invite, onBack }) {
   const root = useRef(null);
   useGSAP(() => {
@@ -285,7 +296,7 @@ function InvitationPage({ invite, onBack }) {
         .from('.invitation-cover', { y: 36, scale: 0.93, rotation: -2.2, autoAlpha: 0, duration: 0.65, ease: 'back.out(1.35)' }, '-=0.2')
         .from('.cover-poster .name-tiles', { y: 18, scale: 0.75, autoAlpha: 0, stagger: 0.035, duration: 0.4, ease: 'back.out(2)' }, '-=0.4')
         .from(['.cover-poster .poster-age', '.cover-poster .poster-ticket'], { y: 20, scale: 0.9, autoAlpha: 0, stagger: 0.07, duration: 0.45, ease: 'back.out(1.5)' }, '-=0.3')
-        .from(['.party-details', '.dress-code-section'], { y: 32, autoAlpha: 0, stagger: 0.12, duration: 0.55 }, '-=0.25');
+        .from(['.party-details', '.dress-code-section', '.google-form-section'], { y: 32, autoAlpha: 0, stagger: 0.12, duration: 0.55 }, '-=0.25');
     });
   }, { scope: root });
 
@@ -297,6 +308,7 @@ function InvitationPage({ invite, onBack }) {
       <EventDetails invite={invite} />
       <ButterflyFlight src={pinkButterfly} variant={1} />
       <DressCode invite={invite} />
+      <GoogleFormSection />
     </div>
   </main>;
 }

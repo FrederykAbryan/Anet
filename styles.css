@@ -218,6 +218,17 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .dress-code-copy p { max-width: 50ch; margin: 8px 0 0; color: var(--color-ink); font: clamp(1.3rem, 2.2vw, 1.75rem)/1.2 var(--font-hand); overflow-wrap: anywhere; }
 .dress-code-sparkles { width: clamp(44px, 7vw, 64px); align-self: start; rotate: 14deg; }
 
+/* A separate RSVP moment, styled like a small keepsake card. */
+.google-form-section { position: relative; isolation: isolate; width: min(100%, 620px); margin: 54px auto 12px; padding: clamp(26px, 5vw, 42px); overflow-wrap: anywhere; text-align: center; rotate: .7deg; }
+.google-form-section::before { position: absolute; z-index: -1; inset: 0; content: ''; background: repeating-linear-gradient(135deg, #fff8fb 0 18px, #fdebf3 18px 36px); border: 2px solid #f3c2d6; border-radius: 22px 18px 24px 16px; box-shadow: 0 8px 0 #e9a9c3, 0 14px 24px #9a42601c; }
+.google-form-kicker { display: inline-block; color: var(--color-raspberry); font-size: .68rem; font-weight: 800; letter-spacing: .2em; }
+.google-form-section h2 { margin: 10px 0 0; color: var(--color-ink); font: clamp(1.75rem, 5vw, 2.5rem)/1.05 var(--font-display); overflow-wrap: anywhere; }
+.google-form-section p { margin: 14px 0 0; color: var(--color-raspberry); font: clamp(1.2rem, 3vw, 1.65rem)/1.2 var(--font-hand); }
+.google-form-button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; margin-top: 22px; padding: 12px 22px; border: 2px solid var(--color-hot-pink); border-radius: 999px; background: var(--color-hot-pink); color: #fff; text-decoration: none; font-size: .8rem; font-weight: 800; letter-spacing: .08em; box-shadow: 0 4px 0 #b8336f; transition: transform var(--dur-medium) var(--ease-out), background var(--dur-fast) var(--ease-out); }
+.google-form-button:hover { transform: translateY(-2px); background: var(--color-raspberry); }
+.google-form-button:active { transform: translateY(1px); box-shadow: 0 2px 0 #b8336f; }
+.google-form-button:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 4px; }
+
 /* Wishes: lined notepaper */
 .wishes-section { position: relative; margin: 84px auto 0; padding: 40px clamp(18px, 4vw, 44px) 34px clamp(56px, 9%, 84px); display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1fr); gap: clamp(22px, 4vw, 48px); rotate: .5deg; }
 .wishes-section::before { background: linear-gradient(90deg, transparent clamp(40px, 6.5%, 62px), #f39cbf clamp(40px, 6.5%, 62px) calc(clamp(40px, 6.5%, 62px) + 2px), transparent 0), repeating-linear-gradient(180deg, #fffdfd 0 31px, #f5d0de 31px 32px); }
