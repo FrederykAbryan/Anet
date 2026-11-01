@@ -1,0 +1,51 @@
+.admin-page {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 48px 20px;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  color: #2b2230;
+}
+
+.admin-page h1 { margin: 0 0 8px; font-family: 'Fraunces', serif; }
+.admin-page h2 { margin: 0 0 12px; font-size: 1.1rem; }
+.admin-note { margin: 0 0 24px; color: #6b5e70; }
+
+.admin-card {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 6px 20px rgb(43 34 48 / 10%);
+}
+
+.admin-card label { display: grid; gap: 6px; font-weight: 600; }
+
+.admin-card input {
+  padding: 10px 12px;
+  border: 1px solid #d8cdda;
+  border-radius: 8px;
+  font: inherit;
+}
+
+.admin-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.admin-page button {
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 999px;
+  background: #2b2230;
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.admin-page button:disabled { opacity: 0.5; cursor: not-allowed; }
+.admin-error { margin: 0; color: #b42318; }
+.admin-link { width: 100%; font-family: ui-monospace, monospace; font-size: 0.85rem; }
+
+.admin-guests { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.admin-guests li { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.admin-guests em { color: #6b5e70; }

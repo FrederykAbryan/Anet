@@ -1,0 +1,26 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# The venue photo is served only by the token-checked function, never as a static asset.
+[functions.invitation-photo]
+  included_files = ["netlify/private/**"]
+
+# Invitation and admin URLs carry bearer tokens / admin UI: never leak via Referer, cache, or index.
+[[headers]]
+  for = "/invitation/*"
+  [headers.values]
+    Referrer-Policy = "no-referrer"
+    Cache-Control = "no-store"
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    Referrer-Policy = "no-referrer"
+    Cache-Control = "no-store"
+    X-Robots-Tag = "noindex, nofollow"

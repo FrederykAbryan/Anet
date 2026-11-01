@@ -7,9 +7,9 @@ import pinkButterfly from '../assets/paper-butterfly.webp';
 import yellowButterfly from '../assets/paper-butterfly-yellow.webp';
 import welcomePhotoPlaceholder from '../assets/welcome-photo-placeholder.webp';
 import stageArtwork from '../assets/anet-birthday-stage-reference.jpg';
-import venuePhoto from '../assets/venue-braci.webp';
 import DiscoGlobe from './DiscoGlobe.jsx';
-import { invite, venue } from './invite.ts';
+import AdminGuests from './AdminGuests.jsx';
+import { invite as publicInvite } from './invite.ts';
 import starYellow from '../assets/art/star-yellow.svg';
 import starBlue from '../assets/art/star-blue.svg';
 import tapePink from '../assets/art/tape-pink.svg';
@@ -62,9 +62,41 @@ function ButterflyFlight({ src, variant = 0 }) {
 
 const validEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email || '');
 
-// Only the guest name comes from the link (?guest=...); everything else lives in invite.ts.
-const readGuest = () => (new URLSearchParams(window.location.search).get('guest') ?? invite.guest).slice(0, 100);
-const withGuest = (path, guest) => guest.trim() ? `${path}?${new URLSearchParams({ guest: guest.trim() })}` : path;
+// Invitation links look like /invitation/<token>. The token is only a lookup key:
+// the server decides whether it grants access, and returns the private details if so.
+const readToken = () => /^\/invitation\/([A-Za-z0-9_-]{43})\/?$/.exec(window.location.pathname)?.[1] ?? null;
+const isAdminPath = () => window.location.pathname.replace(/\/+$/, '') === '/admin/guests';
+
+async function postToken(endpoint, token) {
+  return fetch(`/.netlify/functions/${endpoint}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ token }),
+    cache: 'no-store',
+    referrerPolicy: 'no-referrer',
+  });
+}
+
+function useInvitationAccess(token) {
+  const [access, setAccess] = useState(() => (token ? { status: 'checking' } : { status: 'denied' }));
+  useEffect(() => {
+    if (!token) return undefined;
+    let cancelled = false;
+    postToken('invitation', token)
+      .then(async (response) => {
+        if (cancelled) return;
+        if (response.ok) {
+          const { guest, event } = await response.json();
+          if (!cancelled) setAccess({ status: 'granted', guest, event });
+        } else {
+          setAccess({ status: response.status === 404 ? 'denied' : 'error' });
+        }
+      })
+      .catch(() => { if (!cancelled) setAccess({ status: 'error' }); });
+    return () => { cancelled = true; };
+  }, [token]);
+  return access;
+}
 
 function Header({ onHome }) {
   return <header className="site-header"><a className="wordmark" href="/" onClick={(event) => { event.preventDefault(); onHome(); }}><span className="wordmark-star" aria-hidden="true">★</span> a little party</a><span className="header-note">A birthday invite, made with love</span></header>;
@@ -208,17 +240,41 @@ function PartyCountdown({ date, time }) {
   </section>;
 }
 
-function VenueCard() {
+// The venue photo is fetched from a token-checked function so it never ships in the public bundle.
+function useVenuePhoto(token) {
+  const [src, setSrc] = useState(null);
+  useEffect(() => {
+    if (!token) return undefined;
+    let cancelled = false;
+    let objectUrl = null;
+    postToken('invitation-photo', token)
+      .then((response) => (response.ok ? response.blob() : null))
+      .then((blob) => {
+        if (cancelled || !blob) return;
+        objectUrl = URL.createObjectURL(blob);
+        setSrc(objectUrl);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+      if (objectUrl) URL.revokeObjectURL(objectUrl);
+    };
+  }, [token]);
+  return src;
+}
+
+function VenueCard({ venue, token }) {
+  const venuePhoto = useVenuePhoto(token);
   return <div className="venue-card">
-    <figure className="venue-photo">
-      <img src={venuePhoto} alt={`Courtyard with a turquoise fountain at ${venue.name}`} width="900" height="675" loading="lazy" />
-      <figcaption>Photo: Hestianingsih / Wolipop (detik.com)</figcaption>
-    </figure>
+    {venuePhoto && <figure className="venue-photo">
+      <img src={venuePhoto} alt={venue.photoAlt || `Photo of ${venue.name}`} width="900" height="675" loading="lazy" />
+      {venue.photoCredit && <figcaption>{venue.photoCredit}</figcaption>}
+    </figure>}
     <div className="venue-copy">
       <strong>{venue.name}</strong>
       <p>{venue.address}</p>
     </div>
-    <iframe className="venue-map" src={venue.embedUrl} title={`Map showing ${venue.name}`} loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
+    <iframe className="venue-map" src={venue.embedUrl} title={`Map showing ${venue.name}`} loading="lazy" referrerPolicy="no-referrer" />
     <div className="venue-actions">
       <a className="venue-button" href={venue.directionsUrl} target="_blank" rel="noreferrer">Get Directions <span aria-hidden="true">↗</span></a>
       <a className="venue-button venue-button-alt" href={venue.mapsUrl} target="_blank" rel="noreferrer">Open in Google Maps</a>
@@ -226,7 +282,8 @@ function VenueCard() {
   </div>;
 }
 
-function EventDetails({ invite }) {
+function EventDetails({ invite, token }) {
+  const { venue } = invite;
   const name = invite.name?.trim() || 'Anet';
   return <section className="party-details" aria-labelledby="party-details-title">
     <p className="party-details-kicker">THE CELEBRATION</p>
@@ -238,7 +295,7 @@ function EventDetails({ invite }) {
         <div className="cutout pinked"><Art src={tapeBlue} className="tape" /><span className="detail-label">TIME</span><p>{invite.time || 'Time to come'}</p></div>
         <div className="cutout pinked"><Art src={tapeGreen} className="tape" /><span className="detail-label">WHERE</span><p>{invite.place || 'Place to come'}</p></div>
       </div>
-      {invite.place === venue.name && <VenueCard />}
+      {venue && invite.place === venue.name && <VenueCard venue={venue} token={token} />}
     </div>
     {validEmail(invite.email) && <a className="rsvp-link" href={`mailto:${invite.email}?subject=${encodeURIComponent(`RSVP for ${name}'s birthday`)}`}>RSVP WITH LOVE <span aria-hidden="true">↗</span></a>}
   </section>;
@@ -259,9 +316,8 @@ function DressCode({ invite }) {
 }
 
 function GoogleFormSection() {
-  return <section className="google-form-section" aria-labelledby="google-form-title">
+  return <section className="google-form-section" aria-label="RSVP form">
     <span className="google-form-kicker">ONE LAST THING</span>
-    <h2 id="google-form-title">Let us know you’re coming</h2>
     <p>di isi yh guyss.. Kl g isi g mkn</p>
     <a className="google-form-button" href="https://docs.google.com/forms/d/e/1FAIpQLSdSQWEEzgtiwLtsWe1rOHhSus7uWJClOEpxaaADdvqC7sFIMw/viewform?usp=publish-editor" target="_blank" rel="noreferrer">
       Fill out the form <span aria-hidden="true">↗</span>
@@ -269,7 +325,27 @@ function GoogleFormSection() {
   </section>;
 }
 
-function InvitationPage({ invite, onBack }) {
+const gateCopy = {
+  checking: ['CHECKING YOUR INVITATION', 'One moment while we find your invitation…'],
+  denied: ['INVITED GUESTS ONLY', 'This invitation needs your personal invitation link. Please open the link you were sent.'],
+  error: ['SOMETHING WENT WRONG', 'We couldn’t check your invitation right now. Please try again in a moment.'],
+};
+
+// Shown instead of the invitation interior until the server has granted access.
+function InvitationGate({ status, onBack }) {
+  const [kicker, message] = gateCopy[status] ?? gateCopy.denied;
+  return <main className="page-shell invitation-page">
+    <button type="button" className="back-button sheet-back" onClick={onBack}>← Back to hello</button>
+    <div className="invitation-sheet">
+      <section className="google-form-section" aria-live="polite">
+        <span className="google-form-kicker">{kicker}</span>
+        <p>{message}</p>
+      </section>
+    </div>
+  </main>;
+}
+
+function InvitationPage({ invite, token, onBack }) {
   const root = useRef(null);
   useGSAP(() => {
     const media = gsap.matchMedia();
@@ -288,7 +364,7 @@ function InvitationPage({ invite, onBack }) {
     <div className="invitation-sheet">
       <InvitationCover invite={invite} />
       <ButterflyFlight src={yellowButterfly} variant={0} />
-      <EventDetails invite={invite} />
+      <EventDetails invite={invite} token={token} />
       <ButterflyFlight src={pinkButterfly} variant={1} />
       <DressCode invite={invite} />
       <GoogleFormSection />
@@ -297,19 +373,24 @@ function InvitationPage({ invite, onBack }) {
 }
 
 export default function App() {
-  const [guest, setGuest] = useState(readGuest);
-  const [page, setPage] = useState(window.location.pathname === '/invitation' ? 'invitation' : 'welcome');
+  return isAdminPath() ? <AdminGuests /> : <InvitationApp />;
+}
+
+function InvitationApp() {
+  const [token] = useState(readToken);
+  const access = useInvitationAccess(token);
+  const [page, setPage] = useState('welcome');
   const targetPageRef = useRef(page);
   const transitionRef = useRef(null);
   const transitionTlRef = useRef(null);
-  const guestInvite = { ...invite, guest };
+  const granted = access.status === 'granted';
+  const guestInvite = granted ? { ...access.event, guest: access.guest } : { ...publicInvite, guest: '' };
 
   useEffect(() => {
-    const onPopState = () => {
-      const next = window.location.pathname === '/invitation' ? 'invitation' : 'welcome';
+    const onPopState = (event) => {
+      const next = event.state?.page === 'invitation' ? 'invitation' : 'welcome';
       targetPageRef.current = next;
       setPage(next);
-      setGuest(readGuest());
     };
     window.addEventListener('popstate', onPopState);
     return () => {
@@ -323,7 +404,8 @@ export default function App() {
     targetPageRef.current = next;
 
     const commitRoute = () => {
-      window.history.pushState(null, '', withGuest(next === 'welcome' ? '/' : '/invitation', guest));
+      // Both views share the guest's link so the token stays in the address bar.
+      window.history.pushState({ page: next }, '', window.location.pathname);
       setPage(next);
       window.scrollTo({ top: 0, behavior: 'auto' });
     };
@@ -356,7 +438,9 @@ export default function App() {
     <Header onHome={() => navigate('welcome')} />
     {page === 'welcome'
       ? <WelcomePage invite={guestInvite} onOpen={() => navigate('invitation')} />
-      : <InvitationPage invite={guestInvite} onBack={() => navigate('welcome')} />}
+      : granted
+        ? <InvitationPage invite={guestInvite} token={token} onBack={() => navigate('welcome')} />
+        : <InvitationGate status={access.status} onBack={() => navigate('welcome')} />}
     <footer className="site-footer"><span>Made for the moments we remember.</span><span>★ &nbsp; A LITTLE PARTY</span></footer>
     <div className="stage-transition" ref={transitionRef} aria-hidden="true">
       <div className="stage-transition-valance" />
