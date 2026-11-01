@@ -1276,3 +1276,13 @@ body {
     linear-gradient(145deg, #fff4f8, #f8dce8);
   box-shadow: 0 7px 0 #e5a1bc;
 }
+
+/* Let the portrait welcome artwork use more of wide desktop viewports. */
+@media (min-width: 900px) {
+  .stage-welcome .stage-cover {
+    width: min(560px, calc(100svh * 5 / 8));
+    max-width: none;
+    height: 100dvh;
+    min-height: 0;
+  }
+}
